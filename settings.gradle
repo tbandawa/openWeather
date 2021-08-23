@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "openWeather"
 include ':app'
+include ':data'
