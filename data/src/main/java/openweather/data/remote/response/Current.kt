@@ -1,6 +1,7 @@
 package openweather.data.remote.response
 
 import com.google.gson.annotations.SerializedName
+import kotlin.collections.List as list
 
 data class Current (
     @SerializedName("dt") var dt : Int,
@@ -17,6 +18,6 @@ data class Current (
     @SerializedName("wind_speed") var windSpeed : Double,
     @SerializedName("wind_deg") var windDeg : Int,
     @SerializedName("wind_gust") var windGust : Double,
-    @SerializedName("weather") var weather : List<Weather>,
+    @SerializedName("weather") var weather : list<Weather>,
     @SerializedName("rain") var rain : Rain
 )

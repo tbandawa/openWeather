@@ -1,4 +1,4 @@
-package starwars.data.api.response
+package openweather.domain.models
 
 /*
  * Copyright (C) 2017 The Android Open Source Project

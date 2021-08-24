@@ -1,10 +1,11 @@
 package openweather.data.remote.response
 
 import com.google.gson.annotations.SerializedName
+import kotlin.collections.List as list
 
 data class CurrentWeatherResponse(
     @SerializedName("coord") var coord : Coord,
-    @SerializedName("weather") var weather : List<Weather>,
+    @SerializedName("weather") var weather : list<Weather>,
     @SerializedName("base") var base : String,
     @SerializedName("main") var main : Main,
     @SerializedName("visibility") var visibility : Int,
