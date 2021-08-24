@@ -7,5 +7,6 @@ data class Sys (
     @SerializedName("id") var id : Int,
     @SerializedName("country") var country : String,
     @SerializedName("sunrise") var sunrise : Int,
-    @SerializedName("sunset") var sunset : Int
+    @SerializedName("sunset") var sunset : Int,
+    @SerializedName("pod") var pod : String
 )
