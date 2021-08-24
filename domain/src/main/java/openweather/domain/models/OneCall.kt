@@ -2,7 +2,7 @@ package openweather.domain.models
 
 import kotlin.collections.List as list
 
-data class OneCallResponse (
+data class OneCall (
     var lat : Double?,
     var lon : Double?,
     var timezone : String?,

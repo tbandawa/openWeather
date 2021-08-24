@@ -2,7 +2,7 @@ package openweather.domain.models
 
 import kotlin.collections.List as list
 
-data class FiveDayWeatherForecastResponse (
+data class FiveDayWeatherForecast (
     var cod : String?,
     var message : Int?,
     var cnt : Int?,

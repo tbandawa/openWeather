@@ -2,7 +2,7 @@ package openweather.domain.models
 
 import kotlin.collections.List as list
 
-data class CurrentWeatherResponse(
+data class CurrentWeather(
     var coord : Coord?,
     var weather : list<Weather>?,
     var base : String?,
