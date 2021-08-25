@@ -6,7 +6,7 @@ import openweather.domain.models.*
 
 class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeather> {
 
-    override fun mapToModel(response: Any?): CurrentWeather {
+    override fun mapToModel(response: CurrentWeatherResponse): CurrentWeather {
         return CurrentWeather(
             Coord(
                 response.coord.lon,

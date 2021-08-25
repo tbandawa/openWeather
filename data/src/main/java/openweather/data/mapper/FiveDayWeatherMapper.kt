@@ -6,7 +6,7 @@ import openweather.domain.models.*
 
 class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> {
 
-    override fun mapToModel(response: Any?): FiveDayWeatherForecast {
+    override fun mapToModel(response: FiveDayWeatherForecastResponse): FiveDayWeatherForecast {
         return FiveDayWeatherForecast(
             response.cod,
             response.message,

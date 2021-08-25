@@ -6,7 +6,7 @@ import openweather.domain.models.*
 
 class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
 
-    override fun mapToModel(response: Any?): OneCall {
+    override fun mapToModel(response: OneCallResponse): OneCall {
         return OneCall(
             response.lat,
             response.lon,
