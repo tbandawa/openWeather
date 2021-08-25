@@ -6,12 +6,12 @@ import openweather.domain.models.*
 
 class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeather> {
 
-    override fun mapToModel(entity: CurrentWeatherResponse): CurrentWeather {
+    override fun mapToModel(response: CurrentWeatherResponse): CurrentWeather {
         return CurrentWeather(
             Coord(
-                entity.coord.lon,
-                entity.coord.lat),
-            entity.weather.map { weather ->
+                response.coord.lon,
+                response.coord.lat),
+            response.weather.map { weather ->
                 Weather(
                     weather.id,
                     weather.main,
@@ -19,48 +19,48 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
                     weather.icon
                 )
             },
-            entity.base,
+            response.base,
             Main(
-                entity.main.temp,
-                entity.main.feelsLike,
-                entity.main.tempMin,
-                entity.main.tempMax,
-                entity.main.tempKf,
-                entity.main.pressure,
-                entity.main.humidity,
-                entity.main.seaLevel,
-                entity.main.grndLevel
+                response.main.temp,
+                response.main.feelsLike,
+                response.main.tempMin,
+                response.main.tempMax,
+                response.main.tempKf,
+                response.main.pressure,
+                response.main.humidity,
+                response.main.seaLevel,
+                response.main.grndLevel
             ),
-            entity.visibility,
+            response.visibility,
             Wind(
-                entity.wind.speed,
-                entity.wind.deg,
-                entity.wind.gust
+                response.wind.speed,
+                response.wind.deg,
+                response.wind.gust
             ),
             Clouds(
-                entity.clouds.all
+                response.clouds.all
             ),
             Rain(
-                entity.rain.one_h,
-                entity.rain.three_h
+                response.rain.one_h,
+                response.rain.three_h
             ),
             Snow(
-                entity.snow.one_h,
-                entity.snow.three_h
+                response.snow.one_h,
+                response.snow.three_h
             ),
-            entity.dt,
+            response.dt,
             Sys(
-                entity.sys.type,
-                entity.sys.id,
-                entity.sys.country,
-                entity.sys.sunrise,
-                entity.sys.sunset,
-                entity.sys.pod
+                response.sys.type,
+                response.sys.id,
+                response.sys.country,
+                response.sys.sunrise,
+                response.sys.sunset,
+                response.sys.pod
             ),
-            entity.timezone,
-            entity.id,
-            entity.name,
-            entity.cod
+            response.timezone,
+            response.id,
+            response.name,
+            response.cod
         )
     }
 
