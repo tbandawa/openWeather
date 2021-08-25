@@ -1,10 +1,7 @@
 package openweather.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import openweather.domain.models.CurrentWeather
-import openweather.domain.models.FiveDayWeatherForecast
-import openweather.domain.models.NetworkResult
-import openweather.domain.models.OneCall
+import openweather.domain.models.*
 
 interface OpenWeatherRepository {
 

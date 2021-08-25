@@ -1,10 +1,10 @@
 package openweather.domain.models
 
-sealed class NetworkResult<T>(
-    val data: T? = null,
+sealed class NetworkResult<M>(
+    val data: M? = null,
     val message: String? = null
 ) {
-    class Success<T>(data: T) : NetworkResult<T>(data)
-    class Error<T>(message: String, data: T? = null) : NetworkResult<T>(data, message)
-    class Loading<T> : NetworkResult<T>()
+    class Success<M>(data: M) : NetworkResult<M>(data)
+    class Error<M>(message: String, data: M? = null) : NetworkResult<M>(data, message)
+    class Loading<M> : NetworkResult<M>()
 }
