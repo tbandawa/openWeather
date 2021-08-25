@@ -7,7 +7,6 @@ import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
 import openweather.data.remote.api.OpenWeatherApi
-import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsNull
@@ -45,22 +44,38 @@ class ServiceApiTest {
     }
 
     @Test
-    fun `test current weather api`() {
+    fun `test current weather api`() = runBlocking {
+
         enqueueResponse("current_weather.json")
-        runBlocking {
-            val track = service.fetchCurrentWeather("api_key", "query")
-            val request = mockWebServer.takeRequest()
+        val response = service.fetchCurrentWeather("api_key", "query")
+        val request = mockWebServer.takeRequest()
 
-            assertThat(request.path, `is`("/weather?appid=api_key&q=query"))
+        assertThat(request.path, `is`("/weather?appid=api_key&q=query"))
 
-            assertThat(track, IsNull.notNullValue())
+        assertThat(response, IsNull.notNullValue())
 
-            assertThat(track.code(), `is`(200))
+        assertThat(response.code(), `is`(200))
 
-            assertThat(track.body()?.base, `is`("stations"))
-            assertThat(track.body()?.clouds?.all, `is`(25))
-        }
+        assertThat(response.body()?.base, `is`("stations"))
+        assertThat(response.body()?.clouds?.all, `is`(25))
 
+    }
+
+    @Test
+    fun `one call weather api`() = runBlocking {
+
+        enqueueResponse("one_call_weather.json")
+        val response = service.fetchOneCall("api_key", 1L, 2L)
+        val request = mockWebServer.takeRequest()
+
+        assertThat(request.path, `is`("/onecall?appid=api_key&lat=1&lon=2"))
+
+        assertThat(response, IsNull.notNullValue())
+
+        assertThat(response.code(), `is`(200))
+
+        assertThat(response.body()?.timezone, `is`("Asia/Shanghai"))
+        assertThat(response.body()?.current?.weather?.size, `is`(1))
 
     }
 
