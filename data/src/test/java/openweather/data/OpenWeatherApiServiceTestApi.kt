@@ -6,7 +6,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsNull
 import org.junit.*
 
-class OpenWeatherApiServiceTest: BaseTest() {
+class OpenWeatherApiServiceTestApi: ApiBaseTest() {
 
     @Test
     fun `test current weather api`() = runBlocking {
