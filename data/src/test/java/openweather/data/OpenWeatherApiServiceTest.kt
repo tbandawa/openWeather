@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
-class ServiceApiTest {
+class OpenWeatherApiServiceTest {
 
     @Rule
     @JvmField
@@ -76,6 +76,24 @@ class ServiceApiTest {
 
         assertThat(response.body()?.timezone, `is`("Asia/Shanghai"))
         assertThat(response.body()?.current?.weather?.size, `is`(1))
+
+    }
+
+    @Test
+    fun `five day weather api`() = runBlocking {
+
+        enqueueResponse("five_day_weather.json")
+        val response = service.fetchFiveDayWeather("api_key", "query")
+        val request = mockWebServer.takeRequest()
+
+        assertThat(request.path, `is`("/forecast?appid=api_key&q=query"))
+
+        assertThat(response, IsNull.notNullValue())
+
+        assertThat(response.code(), `is`(200))
+
+        assertThat(response.body()?.list?.size, `is`(40))
+        assertThat(response.body()?.city?.name, `is`("Beijing"))
 
     }
 
