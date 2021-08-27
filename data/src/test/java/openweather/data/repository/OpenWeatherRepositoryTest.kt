@@ -34,7 +34,7 @@ class OpenWeatherRepositoryTest {
     @Test
     fun `test get current weather`() = runBlocking {
 
-        val currentWeatherResponse = readCurrentWeather()
+        /*val currentWeatherResponse = readJsonResponse<Any>("current_weather.json")
 
         `when`(openWeatherApi.fetchCurrentWeather(anyString(), anyString())).thenReturn(Response.success(currentWeatherResponse))
 
@@ -53,14 +53,8 @@ class OpenWeatherRepositoryTest {
                 }
             }
 
-        }
+        }*/
 
-    }
-
-    private fun readCurrentWeather(): CurrentWeatherResponse {
-        val fileContent =
-            this::class.java.classLoader.getResource("current_weather.json").readText()
-        return Gson().fromJson(fileContent, object : TypeToken<CurrentWeatherResponse>() {}.type)
     }
 
 }

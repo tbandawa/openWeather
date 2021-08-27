@@ -20,6 +20,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @RunWith(JUnit4::class)
 abstract class ApiBaseTest {
@@ -68,10 +69,10 @@ abstract class ApiBaseTest {
         mockWebServer.enqueue(mockResponse.setBody(source.readString(Charsets.UTF_8)))
     }
 
-    protected fun readCurrentWeather(): CurrentWeatherResponse {
+    protected inline fun <reified T : Any> readJsonResponse(fileName: String) : T {
         val fileContent =
-            this::class.java.classLoader.getResource("current_weather.json").readText()
-        return Gson().fromJson(fileContent, object : TypeToken<CurrentWeatherResponse>() {}.type)
+            this::class.java.classLoader.getResource(fileName).readText()
+        return Gson().fromJson(fileContent, object : TypeToken<T>() {}.type)
     }
 
 }
