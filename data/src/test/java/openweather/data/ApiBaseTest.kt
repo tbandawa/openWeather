@@ -8,11 +8,17 @@ import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
 import openweather.data.mapper.CurrentWeatherMapper
+import openweather.data.mapper.FiveDayWeatherMapper
+import openweather.data.mapper.OneCallMapper
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.remote.response.CurrentWeatherResponse
+import openweather.data.remote.response.FiveDayWeatherForecastResponse
+import openweather.data.remote.response.OneCallResponse
 import openweather.data.repository.OpenWeatherRepositoryImpl
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.CurrentWeather
+import openweather.domain.models.FiveDayWeatherForecast
+import openweather.domain.models.OneCall
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -35,10 +41,18 @@ abstract class ApiBaseTest {
 
     protected lateinit var currentWeatherMapper: ResponseMapper<CurrentWeatherResponse, CurrentWeather>
 
+    protected lateinit var fiveDayWeatherMapper: ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast>
+
+    protected lateinit var oneCallMapper: ResponseMapper<OneCallResponse, OneCall>
+
     @Before
     fun createServiceAndRepository() {
 
         currentWeatherMapper = CurrentWeatherMapper()
+
+        fiveDayWeatherMapper = FiveDayWeatherMapper()
+
+        oneCallMapper = OneCallMapper()
 
         mockWebServer = MockWebServer()
 
@@ -60,7 +74,7 @@ abstract class ApiBaseTest {
         code: Int = 200,
         headers: Map<String, String> = emptyMap()
     ) {
-        val inputStream = javaClass.classLoader!!.getResourceAsStream("$fileName")
+        val inputStream = javaClass.classLoader!!.getResourceAsStream(fileName)
         val source = inputStream.source().buffer()
         val mockResponse = MockResponse()
             .setResponseCode(code)
@@ -70,8 +84,7 @@ abstract class ApiBaseTest {
     }
 
     protected inline fun <reified T : Any> readJsonResponse(fileName: String) : T {
-        val fileContent =
-            this::class.java.classLoader.getResource(fileName).readText()
+        val fileContent = this::class.java.classLoader.getResource(fileName).readText()
         return Gson().fromJson(fileContent, object : TypeToken<T>() {}.type)
     }
 
