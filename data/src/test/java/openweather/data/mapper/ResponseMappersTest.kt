@@ -1,5 +1,6 @@
-package openweather.data
+package openweather.data.mapper
 
+import openweather.data.ApiBaseTest
 import org.junit.Test
 
 class ResponseMappersTest: ApiBaseTest() {

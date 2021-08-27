@@ -1,6 +1,7 @@
-package openweather.data
+package openweather.data.remote
 
 import kotlinx.coroutines.runBlocking
+import openweather.data.ApiBaseTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsNull

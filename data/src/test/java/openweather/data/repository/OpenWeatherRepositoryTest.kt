@@ -1,4 +1,4 @@
-package openweather.data
+package openweather.data.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.remote.response.*
-import openweather.data.repository.OpenWeatherRepositoryImpl
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.NetworkResult
 import openweather.domain.repository.OpenWeatherRepository
