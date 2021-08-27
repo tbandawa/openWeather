@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.remote.response.*
 import openweather.domain.models.CurrentWeather
+import openweather.domain.models.FiveDayWeatherForecast
 import openweather.domain.models.NetworkResult
 import openweather.domain.repository.OpenWeatherRepository
 import org.hamcrest.CoreMatchers
@@ -34,7 +35,7 @@ open class OpenWeatherRepositoryTest {
     }
 
     @Test
-    fun `test get current weather`() = runBlocking {
+    fun `test fetch current weather`() = runBlocking {
 
         val currentWeatherResponse = readJsonResponse<CurrentWeatherResponse>("current_weather.json")
 
@@ -46,6 +47,26 @@ open class OpenWeatherRepositoryTest {
                 MatcherAssert.assertThat(
                     value.data?.base,
                     CoreMatchers.`is`("stations")
+                )
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `test fetch five day weather`() = runBlocking {
+
+        val fiveDayWeatherForecastResponse = readJsonResponse<FiveDayWeatherForecastResponse>("five_day_weather.json")
+
+        `when`(openWeatherApi.fetchFiveDayWeather(anyString(), anyString())).thenReturn(Response.success(fiveDayWeatherForecastResponse))
+
+        openWeatherRepository.fetchFiveDayWeather("city").collect { value: NetworkResult<FiveDayWeatherForecast> ->
+
+            if(value is NetworkResult.Success) {
+                MatcherAssert.assertThat(
+                    value.data?.city?.name,
+                    CoreMatchers.`is`("Beijing")
                 )
             }
 
