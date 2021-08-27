@@ -2,7 +2,7 @@ package openweather.data.repository
 
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
-import openweather.data.BaseMockTest
+import openweather.data.base.BaseMockTest
 import openweather.data.remote.response.*
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.FiveDayWeatherForecast

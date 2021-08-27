@@ -1,4 +1,4 @@
-package openweather.data
+package openweather.data.base
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.Gson
@@ -14,7 +14,6 @@ import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.remote.response.CurrentWeatherResponse
 import openweather.data.remote.response.FiveDayWeatherForecastResponse
 import openweather.data.remote.response.OneCallResponse
-import openweather.data.repository.OpenWeatherRepositoryImpl
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.FiveDayWeatherForecast
@@ -26,7 +25,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 @RunWith(JUnit4::class)
 abstract class ApiBaseTest {

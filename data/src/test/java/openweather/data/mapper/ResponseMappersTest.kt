@@ -1,6 +1,6 @@
 package openweather.data.mapper
 
-import openweather.data.ApiBaseTest
+import openweather.data.base.ApiBaseTest
 import openweather.data.remote.response.CurrentWeatherResponse
 import openweather.data.remote.response.FiveDayWeatherForecastResponse
 import openweather.data.remote.response.OneCallResponse
