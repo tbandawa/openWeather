@@ -44,8 +44,8 @@ class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, Five
                     list.visibility,
                     list.pop,
                     Rain(
-                        list.rain.one_h,
-                        list.rain.three_h
+                        list.rain?.one_h,
+                        list.rain?.three_h
                     ),
                     Sys(
                         list.sys.type,
