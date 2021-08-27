@@ -9,6 +9,8 @@ import openweather.data.remote.response.*
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.NetworkResult
 import openweather.domain.repository.OpenWeatherRepository
+import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert
 import org.mockito.MockitoAnnotations
 import org.junit.Before
 import org.junit.Test
@@ -18,12 +20,12 @@ import org.mockito.Mockito.`when`
 import retrofit2.Response
 
 
-class OpenWeatherRepositoryTest {
+open class OpenWeatherRepositoryTest {
 
     @Mock
     lateinit var openWeatherApi: OpenWeatherApi
 
-    lateinit var openWeatherRepository: OpenWeatherRepository
+    private lateinit var openWeatherRepository: OpenWeatherRepository
 
     @Before
     fun setUp() {
@@ -34,27 +36,26 @@ class OpenWeatherRepositoryTest {
     @Test
     fun `test get current weather`() = runBlocking {
 
-        /*val currentWeatherResponse = readJsonResponse<Any>("current_weather.json")
+        val currentWeatherResponse = readJsonResponse<CurrentWeatherResponse>("current_weather.json")
 
         `when`(openWeatherApi.fetchCurrentWeather(anyString(), anyString())).thenReturn(Response.success(currentWeatherResponse))
 
         openWeatherRepository.fetchCurrentWeather("city").collect { value: NetworkResult<CurrentWeather> ->
 
-            when(value) {
-
-                is NetworkResult.Loading -> {
-                    println("loading...")
-                }
-                is NetworkResult.Success -> {
-                    println("success -> ${value.data.toString()}")
-                }
-                is NetworkResult.Error -> {
-                    println("error -> ${value.message}")
-                }
+            if(value is NetworkResult.Success) {
+                MatcherAssert.assertThat(
+                    value.data?.base,
+                    CoreMatchers.`is`("stations")
+                )
             }
 
-        }*/
+        }
 
+    }
+
+    private inline fun <reified T : Any> readJsonResponse(fileName: String) : T {
+        val fileContent = this::class.java.classLoader.getResource(fileName).readText()
+        return Gson().fromJson(fileContent, object : TypeToken<T>() {}.type)
     }
 
 }
