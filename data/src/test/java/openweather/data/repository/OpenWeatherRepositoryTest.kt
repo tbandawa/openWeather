@@ -9,17 +9,18 @@ import openweather.data.remote.response.*
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.FiveDayWeatherForecast
 import openweather.domain.models.NetworkResult
+import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.mockito.MockitoAnnotations
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mock
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
 import retrofit2.Response
-
 
 open class OpenWeatherRepositoryTest {
 
@@ -67,6 +68,26 @@ open class OpenWeatherRepositoryTest {
                 MatcherAssert.assertThat(
                     value.data?.city?.name,
                     CoreMatchers.`is`("Beijing")
+                )
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `test one call weather`() = runBlocking {
+
+        val oneCallResponse = readJsonResponse<OneCallResponse>("one_call_weather.json")
+
+        `when`(openWeatherApi.fetchOneCall(anyString(), anyLong(), anyLong())).thenReturn(Response.success(oneCallResponse))
+
+        openWeatherRepository.fetchOneCall(1L, 1L).collect { value: NetworkResult<OneCall> ->
+
+            if(value is NetworkResult.Success) {
+                MatcherAssert.assertThat(
+                    value.data?.current?.sunrise,
+                    CoreMatchers.`is`(1629927390)
                 )
             }
 
