@@ -10,7 +10,7 @@ data class Hourly (
     @SerializedName("pressure") var pressure : Int,
     @SerializedName("humidity") var humidity : Int,
     @SerializedName("dew_point") var dewPoint : Double,
-    @SerializedName("uvi") var uvi : Int,
+    @SerializedName("uvi") var uvi : Double,
     @SerializedName("clouds") var clouds : Int,
     @SerializedName("visibility") var visibility : Int,
     @SerializedName("wind_speed") var windSpeed : Double,
@@ -18,5 +18,5 @@ data class Hourly (
     @SerializedName("wind_gust") var windGust : Double,
     @SerializedName("weather") var weather : list<Weather>,
     @SerializedName("pop") var pop : Double,
-    @SerializedName("rain") var rain : Rain
+    @SerializedName("rain") var rain : Rain? = null
 )

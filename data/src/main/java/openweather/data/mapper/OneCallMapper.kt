@@ -36,8 +36,8 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     )
                 },
                 Rain(
-                    response.current.rain.one_h,
-                    response.current.rain.three_h
+                    response.current.rain?.one_h,
+                    response.current.rain?.three_h
                 )
             ),
             response.minutely.map { minutely ->
@@ -70,8 +70,8 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     },
                     hourly.pop,
                     Rain(
-                        hourly.rain.one_h,
-                        hourly.rain.three_h
+                        hourly.rain?.one_h,
+                        hourly.rain?.three_h
                     )
                 )
             },
