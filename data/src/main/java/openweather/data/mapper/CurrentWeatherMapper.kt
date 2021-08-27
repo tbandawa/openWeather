@@ -10,7 +10,8 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
         return CurrentWeather(
             Coord(
                 response.coord.lon,
-                response.coord.lat),
+                response.coord.lat
+            ),
             response.weather.map { weather ->
                 Weather(
                     weather.id,
@@ -38,15 +39,15 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
                 response.wind.gust
             ),
             Clouds(
-                response.clouds.all
+                response.clouds?.all
             ),
             Rain(
-                response.rain.one_h,
-                response.rain.three_h
+                response.rain?.one_h,
+                response.rain?.three_h
             ),
             Snow(
-                response.snow.one_h,
-                response.snow.three_h
+                response.snow?.one_h,
+                response.snow?.three_h
             ),
             response.dt,
             Sys(

@@ -18,5 +18,5 @@ data class Hourly (
     @SerializedName("wind_gust") var windGust : Double,
     @SerializedName("weather") var weather : list<Weather>,
     @SerializedName("pop") var pop : Double,
-    @SerializedName("rain") var rain : Rain
+    @SerializedName("rain") var rain : Rain? = null
 )

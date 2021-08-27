@@ -19,5 +19,5 @@ data class Current (
     @SerializedName("wind_deg") var windDeg : Int,
     @SerializedName("wind_gust") var windGust : Double,
     @SerializedName("weather") var weather : list<Weather>,
-    @SerializedName("rain") var rain : Rain
+    @SerializedName("rain") var rain : Rain? = null
 )

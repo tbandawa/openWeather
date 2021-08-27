@@ -11,7 +11,8 @@ data class List (
     @SerializedName("wind") var wind : Wind,
     @SerializedName("visibility") var visibility : Int,
     @SerializedName("pop") var pop : Double,
-    @SerializedName("rain") var rain : Rain,
+    @SerializedName("rain") var rain : Rain? = null,
+    @SerializedName("snow") var snow : Snow? = null,
     @SerializedName("sys") var sys : Sys,
     @SerializedName("dt_txt") var dtTxt : String
 )
