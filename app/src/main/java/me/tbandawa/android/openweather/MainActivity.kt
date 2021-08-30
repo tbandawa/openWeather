@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -79,7 +77,7 @@ fun MainContent() {
                     top.linkTo(parent.top)
                 }
                 .fillMaxWidth()
-                .fillMaxHeight(0.8f)
+                .fillMaxHeight()
         ) {
 
         }
@@ -89,9 +87,8 @@ fun MainContent() {
                     bottom.linkTo(parent.bottom)
                 }
                 .fillMaxWidth()
-                .fillMaxHeight(0.2f)
         ) {
-
+            BottomRecycler()
         }
     }
 }
@@ -112,7 +109,7 @@ fun BottomRecycler() {
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                 }
-                .padding(8.dp, 8.dp, 0.dp, 0.dp)
+                .padding(8.dp, 8.dp, 0.dp, 8.dp)
         )
         Text(
             text = "Next 7 Days",
@@ -126,7 +123,7 @@ fun BottomRecycler() {
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
                 }
-                .padding(0.dp, 8.dp, 8.dp, 0.dp)
+                .padding(0.dp, 8.dp, 8.dp, 8.dp)
         )
         Row(modifier = Modifier
             .constrainAs(hourlyRow) {
@@ -136,6 +133,7 @@ fun BottomRecycler() {
                 end.linkTo(parent.end)
                 bottom.linkTo(parent.bottom)
             }
+            .padding(0.dp, 0.dp, 0.dp, 8.dp)
             .fillMaxWidth()
         ) {
             HourlyItem()
@@ -185,6 +183,6 @@ fun HourlyItem() {
 @Composable
 fun DefaultPreview() {
     OpenWeatherTheme {
-        BottomRecycler()
+        MainContent()
     }
 }
