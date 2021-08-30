@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,8 +68,9 @@ fun ToolBar() {
 
 @Composable
 fun MainContent() {
-    ConstraintLayout(modifier = Modifier
-        .fillMaxSize()
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         val (topLayout, bottomLayout) = createRefs()
         Column(
@@ -90,6 +92,58 @@ fun MainContent() {
                 .fillMaxHeight(0.2f)
         ) {
 
+        }
+    }
+}
+
+@Composable
+fun BottomRecycler() {
+    ConstraintLayout {
+        val (textHourly, textWeekly, hourlyRow) = createRefs()
+        Text(
+            text = "Today",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            ),
+            modifier = Modifier
+                .constrainAs(textHourly) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                }
+                .padding(8.dp, 8.dp, 0.dp, 0.dp)
+        )
+        Text(
+            text = "Next 7 Days",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            ),
+            modifier = Modifier
+                .constrainAs(textWeekly) {
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top)
+                }
+                .padding(0.dp, 8.dp, 8.dp, 0.dp)
+        )
+        Row(modifier = Modifier
+            .constrainAs(hourlyRow) {
+                top.linkTo(textHourly.bottom)
+                top.linkTo(textWeekly.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(parent.bottom)
+            }
+            .fillMaxWidth()
+        ) {
+            HourlyItem()
+            HourlyItem()
+            HourlyItem()
+            HourlyItem()
+            HourlyItem()
+            HourlyItem()
         }
     }
 }
@@ -131,6 +185,6 @@ fun HourlyItem() {
 @Composable
 fun DefaultPreview() {
     OpenWeatherTheme {
-        HourlyItem()
+        BottomRecycler()
     }
 }
