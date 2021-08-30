@@ -41,9 +41,9 @@ fun ToolBar() {
     TopAppBar(
         title = {
             Column() {
-                Text(text = "AppBar")
+                Text(text = "Johannesburg")
                 Text(
-                    text = "AppBar",
+                    text = "22, Aug 2021",
                     style = TextStyle(fontSize = 12.sp)
                 )
             }
@@ -79,7 +79,7 @@ fun MainContent() {
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-
+            WeatherContent()
         }
         Column(
             modifier = Modifier
@@ -90,6 +90,40 @@ fun MainContent() {
         ) {
             BottomRecycler()
         }
+    }
+}
+
+@Composable
+fun WeatherContent() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(
+            painter = painterResource(R.drawable.weather),
+            contentDescription = null,
+            modifier = Modifier
+                .size(250.dp, 250.dp)
+        )
+        Text(
+            text = "22°C",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp
+            )
+        )
+        Text(
+            text = "Partly Cloudy",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp
+            )
+        )
     }
 }
 
