@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -98,15 +99,14 @@ fun WeatherContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(0.dp, 35.dp, 0.dp, 0.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             painter = painterResource(R.drawable.weather),
             contentDescription = null,
             modifier = Modifier
-                .size(250.dp, 250.dp)
+                .size(200.dp, 200.dp)
         )
         Text(
             text = "22°C",
@@ -124,6 +124,7 @@ fun WeatherContent() {
                 fontSize = 18.sp
             )
         )
+        DetailGrid()
     }
 }
 
@@ -181,6 +182,39 @@ fun BottomRecycler() {
 }
 
 @Composable
+fun DetailGrid() {
+    Column(
+        modifier = Modifier
+            .padding(0.dp, 35.dp, 0.dp, 0.dp)
+            .width(IntrinsicSize.Max)
+    ) {
+        Row {
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+        }
+        HorizontalDivider()
+        Row {
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+        }
+        HorizontalDivider()
+        Row {
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+            VerticalDivider()
+            DetailItem()
+        }
+    }
+}
+
+@Composable
 fun HourlyItem() {
     Column(modifier = Modifier
         .width(65.dp)
@@ -211,6 +245,73 @@ fun HourlyItem() {
             )
         )
     }
+}
+
+@Composable
+fun DetailItem() {
+    ConstraintLayout(
+        modifier = Modifier
+            .background(color = Color.White)
+            .height(57.dp)
+            .padding(10.dp, 5.dp, 5.dp, 5.dp)
+    ) {
+        val (detailIcon, detailTitle, detailValue) = createRefs()
+        Image(
+            painter = painterResource(R.drawable.ic_cloud),
+            contentDescription = null,
+            modifier = Modifier
+                .constrainAs(detailIcon) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                }
+                .size(30.dp, 30.dp)
+                .padding(0.dp, 0.dp, 8.dp, 0.dp)
+        )
+        Text(
+            text = "Wind Speed",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                lineHeight = 8.sp
+            ),
+            modifier = Modifier
+                .constrainAs(detailTitle) {
+                    start.linkTo(detailIcon.end)
+                    top.linkTo(parent.top)
+                }
+                .size(80.dp, 28.dp)
+                .padding(0.dp, 8.dp, 0.dp, 0.dp)
+        )
+        Text(
+            text = "22°C",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp
+            ),
+            modifier = Modifier
+                .constrainAs(detailValue) {
+                    start.linkTo(detailIcon.end)
+                    top.linkTo(detailTitle.bottom)
+                }
+        )
+    }
+}
+
+@Composable
+fun VerticalDivider() {
+    Spacer(modifier = Modifier
+        .width(1.dp)
+        .height(57.dp)
+        .background(color = Color.LightGray))
+}
+
+@Composable
+fun HorizontalDivider() {
+    Spacer(modifier = Modifier
+        .height(1.dp)
+        .fillMaxWidth()
+        .background(color = Color.LightGray))
 }
 
 @Preview(showBackground = true)
