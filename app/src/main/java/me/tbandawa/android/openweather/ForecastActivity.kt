@@ -3,11 +3,18 @@ package me.tbandawa.android.openweather
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +27,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 
+@ExperimentalAnimationApi
 class ForecastActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -63,6 +72,7 @@ fun ForecastToolBar() {
     )
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun ForecastContent() {
     ConstraintLayout(
@@ -97,18 +107,32 @@ fun ForecastContent() {
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                items(5) { index ->
+                    ForecastItem()
+                }
+            }
         }
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun ForecastItem() {
+
+    var visible by remember { mutableStateOf(false) }
+
     ConstraintLayout(
         modifier = Modifier
             .background(color = Color.White)
             .fillMaxWidth()
-            .padding(0.dp, 5.dp, 0.dp, 5.dp)
+            .padding(10.dp, 5.dp, 10.dp, 5.dp)
+            .clickable {
+                visible = !visible
+            }
     ) {
         val (visibleLayout, moreLayout) = createRefs()
         Row(
@@ -162,14 +186,46 @@ fun ForecastItem() {
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
                 ),
                 modifier = Modifier
                     .padding(16.dp, 0.dp, 0.dp, 0.dp)
                     .fillMaxWidth()
             )
         }
-        Column(
+
+        AnimatedVisibility(
+            modifier = Modifier
+                .constrainAs(moreLayout) {
+                    start.linkTo(parent.start)
+                    top.linkTo(visibleLayout.bottom)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(0.dp, 0.dp, 0.dp, 16.dp),
+            visible = visible,
+            enter = fadeIn(
+                initialAlpha = 0.4f
+            ),
+            exit = fadeOut(
+                animationSpec = tween(durationMillis = 250)
+            )
+        ) {
+            Column {
+                Row {
+                    MoreItem()
+                    MoreItem()
+                    MoreItem()
+                }
+                Row {
+                    MoreItem()
+                    MoreItem()
+                    MoreItem()
+                }
+            }
+        }
+
+        /*Column(
             modifier = Modifier
                 .constrainAs(moreLayout) {
                     start.linkTo(parent.start)
@@ -189,7 +245,8 @@ fun ForecastItem() {
                 MoreItem()
                 MoreItem()
             }
-        }
+        }*/
+
     }
 }
 
@@ -245,10 +302,11 @@ fun MoreItem() {
     }
 }
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun ForecastPreview() {
     OpenWeatherTheme {
-        ForecastItem()
+        ForecastContent()
     }
 }
