@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Scaffold(
-                        topBar = { ToolBar() }
+                        topBar = { MainToolBar() }
                     ) {
                         MainContent()
                     }
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ToolBar() {
+fun MainToolBar() {
     TopAppBar(
         title = {
             Column() {
@@ -316,7 +316,7 @@ fun HorizontalDivider() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun MainPreview() {
     OpenWeatherTheme {
         MainContent()
     }
