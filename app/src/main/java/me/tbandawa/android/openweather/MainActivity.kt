@@ -1,8 +1,10 @@
 package me.tbandawa.android.openweather
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -21,9 +24,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -68,6 +73,7 @@ fun MainToolBar() {
     )
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun MainContent() {
     ConstraintLayout(
@@ -131,8 +137,12 @@ fun WeatherContent() {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun BottomRecycler() {
+
+    val context = LocalContext.current
+
     ConstraintLayout {
         val (textHourly, textWeekly, hourlyRow) = createRefs()
         Text(
@@ -163,7 +173,7 @@ fun BottomRecycler() {
                 }
                 .padding(0.dp, 8.dp, 8.dp, 8.dp)
                 .clickable {
-
+                    context.startActivity(Intent(context, ForecastActivity::class.java))
                 }
         )
         LazyRow(
@@ -318,6 +328,7 @@ fun HorizontalDivider() {
         .background(color = Color.LightGray))
 }
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
