@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -160,23 +162,21 @@ fun BottomRecycler() {
                 }
                 .padding(0.dp, 8.dp, 8.dp, 8.dp)
         )
-        Row(modifier = Modifier
-            .constrainAs(hourlyRow) {
-                top.linkTo(textHourly.bottom)
-                top.linkTo(textWeekly.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-                bottom.linkTo(parent.bottom)
-            }
-            .padding(0.dp, 0.dp, 0.dp, 8.dp)
-            .fillMaxWidth()
+        LazyRow(
+            modifier = Modifier
+                .constrainAs(hourlyRow) {
+                    top.linkTo(textHourly.bottom)
+                    top.linkTo(textWeekly.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(0.dp, 0.dp, 0.dp, 8.dp)
+                .fillMaxWidth()
         ) {
-            HourlyItem()
-            HourlyItem()
-            HourlyItem()
-            HourlyItem()
-            HourlyItem()
-            HourlyItem()
+            items(16) { index ->
+                HourlyItem()
+            }
         }
     }
 }
