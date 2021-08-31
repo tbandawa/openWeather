@@ -108,7 +108,7 @@ fun ForecastItem() {
         modifier = Modifier
             .background(color = Color.White)
             .fillMaxWidth()
-            .padding(16.dp, 5.dp, 5.dp, 5.dp)
+            .padding(0.dp, 5.dp, 0.dp, 5.dp)
     ) {
         val (visibleLayout, moreLayout) = createRefs()
         Row(
@@ -118,7 +118,8 @@ fun ForecastItem() {
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
-                },
+                }
+                .padding(10.dp, 0.dp, 10.dp, 0.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -168,7 +169,7 @@ fun ForecastItem() {
                     .fillMaxWidth()
             )
         }
-        Row(
+        Column(
             modifier = Modifier
                 .constrainAs(moreLayout) {
                     start.linkTo(parent.start)
@@ -176,10 +177,71 @@ fun ForecastItem() {
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
                 }
-                .padding(16.dp, 0.dp, 16.dp, 8.dp)
+                .padding(0.dp, 0.dp, 0.dp, 0.dp)
         ) {
-
+            Row {
+                MoreItem()
+                MoreItem()
+                MoreItem()
+            }
+            Row {
+                MoreItem()
+                MoreItem()
+                MoreItem()
+            }
         }
+    }
+}
+
+@Composable
+fun MoreItem() {
+    ConstraintLayout(
+        modifier = Modifier
+            .background(color = Color.White)
+            .height(57.dp)
+            .padding(5.dp, 5.dp, 5.dp, 5.dp)
+    ) {
+        val (detailIcon, detailTitle, detailValue) = createRefs()
+        Image(
+            painter = painterResource(R.drawable.ic_cloud),
+            contentDescription = null,
+            modifier = Modifier
+                .constrainAs(detailIcon) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                }
+                .size(25.dp, 30.dp)
+                .padding(0.dp, 0.dp, 8.dp, 0.dp)
+        )
+        Text(
+            text = "Wind Speed",
+            style = TextStyle(
+                color = Color.Black,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                lineHeight = 8.sp
+            ),
+            modifier = Modifier
+                .constrainAs(detailTitle) {
+                    start.linkTo(detailIcon.end)
+                    top.linkTo(parent.top)
+                }
+                .size(80.dp, 28.dp)
+                .padding(0.dp, 8.dp, 0.dp, 0.dp)
+        )
+        Text(
+            text = "22°C",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp
+            ),
+            modifier = Modifier
+                .constrainAs(detailValue) {
+                    start.linkTo(detailIcon.end)
+                    top.linkTo(detailTitle.bottom)
+                }
+        )
     }
 }
 
