@@ -40,7 +40,7 @@ class SettingsActivity : ComponentActivity() {
                     Scaffold(
                         topBar = { SettingsToolBar() }
                     ) {
-
+                        SettingsContent()
                     }
                 }
             }
@@ -81,6 +81,7 @@ fun SettingsContent() {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp)
     ) {
         val (contentLayout, bottomLayout) = createRefs()
         Column(
@@ -91,6 +92,222 @@ fun SettingsContent() {
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
         ) {
+
+            Text(
+                text = "Units",
+                style = TextStyle(
+                    color = Color.Black,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp
+                ),
+                modifier = Modifier
+                    .padding(0.dp, 16.dp, 0.dp, 8.dp)
+            )
+
+            HorizontalDivider()
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Temperature",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = "Partly Cloudy",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    )
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Wind speed",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = "Partly Cloudy",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    )
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Pressure",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = "Partly Cloudy",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    )
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Distance",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = "Partly Cloudy",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    )
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, bottom = 45.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Time formart",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Text(
+                    text = "Partly Cloudy",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    )
+                )
+            }
+
+            HorizontalDivider()
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(35.dp)
+                    .padding(top = 15.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.svg_repo),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(30.dp)
+                        .padding(end = 8.dp)
+                )
+                Text(
+                    text = "Icons source",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(35.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.github),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(25.dp)
+                        .padding(end = 8.dp)
+                )
+                Text(
+                    text = "Source code",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(30.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.ic_email),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(30.dp)
+                        .padding(end = 8.dp)
+                )
+                Text(
+                    text = "E-mail",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
 
         }
         Row(
@@ -120,6 +337,10 @@ fun SettingsContent() {
 @Composable
 fun SettingsPreview() {
     OpenWeatherTheme {
-        SettingsContent()
+        Scaffold(
+            topBar = { SettingsToolBar() }
+        ) {
+            SettingsContent()
+        }
     }
 }
