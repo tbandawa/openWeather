@@ -45,8 +45,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun MainToolBar() {
+
+    val context = LocalContext.current
+
     TopAppBar(
         title = {
             Column() {
@@ -60,7 +64,11 @@ fun MainToolBar() {
         backgroundColor = Color.White,
         elevation = 0.dp,
         actions = {
-            IconButton(onClick = {}) {
+            IconButton(
+                onClick = {
+                    context.startActivity(Intent(context, SettingsActivity::class.java))
+                }
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_settings),
                     contentDescription = null,
