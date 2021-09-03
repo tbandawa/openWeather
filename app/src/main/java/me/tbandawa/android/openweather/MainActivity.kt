@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,13 +26,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
+import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: HomeViewModel by viewModels()
+
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            Timber.d(viewModel.oneCall.value?.data.toString())
+
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Scaffold(

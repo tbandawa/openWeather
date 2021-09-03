@@ -12,7 +12,7 @@ data class Current (
     @SerializedName("pressure") var pressure : Int,
     @SerializedName("humidity") var humidity : Int,
     @SerializedName("dew_point") var dewPoint : Double,
-    @SerializedName("uvi") var uvi : Int,
+    @SerializedName("uvi") var uvi : Double,
     @SerializedName("clouds") var clouds : Int,
     @SerializedName("visibility") var visibility : Int,
     @SerializedName("wind_speed") var windSpeed : Double,

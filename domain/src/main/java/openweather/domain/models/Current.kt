@@ -11,7 +11,7 @@ data class Current (
     var pressure : Int?,
     var humidity : Int?,
     var dewPoint : Double?,
-    var uvi : Int?,
+    var uvi : Double?,
     var clouds : Int?,
     var visibility : Int?,
     var windSpeed : Double?,

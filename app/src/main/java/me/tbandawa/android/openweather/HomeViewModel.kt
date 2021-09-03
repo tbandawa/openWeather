@@ -1,0 +1,36 @@
+package me.tbandawa.android.openweather
+
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import openweather.domain.models.NetworkResult
+import openweather.domain.models.OneCall
+import openweather.domain.repository.OpenWeatherRepository
+import timber.log.Timber
+import javax.inject.Inject
+
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: OpenWeatherRepository
+) : ViewModel() {
+
+    val oneCall: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
+
+    init {
+        fetchWeather()
+    }
+
+    fun fetchWeather(){
+        viewModelScope.launch {
+            repository.fetchOneCall((-26.2023).toLong(), 28.0436.toLong()).collect { result ->
+                Timber.d(result.message)
+                oneCall.value = result
+            }
+        }
+    }
+
+}
