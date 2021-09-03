@@ -124,9 +124,16 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Row {
-                    Chip(selected = true, text = "°C")
-                    Chip(selected = false, text = "°F")
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        Chip(selected = true, text = "°C")
+                        Chip(selected = false, text = "°F")
+                    }
                 }
             }
 
@@ -145,10 +152,17 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Row {
-                    Chip(selected = true, text = "m/s")
-                    Chip(selected = false, text = "km/h")
-                    Chip(selected = false, text = "mph")
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        Chip(selected = true, text = "m/s")
+                        Chip(selected = false, text = "km/h")
+                        Chip(selected = false, text = "mph")
+                    }
                 }
             }
 
@@ -167,9 +181,16 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Row {
-                    Chip(selected = true, text = "hPa")
-                    Chip(selected = false, text = "inHg")
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        Chip(selected = true, text = "hPa")
+                        Chip(selected = false, text = "inHg")
+                    }
                 }
             }
 
@@ -188,9 +209,16 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Row {
-                    Chip(selected = true, text = "km")
-                    Chip(selected = false, text = "mi")
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        Chip(selected = true, text = "km")
+                        Chip(selected = false, text = "mi")
+                    }
                 }
             }
 
@@ -209,9 +237,16 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Row {
-                    Chip(selected = true, text = "24-hour")
-                    Chip(selected = false, text = "12-hour")
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        Chip(selected = true, text = "24-hour")
+                        Chip(selected = false, text = "12-hour")
+                    }
                 }
             }
 
@@ -328,10 +363,10 @@ fun Chip(
         },
         contentColor = when {
             selected -> MaterialTheme.colors.onPrimary
-            else -> Color.LightGray
+            else -> Color.White
         },
         shape = CircleShape,
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(3.dp)
     ) {
         Text(
             text = text,
