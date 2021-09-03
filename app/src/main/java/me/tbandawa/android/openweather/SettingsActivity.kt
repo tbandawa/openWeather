@@ -124,14 +124,10 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Text(
-                    text = "Partly Cloudy",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                    )
-                )
+                Row {
+                    Chip(selected = true, text = "°C")
+                    Chip(selected = false, text = "°F")
+                }
             }
 
             Row(
@@ -149,14 +145,11 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Text(
-                    text = "Partly Cloudy",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                    )
-                )
+                Row {
+                    Chip(selected = true, text = "m/s")
+                    Chip(selected = false, text = "km/h")
+                    Chip(selected = false, text = "mph")
+                }
             }
 
             Row(
@@ -174,14 +167,10 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Text(
-                    text = "Partly Cloudy",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                    )
-                )
+                Row {
+                    Chip(selected = true, text = "hPa")
+                    Chip(selected = false, text = "inHg")
+                }
             }
 
             Row(
@@ -199,14 +188,10 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Text(
-                    text = "Partly Cloudy",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                    )
-                )
+                Row {
+                    Chip(selected = true, text = "km")
+                    Chip(selected = false, text = "mi")
+                }
             }
 
             Row(
@@ -224,14 +209,10 @@ fun SettingsContent() {
                         fontSize = 16.sp
                     )
                 )
-                Text(
-                    text = "Partly Cloudy",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                    )
-                )
+                Row {
+                    Chip(selected = true, text = "24-hour")
+                    Chip(selected = false, text = "12-hour")
+                }
             }
 
             HorizontalDivider()
@@ -336,7 +317,7 @@ fun SettingsContent() {
 }
 
 @Composable
-fun CustomChip(
+fun Chip(
     selected: Boolean,
     text: String
 ) {
@@ -370,11 +351,7 @@ fun SettingsPreview() {
         Scaffold(
             topBar = { SettingsToolBar() }
         ) {
-            // creates a custom chip for active state
-            CustomChip(
-                selected = true,
-                text = "Chip"
-            )
+            SettingsContent()
         }
     }
 }
