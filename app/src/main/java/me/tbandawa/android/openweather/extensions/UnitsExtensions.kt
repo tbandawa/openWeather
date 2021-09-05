@@ -1,26 +1,28 @@
 package me.tbandawa.android.openweather.extensions
 
-fun Double.toTemperature() : String {
+import android.content.Context
+
+fun Double.toTemperature(context: Context) : String {
     return "toTemperature"
 }
 
-fun Double.toSpeed() : String {
+fun Double.toSpeed(context: Context) : String {
     return "toSpeed"
 }
 
-fun Int.toDirection() : String {
+fun Int.toDirection(context: Context) : String {
     return "toDirection"
 }
 
-fun Int.toPressure() : String {
+fun Int.toPressure(context: Context) : String {
     return "toPressure"
 }
 
-fun Double.toDewPoint() : String {
+fun Double.toDewPoint(context: Context) : String {
     return "toDewPoint"
 }
 
-fun Int.toVisibility() : String {
+fun Int.toVisibility(context: Context) : String {
     return "toVisibility"
 }
 
