@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 import kotlin.collections.List as list
 
 data class List (
-    @SerializedName("dt") var dt : Int,
-    @SerializedName("main") var main : Main,
-    @SerializedName("weather") var weather : list<Weather>,
-    @SerializedName("clouds") var clouds : Clouds,
-    @SerializedName("wind") var wind : Wind,
-    @SerializedName("visibility") var visibility : Int,
-    @SerializedName("pop") var pop : Double,
+    @SerializedName("dt") var dt : Int? = null,
+    @SerializedName("main") var main : Main? = null,
+    @SerializedName("weather") var weather : list<Weather>? = null,
+    @SerializedName("clouds") var clouds : Clouds? = null,
+    @SerializedName("wind") var wind : Wind? = null,
+    @SerializedName("visibility") var visibility : Int? = null,
+    @SerializedName("pop") var pop : Double? = null,
     @SerializedName("rain") var rain : Rain? = null,
     @SerializedName("snow") var snow : Snow? = null,
-    @SerializedName("sys") var sys : Sys,
-    @SerializedName("dt_txt") var dtTxt : String
+    @SerializedName("sys") var sys : Sys? = null,
+    @SerializedName("dt_txt") var dtTxt : String? = null
 )

@@ -3,10 +3,10 @@ package openweather.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class Temp (
-    @SerializedName("day") var day : Double,
-    @SerializedName("min") var min : Double,
-    @SerializedName("max") var max : Double,
-    @SerializedName("night") var night : Double,
-    @SerializedName("eve") var eve : Double,
-    @SerializedName("morn") var morn : Double
+    @SerializedName("day") var day : Double? = null,
+    @SerializedName("min") var min : Double? = null,
+    @SerializedName("max") var max : Double? = null,
+    @SerializedName("night") var night : Double? = null,
+    @SerializedName("eve") var eve : Double? = null,
+    @SerializedName("morn") var morn : Double? = null
 )
