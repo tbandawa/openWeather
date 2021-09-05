@@ -13,21 +13,21 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
             response.timezone,
             response.timezoneOffset,
             Current(
-                response.current.dt,
-                response.current.sunrise,
-                response.current.sunset,
-                response.current.temp,
-                response.current.feelsLike,
-                response.current.pressure,
-                response.current.humidity,
-                response.current.dewPoint,
-                response.current.uvi,
-                response.current.clouds,
-                response.current.visibility,
-                response.current.windSpeed,
-                response.current.windDeg,
-                response.current.windGust,
-                response.current.weather.map { weather ->
+                response.current?.dt,
+                response.current?.sunrise,
+                response.current?.sunset,
+                response.current?.temp,
+                response.current?.feelsLike,
+                response.current?.pressure,
+                response.current?.humidity,
+                response.current?.dewPoint,
+                response.current?.uvi,
+                response.current?.clouds,
+                response.current?.visibility,
+                response.current?.windSpeed,
+                response.current?.windDeg,
+                response.current?.windGust,
+                response.current?.weather?.map { weather ->
                     Weather(
                         weather.id,
                         weather.main,
@@ -36,17 +36,21 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     )
                 },
                 Rain(
-                    response.current.rain?.one_h,
-                    response.current.rain?.three_h
+                    response.current?.rain?.one_h,
+                    response.current?.rain?.three_h
+                ),
+                Snow(
+                    response.current?.snow?.one_h,
+                    response.current?.snow?.three_h
                 )
             ),
-            response.minutely.map { minutely ->
+            response.minutely?.map { minutely ->
                 Minutely(
                     minutely.dt,
                     minutely.precipitation
                 )
             },
-            response.hourly.map { hourly ->
+            response.hourly?.map { hourly ->
                 Hourly(
                     hourly.dt,
                     hourly.temp,
@@ -60,7 +64,7 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     hourly.windSpeed,
                     hourly.windDeg,
                     hourly.windGust,
-                    hourly.weather.map { weather ->
+                    hourly.weather?.map { weather ->
                         Weather(
                             weather.id,
                             weather.main,
@@ -75,7 +79,7 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     )
                 )
             },
-            response.daily.map { daily ->
+            response.daily?.map { daily ->
                 Daily(
                     daily.dt,
                     daily.sunrise,
@@ -84,18 +88,18 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     daily.moonset,
                     daily.moonPhase,
                     Temp(
-                        daily.temp.day,
-                        daily.temp.min,
-                        daily.temp.max,
-                        daily.temp.night,
-                        daily.temp.eve,
-                        daily.temp.morn
+                        daily.temp?.day,
+                        daily.temp?.min,
+                        daily.temp?.max,
+                        daily.temp?.night,
+                        daily.temp?.eve,
+                        daily.temp?.morn
                     ),
                     FeelsLike(
-                        daily.feelsLike.day,
-                        daily.feelsLike.night,
-                        daily.feelsLike.eve,
-                        daily.feelsLike.morn
+                        daily.feelsLike?.day,
+                        daily.feelsLike?.night,
+                        daily.feelsLike?.eve,
+                        daily.feelsLike?.morn
                     ),
                     daily.pressure,
                     daily.humidity,
@@ -103,7 +107,7 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     daily.windSpeed,
                     daily.windDeg,
                     daily.windGust,
-                    daily.weather.map { weather ->
+                    daily.weather?.map { weather ->
                         Weather(
                             weather.id,
                             weather.main,

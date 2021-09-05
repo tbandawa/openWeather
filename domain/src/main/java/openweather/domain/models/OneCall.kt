@@ -8,7 +8,7 @@ data class OneCall (
     var timezone : String?,
     var timezoneOffset : Int?,
     var current : Current?,
-    var minutely : list<Minutely>?,
-    var hourly : list<Hourly>?,
-    var daily : list<Daily>?
+    var minutely : list<Minutely>? = listOf(),
+    var hourly : list<Hourly>? = listOf(),
+    var daily : list<Daily>? = listOf()
 )

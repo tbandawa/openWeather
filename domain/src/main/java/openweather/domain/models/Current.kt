@@ -11,12 +11,13 @@ data class Current (
     var pressure : Int?,
     var humidity : Int?,
     var dewPoint : Double?,
-    var uvi : Int?,
+    var uvi : Double?,
     var clouds : Int?,
     var visibility : Int?,
     var windSpeed : Double?,
     var windDeg : Int?,
     var windGust : Double?,
     var weather : list<Weather>?,
-    var rain : Rain?
+    var rain : Rain?,
+    var snow : Snow?
 )

@@ -9,10 +9,10 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
     override fun mapToModel(response: CurrentWeatherResponse): CurrentWeather {
         return CurrentWeather(
             Coord(
-                response.coord.lon,
-                response.coord.lat
+                response.coord?.lon,
+                response.coord?.lat
             ),
-            response.weather.map { weather ->
+            response.weather?.map { weather ->
                 Weather(
                     weather.id,
                     weather.main,
@@ -22,21 +22,21 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
             },
             response.base,
             Main(
-                response.main.temp,
-                response.main.feelsLike,
-                response.main.tempMin,
-                response.main.tempMax,
-                response.main.tempKf,
-                response.main.pressure,
-                response.main.humidity,
-                response.main.seaLevel,
-                response.main.grndLevel
+                response.main?.temp,
+                response.main?.feelsLike,
+                response.main?.tempMin,
+                response.main?.tempMax,
+                response.main?.tempKf,
+                response.main?.pressure,
+                response.main?.humidity,
+                response.main?.seaLevel,
+                response.main?.grndLevel
             ),
             response.visibility,
             Wind(
-                response.wind.speed,
-                response.wind.deg,
-                response.wind.gust
+                response.wind?.speed,
+                response.wind?.deg,
+                response.wind?.gust
             ),
             Clouds(
                 response.clouds?.all
@@ -51,12 +51,12 @@ class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeath
             ),
             response.dt,
             Sys(
-                response.sys.type,
-                response.sys.id,
-                response.sys.country,
-                response.sys.sunrise,
-                response.sys.sunset,
-                response.sys.pod
+                response.sys?.type,
+                response.sys?.id,
+                response.sys?.country,
+                response.sys?.sunrise,
+                response.sys?.sunset,
+                response.sys?.pod
             ),
             response.timezone,
             response.id,

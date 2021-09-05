@@ -3,13 +3,13 @@ package openweather.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class Main (
-    @SerializedName("temp") var temp : Double,
-    @SerializedName("feels_like") var feelsLike : Double,
-    @SerializedName("temp_min") var tempMin : Double,
-    @SerializedName("temp_max") var tempMax : Double,
-    @SerializedName("temp_kf") var tempKf : Double,
-    @SerializedName("pressure") var pressure : Int,
-    @SerializedName("humidity") var humidity : Int,
-    @SerializedName("sea_level") var seaLevel : Int,
-    @SerializedName("grnd_level") var grndLevel : Int
+    @SerializedName("temp") var temp : Double? = null,
+    @SerializedName("feels_like") var feelsLike : Double? = null,
+    @SerializedName("temp_min") var tempMin : Double? = null,
+    @SerializedName("temp_max") var tempMax : Double? = null,
+    @SerializedName("temp_kf") var tempKf : Double? = null,
+    @SerializedName("pressure") var pressure : Int? = null,
+    @SerializedName("humidity") var humidity : Int? = null,
+    @SerializedName("sea_level") var seaLevel : Int? = null,
+    @SerializedName("grnd_level") var grndLevel : Int? = null
 )
