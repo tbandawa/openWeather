@@ -44,13 +44,10 @@ class MainActivity : ComponentActivity() {
                             LoadingContent()
                         }
                         is NetworkResult.Success -> {
-
-                            Timber.d("${result.data}")
-
                             Scaffold(
                                 topBar = { MainToolBar() }
                             ) {
-                                MainContent()
+                                MainContent(result.data!!)
                             }
                         }
                         is NetworkResult.Error -> {

@@ -8,10 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ConstraintLayout
+import openweather.domain.models.OneCall
 
 @ExperimentalAnimationApi
 @Composable
-fun MainContent() {
+fun MainContent(
+    oneCall: OneCall
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -25,7 +28,7 @@ fun MainContent() {
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-            WeatherContent()
+            WeatherContent(oneCall.current!!)
         }
         Column(
             modifier = Modifier

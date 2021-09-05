@@ -16,9 +16,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.extensions.toTemperature
+import openweather.domain.models.Current
+import java.util.*
 
 @Composable
-fun WeatherContent() {
+fun WeatherContent(
+    current: Current
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,7 +37,7 @@ fun WeatherContent() {
                 .size(200.dp, 200.dp)
         )
         Text(
-            text = "22°C",
+            text = current.temp!!.toTemperature(),
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
@@ -40,13 +45,17 @@ fun WeatherContent() {
             )
         )
         Text(
-            text = "Partly Cloudy",
+            text = current.weather?.get(0)!!.description!!.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.getDefault()
+                ) else it.toString()
+            },
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp
             )
         )
-        DetailGrid()
+        DetailGrid(current)
     }
 }
