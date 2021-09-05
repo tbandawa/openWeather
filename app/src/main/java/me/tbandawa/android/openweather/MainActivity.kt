@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val result = viewModel.currentWeather.value
+            val result = viewModel.oneCallWeather.value
 
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
@@ -44,6 +44,9 @@ class MainActivity : ComponentActivity() {
                             LoadingContent()
                         }
                         is NetworkResult.Success -> {
+
+                            Timber.d("${result.data}")
+
                             Scaffold(
                                 topBar = { MainToolBar() }
                             ) {

@@ -19,12 +19,12 @@ class HomeViewModel @Inject constructor(
     private val repository: OpenWeatherRepository
 ) : ViewModel() {
 
-    val oneCall: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
+    val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
 
     val currentWeather: MutableState<NetworkResult<CurrentWeather>?> = mutableStateOf(null)
 
     init {
-        fetchCurrentWeather()
+        fetchWeather()
     }
 
     private fun fetchWeather(){
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
                     }
                 }
 
-                oneCall.value = result
+                oneCallWeather.value = result
             }
         }
     }
