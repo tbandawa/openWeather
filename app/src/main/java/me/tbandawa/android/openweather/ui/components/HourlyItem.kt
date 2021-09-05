@@ -10,15 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.extensions.toTemperature
+import openweather.domain.models.Hourly
 
 @Composable
-fun HourlyItem() {
+fun HourlyItem(
+    hourly: Hourly
+) {
+
+    val context = LocalContext.current
+
     Column(modifier = Modifier
         .width(65.dp)
         .padding(5.dp),
@@ -40,7 +48,7 @@ fun HourlyItem() {
                 .padding(0.dp, 5.dp, 0.dp, 5.dp)
         )
         Text(
-            text = "22°C",
+            text = hourly.temp!!.toTemperature(context),
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Light,
