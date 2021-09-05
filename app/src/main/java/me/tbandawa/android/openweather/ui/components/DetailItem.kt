@@ -22,7 +22,7 @@ import me.tbandawa.android.openweather.R
 fun DetailItem(
     painter: Painter,
     title: String,
-    value: Double
+    value: String
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -58,7 +58,7 @@ fun DetailItem(
                 .padding(0.dp, 8.dp, 0.dp, 0.dp)
         )
         Text(
-            text = "$value",
+            text = value,
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Medium,
