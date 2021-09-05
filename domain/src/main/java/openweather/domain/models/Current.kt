@@ -18,5 +18,6 @@ data class Current (
     var windDeg : Int?,
     var windGust : Double?,
     var weather : list<Weather>?,
-    var rain : Rain?
+    var rain : Rain?,
+    var snow : Snow?
 )
