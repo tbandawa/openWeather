@@ -2,9 +2,17 @@ package openweather.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 
 class PreferenceHelper(private val context: Context) {
+
+    val tempUnit: LiveData<String> = MutableLiveData()
+    val speedUnit: LiveData<String> = MutableLiveData()
+    val pressureUnit: LiveData<String> = MutableLiveData()
+    val distanceUnit: LiveData<String> = MutableLiveData()
+    val timeUnit: LiveData<String> = MutableLiveData()
 
     fun defaultPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 

@@ -1,12 +1,15 @@
 package openweather.data.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import openweather.data.BuildConfig
+import openweather.data.local.PreferenceHelper
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.repository.OpenWeatherRepositoryImpl
 import openweather.domain.repository.OpenWeatherRepository
@@ -43,6 +46,12 @@ object DataModule {
             .client(okHttpClient)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun providePreferenceHelper(
+        @ApplicationContext appContext: Context
+    ): PreferenceHelper = PreferenceHelper(appContext)
 
     @Provides
     @Singleton
