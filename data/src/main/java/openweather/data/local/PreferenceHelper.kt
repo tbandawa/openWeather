@@ -8,11 +8,24 @@ import androidx.preference.PreferenceManager
 
 class PreferenceHelper(private val context: Context) {
 
-    val tempUnit: LiveData<String> = MutableLiveData()
-    val speedUnit: LiveData<String> = MutableLiveData()
-    val pressureUnit: LiveData<String> = MutableLiveData()
-    val distanceUnit: LiveData<String> = MutableLiveData()
-    val timeUnit: LiveData<String> = MutableLiveData()
+    private val _tempUnit = MutableLiveData<String>()
+    val tempUnit: LiveData<String> = _tempUnit
+
+    private val _speedUnit = MutableLiveData<String>()
+    val speedUnit: LiveData<String> = _speedUnit
+
+    private val _pressureUnit = MutableLiveData<String>()
+    val pressureUnit: LiveData<String> = _pressureUnit
+
+    private val _distanceUnit = MutableLiveData<String>()
+    val distanceUnit: LiveData<String> = _distanceUnit
+
+    private val _timeUnit = MutableLiveData<String>()
+    val timeUnit: LiveData<String> = _timeUnit
+
+    init {
+        emitPreferences()
+    }
 
     fun defaultPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -23,7 +36,7 @@ class PreferenceHelper(private val context: Context) {
     }
 
     /**
-     * puts a key value pair in shared preferenceManager if doesn't exists, otherwise updates value on given [key]
+     * Puts a key value pair in shared preferenceManager if doesn't exists, otherwise updates value on given [key]
      */
     operator fun SharedPreferences.set(key: String?, value: Any?) {
         when (value) {
@@ -34,10 +47,11 @@ class PreferenceHelper(private val context: Context) {
             is Long -> edit { it.putLong(key, value) }
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
+        emitPreferences()
     }
 
     /**
-     * finds value on given key.
+     * Finds value on given key.
      * [T] is the type of value
      * @param defaultValue optional default value - will take null for strings, false for bool and -1 for numeric values if [defaultValue] is not specified
      */
@@ -50,6 +64,17 @@ class PreferenceHelper(private val context: Context) {
             Long::class -> getLong(key, defaultValue as? Long ?: -1) as T?
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
+    }
+
+    /**
+     * Updates preferences to observers
+     */
+    private fun emitPreferences() {
+        _tempUnit.value = defaultPrefs().getString(Units.TEMPERATURE.key, "°C")
+        _speedUnit.value = defaultPrefs().getString(Units.SPEED.key, "m/s")
+        _pressureUnit.value = defaultPrefs().getString(Units.PRESSURE.key, "hPa")
+        _distanceUnit.value = defaultPrefs().getString(Units.DISTANCE.key, "km")
+        _timeUnit.value = defaultPrefs().getString(Units.TIME.key, "24-hour")
     }
 
 }
