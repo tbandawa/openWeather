@@ -6,8 +6,6 @@ import androidx.preference.PreferenceManager
 
 class PreferenceHelper(private val context: Context) {
 
-    val BACKGROUND: String = "background"
-
     fun defaultPrefs(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
