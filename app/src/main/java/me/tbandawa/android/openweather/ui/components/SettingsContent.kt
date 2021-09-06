@@ -47,146 +47,15 @@ fun SettingsContent() {
 
             HorizontalDivider()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Temperature",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        Chip(selected = true, text = "°C")
-                        Chip(selected = false, text = "°F")
-                    }
-                }
-            }
+            TemperatureSettings()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Wind speed",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        Chip(selected = true, text = "m/s")
-                        Chip(selected = false, text = "km/h")
-                        Chip(selected = false, text = "mph")
-                    }
-                }
-            }
+            SpeedSettings()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Pressure",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        Chip(selected = true, text = "hPa")
-                        Chip(selected = false, text = "inHg")
-                    }
-                }
-            }
+            PressureSettings()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Distance",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        Chip(selected = true, text = "km")
-                        Chip(selected = false, text = "mi")
-                    }
-                }
-            }
+            DistanceSettings()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp, bottom = 45.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Time formart",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        Chip(selected = true, text = "24-hour")
-                        Chip(selected = false, text = "12-hour")
-                    }
-                }
-            }
+            TimeSettings()
 
             HorizontalDivider()
 

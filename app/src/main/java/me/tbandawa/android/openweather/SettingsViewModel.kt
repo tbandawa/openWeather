@@ -15,7 +15,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class SettingsViewModel @Inject constructor(
     private val repository: OpenWeatherRepository
 ) : ViewModel() {
 
