@@ -23,8 +23,8 @@ import openweather.data.local.PreferenceUnits
 @ExperimentalMaterialApi
 @Composable
 fun TemperatureSettings(
-    preferenceHelper: PreferenceHelper,
-    preferenceUnits: PreferenceUnits
+    preferenceUnits: PreferenceUnits,
+    setPreference: (PreferenceUnits) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -48,8 +48,8 @@ fun TemperatureSettings(
             modifier = Modifier.padding(1.dp)
         ) {
             Row {
-                UnitChip(preferenceUnits, viewModel, text = "°C")
-                UnitChip(preferenceUnits, viewModel, text = "°F")
+                UnitChip(preferenceUnits, setPreference, text = "°C")
+                UnitChip(preferenceUnits, setPreference, text = "°F")
             }
         }
     }

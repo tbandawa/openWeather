@@ -24,8 +24,8 @@ import openweather.data.local.PreferenceUnits
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
-    preferenceHelper: PreferenceHelper,
-    preferenceUnits: PreferenceUnits
+    preferenceUnits: PreferenceUnits,
+    setPreference: (PreferenceUnits) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -55,7 +55,7 @@ fun SettingsContent(
 
             HorizontalDivider()
 
-            TemperatureSettings(preferenceUnits, viewModel)
+            TemperatureSettings(preferenceUnits, setPreference)
 
             SpeedSettings()
 

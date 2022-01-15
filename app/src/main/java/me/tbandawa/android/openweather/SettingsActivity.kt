@@ -36,7 +36,7 @@ class SettingsActivity : ComponentActivity() {
                     Scaffold(
                         topBar = { SettingsToolBar() }
                     ) {
-                        SettingsContent(preferenceHelper::put, preferenceUnits.value)
+                        SettingsContent(preferenceUnits.value, preferenceHelper::put)
                     }
                 }
             }
