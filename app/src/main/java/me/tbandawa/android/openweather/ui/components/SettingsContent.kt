@@ -57,13 +57,13 @@ fun SettingsContent(
 
             TemperatureSettings(preferenceUnits, setPreference)
 
-            SpeedSettings()
+            SpeedSettings(preferenceUnits, setPreference)
 
-            PressureSettings()
+            PressureSettings(preferenceUnits, setPreference)
 
-            DistanceSettings()
+            DistanceSettings(preferenceUnits, setPreference)
 
-            TimeSettings()
+            TimeSettings(preferenceUnits, setPreference)
 
             HorizontalDivider()
 

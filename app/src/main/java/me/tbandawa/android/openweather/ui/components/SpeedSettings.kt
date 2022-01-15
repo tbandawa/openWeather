@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,9 +16,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import openweather.data.local.PreferenceUnits
 
+@ExperimentalMaterialApi
 @Composable
-fun SpeedSettings() {
+fun SpeedSettings(
+    preferenceUnits: PreferenceUnits,
+    setPreference: (PreferenceUnits) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,11 +45,11 @@ fun SpeedSettings() {
             shape = CircleShape,
             modifier = Modifier.padding(1.dp)
         ) {
-            /*Row {
-                Chip(selected = true, text = "m/s")
-                Chip(selected = false, text = "km/h")
-                Chip(selected = false, text = "mph")
-            }*/
+            Row {
+                UnitChip(preferenceUnits, setPreference, text = "m/s")
+                UnitChip(preferenceUnits, setPreference, text = "km/h")
+                UnitChip(preferenceUnits, setPreference, text = "mph")
+            }
         }
     }
 }

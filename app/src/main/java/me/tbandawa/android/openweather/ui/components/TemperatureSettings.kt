@@ -49,7 +49,7 @@ fun TemperatureSettings(
         ) {
             Row {
                 UnitChip(preferenceUnits, setPreference, text = "°C")
-                UnitChip(preferenceUnits, setPreference, text = "°F")
+                UnitChip(preferenceUnits, setPreference, text = "F")
             }
         }
     }
