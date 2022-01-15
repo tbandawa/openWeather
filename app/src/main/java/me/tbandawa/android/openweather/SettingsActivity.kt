@@ -13,7 +13,6 @@ import me.tbandawa.android.openweather.ui.components.SettingsContent
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,8 +27,8 @@ class SettingsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            Timber.d("${preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "24-hour")).value}")
-            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "24-hour"))
+            Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
+            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
 
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
