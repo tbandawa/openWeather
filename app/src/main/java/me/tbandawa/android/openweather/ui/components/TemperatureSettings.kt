@@ -17,14 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.SettingsViewModel
+import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
-import openweather.data.local.Units
 
 @ExperimentalMaterialApi
 @Composable
 fun TemperatureSettings(
-    preferenceUnits: PreferenceUnits,
-    viewModel: SettingsViewModel
+    preferenceHelper: PreferenceHelper,
+    preferenceUnits: PreferenceUnits
 ) {
     Row(
         modifier = Modifier
@@ -48,8 +48,8 @@ fun TemperatureSettings(
             modifier = Modifier.padding(1.dp)
         ) {
             Row {
-                Chip(preferenceUnits, viewModel, text = "°C")
-                Chip(preferenceUnits, viewModel, text = "°F")
+                UnitChip(preferenceUnits, viewModel, text = "°C")
+                UnitChip(preferenceUnits, viewModel, text = "°F")
             }
         }
     }

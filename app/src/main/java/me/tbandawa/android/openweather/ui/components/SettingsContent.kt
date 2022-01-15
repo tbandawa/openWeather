@@ -18,13 +18,14 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.SettingsViewModel
+import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
-    preferenceUnits: PreferenceUnits,
-    viewModel: SettingsViewModel
+    preferenceHelper: PreferenceHelper,
+    preferenceUnits: PreferenceUnits
 ) {
     ConstraintLayout(
         modifier = Modifier

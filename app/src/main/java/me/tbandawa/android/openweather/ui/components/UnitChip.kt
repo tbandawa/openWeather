@@ -20,7 +20,7 @@ import openweather.data.local.Units
 
 @ExperimentalMaterialApi
 @Composable
-fun Chip(
+fun UnitChip(
     preferenceUnits: PreferenceUnits,
     viewModel: SettingsViewModel,
     text: String
