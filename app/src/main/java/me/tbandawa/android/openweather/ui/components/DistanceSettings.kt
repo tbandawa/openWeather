@@ -39,10 +39,10 @@ fun DistanceSettings() {
             shape = CircleShape,
             modifier = Modifier.padding(1.dp)
         ) {
-            Row {
+            /*Row {
                 Chip(selected = true, text = "km")
                 Chip(selected = false, text = "mi")
-            }
+            }*/
         }
     }
 }

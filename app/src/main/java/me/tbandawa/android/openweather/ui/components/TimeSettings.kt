@@ -39,10 +39,10 @@ fun TimeSettings() {
             shape = CircleShape,
             modifier = Modifier.padding(1.dp)
         ) {
-            Row {
+            /*Row {
                 Chip(selected = true, text = "24-hour")
                 Chip(selected = false, text = "12-hour")
-            }
+            }*/
         }
     }
 }

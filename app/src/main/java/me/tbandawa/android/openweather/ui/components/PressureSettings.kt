@@ -39,10 +39,10 @@ fun PressureSettings() {
             shape = CircleShape,
             modifier = Modifier.padding(1.dp)
         ) {
-            Row {
+            /*Row {
                 Chip(selected = true, text = "hPa")
                 Chip(selected = false, text = "inHg")
-            }
+            }*/
         }
     }
 }

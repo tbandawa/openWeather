@@ -7,40 +7,31 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import openweather.domain.models.CurrentWeather
-import openweather.domain.models.NetworkResult
-import openweather.domain.models.OneCall
-import openweather.domain.repository.OpenWeatherRepository
-import timber.log.Timber
+import openweather.data.local.PreferenceHelper
+import openweather.data.local.PreferenceUnits
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val repository: OpenWeatherRepository
+    private val preferenceHelper: PreferenceHelper
 ) : ViewModel() {
 
-    val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
-
-    val currentWeather: MutableState<NetworkResult<CurrentWeather>?> = mutableStateOf(null)
+    /*var prefUnits: MutableState<PreferenceUnits> = mutableStateOf(preferenceHelper.get())
 
     init {
-        fetchWeather()
-    }
-
-    private fun fetchWeather(){
         viewModelScope.launch {
-            repository.fetchOneCall((-26.2023).toLong(), 28.0436.toLong()).collect { result ->
-                oneCallWeather.value = result
+            preferenceHelper.prefUnits.collect { results ->
+                prefUnits.value = results
             }
         }
     }
 
-    private fun fetchCurrentWeather(){
-        viewModelScope.launch {
-            repository.fetchCurrentWeather("Johannesburg").collect { result ->
-                currentWeather.value = result
-            }
-        }
+    fun getUnits(): PreferenceUnits {
+        return preferenceHelper.get()
+    }*/
+
+    fun setUnits(preferenceUnits: PreferenceUnits) {
+        preferenceHelper.put(preferenceUnits)
     }
 
 }

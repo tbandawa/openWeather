@@ -11,7 +11,6 @@ import openweather.domain.models.CurrentWeather
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

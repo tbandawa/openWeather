@@ -39,11 +39,11 @@ fun SpeedSettings() {
             shape = CircleShape,
             modifier = Modifier.padding(1.dp)
         ) {
-            Row {
+            /*Row {
                 Chip(selected = true, text = "m/s")
                 Chip(selected = false, text = "km/h")
                 Chip(selected = false, text = "mph")
-            }
+            }*/
         }
     }
 }

@@ -3,6 +3,7 @@ package me.tbandawa.android.openweather.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,9 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.SettingsViewModel
+import openweather.data.local.PreferenceUnits
 
+@ExperimentalMaterialApi
 @Composable
-fun SettingsContent() {
+fun SettingsContent(
+    preferenceUnits: PreferenceUnits,
+    viewModel: SettingsViewModel
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -47,7 +54,7 @@ fun SettingsContent() {
 
             HorizontalDivider()
 
-            TemperatureSettings()
+            TemperatureSettings(preferenceUnits, viewModel)
 
             SpeedSettings()
 
