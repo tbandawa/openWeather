@@ -1,6 +1,7 @@
 package me.tbandawa.android.openweather.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -251,8 +253,12 @@ fun SettingsContent(
                         fontWeight = FontWeight.Normal,
                         fontSize = 16.sp,
                     ),
+                    textDecoration = TextDecoration.Underline,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable {
+
+                        }
                 )
             }
 
@@ -276,8 +282,12 @@ fun SettingsContent(
                         fontWeight = FontWeight.Normal,
                         fontSize = 16.sp,
                     ),
+                    textDecoration = TextDecoration.Underline,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable {
+
+                        }
                 )
             }
 
