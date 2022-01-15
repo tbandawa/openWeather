@@ -11,7 +11,6 @@ import openweather.domain.models.CurrentWeather
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,19 +29,6 @@ class HomeViewModel @Inject constructor(
     private fun fetchWeather(){
         viewModelScope.launch {
             repository.fetchOneCall((-26.2023).toLong(), 28.0436.toLong()).collect { result ->
-
-                when(result) {
-                    is NetworkResult.Loading -> {
-                        Timber.d("loading...")
-                    }
-                    is NetworkResult.Success -> {
-                        Timber.d(result.data.toString())
-                    }
-                    is NetworkResult.Error -> {
-                        Timber.d(result.message)
-                    }
-                }
-
                 oneCallWeather.value = result
             }
         }
@@ -51,19 +37,6 @@ class HomeViewModel @Inject constructor(
     private fun fetchCurrentWeather(){
         viewModelScope.launch {
             repository.fetchCurrentWeather("Johannesburg").collect { result ->
-
-                when(result) {
-                    is NetworkResult.Loading -> {
-                        Timber.d("loading...")
-                    }
-                    is NetworkResult.Success -> {
-                        Timber.d(result.data.toString())
-                    }
-                    is NetworkResult.Error -> {
-                        Timber.d(result.message)
-                    }
-                }
-
                 currentWeather.value = result
             }
         }
