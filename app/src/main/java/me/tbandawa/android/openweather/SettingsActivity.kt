@@ -28,15 +28,23 @@ class SettingsActivity : ComponentActivity() {
 
         setContent {
 
-            Timber.d("${preferenceHelper.observeAsState(PreferenceUnits("°F", "m/s", "hPa", "km", "24-hour")).value}")
-            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°F", "m/s", "hPa", "km", "24-hour"))
+            Timber.d("observeAsState = ${preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value}")
+
+            preferenceHelper.observe(this, { units ->
+                Timber.d("observe = $units")
+            })
+
+            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value
+            //Timber.d("$preferenceUnits")
+
+
 
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Scaffold(
                         topBar = { SettingsToolBar() }
                     ) {
-                        SettingsContent(preferenceHelper::put, preferenceUnits.value)
+                        SettingsContent(preferenceUnits, preferenceHelper::put)
                     }
                 }
             }

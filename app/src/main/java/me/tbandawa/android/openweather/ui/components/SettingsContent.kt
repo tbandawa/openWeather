@@ -18,13 +18,14 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.SettingsViewModel
+import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
     preferenceUnits: PreferenceUnits,
-    viewModel: SettingsViewModel
+    setPreference: (PreferenceUnits) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -54,15 +55,15 @@ fun SettingsContent(
 
             HorizontalDivider()
 
-            TemperatureSettings(preferenceUnits, viewModel)
+            TemperatureSettings(preferenceUnits, setPreference)
 
-            SpeedSettings()
+            SpeedSettings(preferenceUnits, setPreference)
 
-            PressureSettings()
+            PressureSettings(preferenceUnits, setPreference)
 
-            DistanceSettings()
+            DistanceSettings(preferenceUnits, setPreference)
 
-            TimeSettings()
+            TimeSettings(preferenceUnits, setPreference)
 
             HorizontalDivider()
 
