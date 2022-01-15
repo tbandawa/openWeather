@@ -46,7 +46,7 @@ fun SettingsContent(
                 text = "Units",
                 style = TextStyle(
                     color = Color.Black,
-                    fontWeight = FontWeight.Normal,
+                    fontWeight = FontWeight.ExtraBold,
                     fontSize = 18.sp
                 ),
                 modifier = Modifier

@@ -11,7 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
 
 @Composable
@@ -20,7 +23,14 @@ fun SettingsToolBar() {
     val context = LocalContext.current
     TopAppBar(
         title = {
-            Text(text = "Settings")
+            Text(
+                text = "Settings",
+                style = TextStyle(
+                    color = Color.Black,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 22.sp
+                )
+            )
         },
         navigationIcon = {
             IconButton(
