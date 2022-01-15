@@ -20,31 +20,23 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
 
-    @Inject lateinit var preferenceHelper: PreferenceHelper
+    @Inject
+    lateinit var preferenceHelper: PreferenceHelper
 
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
 
-            Timber.d("observeAsState = ${preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value}")
-
-            preferenceHelper.observe(this, { units ->
-                Timber.d("observe = $units")
-            })
-
-            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value
-            //Timber.d("$preferenceUnits")
-
-
+            Timber.d("${preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "24-hour")).value}")
+            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "24-hour"))
 
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Scaffold(
                         topBar = { SettingsToolBar() }
                     ) {
-                        SettingsContent(preferenceUnits, preferenceHelper::put)
+                        SettingsContent(preferenceHelper, preferenceUnits.value)
                     }
                 }
             }

@@ -17,15 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
-import me.tbandawa.android.openweather.SettingsViewModel
 import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
-    preferenceUnits: PreferenceUnits,
-    setPreference: (PreferenceUnits) -> Unit
+    preferenceHelper: PreferenceHelper,
+    preferenceUnits: PreferenceUnits
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -42,6 +41,7 @@ fun SettingsContent(
                 .height(IntrinsicSize.Max)
         ) {
 
+            //Units text
             Text(
                 text = "Units",
                 style = TextStyle(
@@ -53,18 +53,156 @@ fun SettingsContent(
                     .padding(0.dp, 16.dp, 0.dp, 8.dp)
             )
 
+            //Horizontal divider
             HorizontalDivider()
 
-            TemperatureSettings(preferenceUnits, setPreference)
+            //Temperature units settings
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Temperature",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        UnitChip(preferenceUnits, preferenceHelper::put, "°C")
+                        UnitChip(preferenceUnits, preferenceHelper::put, "F")
+                    }
+                }
+            }
 
-            SpeedSettings(preferenceUnits, setPreference)
+            //Wind speed units settings
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Wind speed",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "m/s")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "km/h")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "mph")
+                    }
+                }
+            }
 
-            PressureSettings(preferenceUnits, setPreference)
+            //Pressure units settings
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Pressure",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "hPa")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "inHg")
+                    }
+                }
+            }
 
-            DistanceSettings(preferenceUnits, setPreference)
+            //Distance units settings
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Distance",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "km")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "mi")
+                    }
+                }
+            }
 
-            TimeSettings(preferenceUnits, setPreference)
+            //Time format units settings
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, bottom = 45.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Time format",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                )
+                Surface(
+                    color = Color.LightGray,
+                    contentColor = Color.LightGray,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(1.dp)
+                ) {
+                    Row {
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "12-hour")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "24-hour")
+                    }
+                }
+            }
 
+            //Horizontal divider
             HorizontalDivider()
 
             Row(
@@ -144,6 +282,7 @@ fun SettingsContent(
             }
 
         }
+
         Row(
             modifier = Modifier
                 .constrainAs(bottomLayout) {
@@ -163,5 +302,7 @@ fun SettingsContent(
                 )
             )
         }
+
     }
+
 }
