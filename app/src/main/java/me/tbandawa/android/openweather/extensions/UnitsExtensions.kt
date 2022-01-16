@@ -1,33 +1,67 @@
 package me.tbandawa.android.openweather.extensions
 
-import android.content.Context
+import kotlin.math.roundToInt
 
-fun Double.toTemperature(context: Context) : String {
-    return "toTemperature"
+fun Double.toTemperature(unit: String) : String {
+    return when (unit) {
+        "°C" -> {
+            var celcius = this - 273.15
+            "${celcius.roundToInt()} °C"
+        }
+        "°F" -> {
+            var fahrenheit = (9/5*(this - 273)) + 32
+            "${fahrenheit.roundToInt()} °F"
+        }
+        else -> {""}
+    }
 }
 
-fun Double.toSpeed(context: Context) : String {
-    return "toSpeed"
+fun Double.toSpeed(unit: String) : String {
+    return when (unit) {
+        "m/s" -> "${this.roundToInt()} m/s"
+        "km/h" -> {
+            var speed = this*3.6
+            "${speed.roundToInt()} km/h"
+        }
+        "mph" -> {
+            var speed = this*2.23694
+            "${speed.roundToInt()} mph"
+        }
+        else -> {""}
+    }
 }
 
-fun Int.toDirection(context: Context) : String {
-    return "toDirection"
+fun Int.toDirection() : String = "${this}°"
+
+fun Int.toPressure(unit: String) : String {
+    return when (unit) {
+        "hPa" -> "$this hPa"
+        "inHg" -> {
+            var pressure = this*0.029529983071445
+            "${pressure.roundToInt()} inHg"
+        }
+        else -> {""}
+    }
 }
 
-fun Int.toPressure(context: Context) : String {
-    return "toPressure"
+fun Double.toDewPoint(unit: String) : String {
+    return when (unit) {
+        "°C" -> {
+            var celcius = this - 273.15
+            "${celcius.roundToInt()} °C"
+        }
+        "°F" -> {
+            var fahrenheit = (9/5*(this - 273)) + 32
+            "${fahrenheit.roundToInt()} °F"
+        }
+        else -> {""}
+    }
 }
 
-fun Double.toDewPoint(context: Context) : String {
-    return "toDewPoint"
-}
+fun Int.toVisibility() : String = "${this} m"
 
-fun Int.toVisibility(context: Context) : String {
-    return "toVisibility"
-}
+fun Int.toCloudCover() : String = "$this %"
 
-fun Int.toCloudCover() : String = "$this%"
-
-fun Int.toHumidity() : String = "$this%"
+fun Int.toHumidity() : String = "$this %"
 
 fun Double.toUV() : String = "${this.toInt()}"

@@ -95,7 +95,7 @@ fun SettingsContent(
                 ) {
                     Row {
                         UnitChip(preferenceUnits, preferenceHelper::put, "°C")
-                        UnitChip(preferenceUnits, preferenceHelper::put, "F")
+                        UnitChip(preferenceUnits, preferenceHelper::put, "°F")
                     }
                 }
             }
@@ -155,35 +155,6 @@ fun SettingsContent(
                     Row {
                         UnitChip(preferenceUnits, preferenceHelper::put, text = "hPa")
                         UnitChip(preferenceUnits, preferenceHelper::put, text = "inHg")
-                    }
-                }
-            }
-
-            //Distance units settings
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Distance",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        UnitChip(preferenceUnits, preferenceHelper::put, text = "km")
-                        UnitChip(preferenceUnits, preferenceHelper::put, text = "mi")
                     }
                 }
             }

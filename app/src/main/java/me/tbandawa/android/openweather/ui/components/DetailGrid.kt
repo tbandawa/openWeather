@@ -8,26 +8,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
+import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Current
+import timber.log.Timber
 
 @Composable
 fun DetailGrid(
-    current: Current
+    current: Current,
+    preferenceUnits: PreferenceUnits
 ) {
-
-    val context = LocalContext.current
-
     Column(
         modifier = Modifier
             .padding(0.dp, 35.dp, 0.dp, 0.dp)
             .width(IntrinsicSize.Max)
     ) {
         Row {
-            DetailItem(painterResource(R.drawable.ic_feels), "Feels like", current.feelsLike!!.toTemperature(context))
+            DetailItem(painterResource(R.drawable.ic_feels), "Feels like", current.feelsLike!!.toTemperature(preferenceUnits.temperature))
             VerticalDivider()
-            DetailItem(painterResource(R.drawable.ic_wind), "Wind Speed", current.windSpeed!!.toSpeed(context))
+            DetailItem(painterResource(R.drawable.ic_wind), "Wind Speed", current.windSpeed!!.toSpeed(preferenceUnits.speed))
             VerticalDivider()
-            DetailItem(painterResource(R.drawable.ic_direction), "Wind direction", current.windDeg!!.toDirection(context))
+            DetailItem(painterResource(R.drawable.ic_direction), "Wind direction", current.windDeg!!.toDirection())
         }
         HorizontalDivider()
         Row {
@@ -35,15 +35,15 @@ fun DetailGrid(
             VerticalDivider()
             DetailItem(painterResource(R.drawable.ic_cloud), "Cloud cover", current.clouds!!.toCloudCover())
             VerticalDivider()
-            DetailItem(painterResource(R.drawable.ic_pressure), "Pressure", current.pressure!!.toPressure(context))
+            DetailItem(painterResource(R.drawable.ic_pressure), "Pressure", current.pressure!!.toPressure(preferenceUnits.pressure))
         }
         HorizontalDivider()
         Row {
             DetailItem(painterResource(R.drawable.ic_humidity), "Humidity", current.humidity!!.toHumidity())
             VerticalDivider()
-            DetailItem(painterResource(R.drawable.ic_dew), "Dew point", current.dewPoint!!.toDewPoint(context))
+            DetailItem(painterResource(R.drawable.ic_dew), "Dew point", current.dewPoint!!.toDewPoint(preferenceUnits.temperature))
             VerticalDivider()
-            DetailItem(painterResource(R.drawable.ic_visibility), "Visibility", current.visibility!!.toVisibility(context))
+            DetailItem(painterResource(R.drawable.ic_visibility), "Visibility", current.visibility!!.toVisibility())
         }
     }
 }
