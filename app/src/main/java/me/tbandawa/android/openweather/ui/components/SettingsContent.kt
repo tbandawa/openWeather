@@ -95,7 +95,7 @@ fun SettingsContent(
                 ) {
                     Row {
                         UnitChip(preferenceUnits, preferenceHelper::put, "°C")
-                        UnitChip(preferenceUnits, preferenceHelper::put, "F")
+                        UnitChip(preferenceUnits, preferenceHelper::put, "°F")
                     }
                 }
             }

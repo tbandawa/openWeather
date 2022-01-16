@@ -22,7 +22,8 @@ import openweather.domain.models.Hourly
 
 @Composable
 fun HourlyItem(
-    hourly: Hourly
+    hourly: Hourly,
+    unit: String
 ) {
 
     val context = LocalContext.current
@@ -48,7 +49,7 @@ fun HourlyItem(
                 .padding(0.dp, 5.dp, 0.dp, 5.dp)
         )
         Text(
-            text = hourly.temp!!.toTemperature(context),
+            text = hourly.temp!!.toTemperature(unit),
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Light,

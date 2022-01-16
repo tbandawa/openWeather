@@ -1,30 +1,46 @@
 package me.tbandawa.android.openweather.extensions
 
-import android.content.Context
+import kotlin.math.roundToInt
 
-fun Double.toTemperature(context: Context) : String {
-    return "toTemperature"
+fun Double.toTemperature(unit: String) : String {
+    return when (unit) {
+        "°C" -> {
+            var celcius = this - 273.15
+            "${celcius.roundToInt()}°C"
+        }
+        "°F" -> {
+            var fahrenheit = (9/5*(this - 273)) + 32
+            "${fahrenheit.roundToInt()}°F"
+        }
+        else -> {""}
+    }
 }
 
-fun Double.toSpeed(context: Context) : String {
+fun Double.toSpeed(unit: String) : String {
     return "toSpeed"
 }
 
-fun Int.toDirection(context: Context) : String {
-    return "toDirection"
-}
+fun Int.toDirection() : String = "${this}°"
 
-fun Int.toPressure(context: Context) : String {
+fun Int.toPressure(unit: String) : String {
     return "toPressure"
 }
 
-fun Double.toDewPoint(context: Context) : String {
-    return "toDewPoint"
+fun Double.toDewPoint(unit: String) : String {
+    return when (unit) {
+        "°C" -> {
+            var celcius = this - 273.15
+            "${celcius.roundToInt()}°C"
+        }
+        "°F" -> {
+            var fahrenheit = (9/5*(this - 273)) + 32
+            "${fahrenheit.roundToInt()}°F"
+        }
+        else -> {""}
+    }
 }
 
-fun Int.toVisibility(context: Context) : String {
-    return "toVisibility"
-}
+fun Int.toVisibility() : String = "${this}m"
 
 fun Int.toCloudCover() : String = "$this%"
 

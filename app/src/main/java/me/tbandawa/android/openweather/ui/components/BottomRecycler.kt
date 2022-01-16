@@ -18,12 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.ForecastActivity
+import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Hourly
 
 @ExperimentalAnimationApi
 @Composable
 fun BottomRecycler(
-    hourly: List<Hourly>
+    hourly: List<Hourly>,
+    preferenceUnits: PreferenceUnits
 ) {
 
     val context = LocalContext.current
@@ -74,7 +76,10 @@ fun BottomRecycler(
                 .fillMaxWidth()
         ) {
             items(hourly) { item ->  
-                HourlyItem(hourly = item)
+                HourlyItem(
+                    hourly = item,
+                    unit = preferenceUnits.temperature
+                )
             }
         }
     }

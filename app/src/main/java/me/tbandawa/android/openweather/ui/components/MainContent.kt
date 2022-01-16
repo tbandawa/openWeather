@@ -39,7 +39,7 @@ fun MainContent(
                 }
                 .fillMaxWidth()
         ) {
-            BottomRecycler(oneCall!!.hourly!!)
+            BottomRecycler(oneCall!!.hourly!!, preferenceUnits)
         }
     }
 }

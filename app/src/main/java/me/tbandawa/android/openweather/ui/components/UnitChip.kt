@@ -43,7 +43,7 @@ fun UnitChip(
         onClick = {
 
             when (text) {
-                "°C","F" -> {
+                "°C","°F" -> {
                     preferenceUnits.temperature = text
                 }
                 "m/s","km/h","mph" -> {
