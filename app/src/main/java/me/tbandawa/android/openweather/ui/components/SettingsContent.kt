@@ -1,5 +1,7 @@
 package me.tbandawa.android.openweather.ui.components
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +32,15 @@ fun SettingsContent(
     preferenceHelper: PreferenceHelper,
     preferenceUnits: PreferenceUnits
 ) {
+
+    val uriHandler = LocalUriHandler.current
+
+    val context = LocalContext.current
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:tonderaibandawa@gmail.com")
+        putExtra(Intent.EXTRA_SUBJECT, "Feedback - open Radio")
+    }
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -228,8 +241,11 @@ fun SettingsContent(
                         fontWeight = FontWeight.Normal,
                         fontSize = 16.sp,
                     ),
+                    textDecoration = TextDecoration.Underline,
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .clickable {
+                            uriHandler.openUri("https://icons8.com/")
+                        }
                 )
             }
 
@@ -255,9 +271,8 @@ fun SettingsContent(
                     ),
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clickable {
-
+                            uriHandler.openUri("https://github.com/tbandawa/openWeather")
                         }
                 )
             }
@@ -284,9 +299,8 @@ fun SettingsContent(
                     ),
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clickable {
-
+                            context.startActivity(Intent.createChooser(intent, "Send Feedback"))
                         }
                 )
             }
