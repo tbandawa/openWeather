@@ -13,38 +13,29 @@ import me.tbandawa.android.openweather.ui.components.SettingsContent
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
 
-    @Inject lateinit var preferenceHelper: PreferenceHelper
+    @Inject
+    lateinit var preferenceHelper: PreferenceHelper
 
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
 
-            Timber.d("observeAsState = ${preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value}")
-
-            preferenceHelper.observe(this, { units ->
-                Timber.d("observe = $units")
-            })
-
-            val preferenceUnits = preferenceHelper.observeAsState(PreferenceUnits("°C", "m/s", "hPa", "km", "12-hour")).value
-            //Timber.d("$preferenceUnits")
-
-
+            Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
+            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
 
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
                     Scaffold(
                         topBar = { SettingsToolBar() }
                     ) {
-                        SettingsContent(preferenceUnits, preferenceHelper::put)
+                        SettingsContent(preferenceHelper, preferenceUnits.value)
                     }
                 }
             }
