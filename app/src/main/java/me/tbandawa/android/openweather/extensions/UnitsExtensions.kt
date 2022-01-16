@@ -34,7 +34,14 @@ fun Double.toSpeed(unit: String) : String {
 fun Int.toDirection() : String = "${this}°"
 
 fun Int.toPressure(unit: String) : String {
-    return "toPressure"
+    return when (unit) {
+        "hPa" -> "$this hPa"
+        "inHg" -> {
+            var pressure = this*0.029529983071445
+            "${pressure.roundToInt()} inHg"
+        }
+        else -> {""}
+    }
 }
 
 fun Double.toDewPoint(unit: String) : String {

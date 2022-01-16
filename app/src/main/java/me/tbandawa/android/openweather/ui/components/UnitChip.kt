@@ -26,7 +26,6 @@ fun UnitChip(
             preferenceUnits.temperature,
             preferenceUnits.speed,
             preferenceUnits.pressure,
-            preferenceUnits.distance,
             preferenceUnits.time -> MaterialTheme.colors.onSurface
             else -> Color.Transparent
         },
@@ -34,7 +33,6 @@ fun UnitChip(
             preferenceUnits.temperature,
             preferenceUnits.speed,
             preferenceUnits.pressure,
-            preferenceUnits.distance,
             preferenceUnits.time -> MaterialTheme.colors.onPrimary
             else -> Color.White
         },
@@ -51,9 +49,6 @@ fun UnitChip(
                 }
                 "hPa","inHg" -> {
                     preferenceUnits.pressure = text
-                }
-                "m","mi" -> {
-                    preferenceUnits.distance = text
                 }
                 "24-hour", "12-hour" -> {
                     preferenceUnits.time = text
