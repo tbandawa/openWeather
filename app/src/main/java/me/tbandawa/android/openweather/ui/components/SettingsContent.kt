@@ -159,35 +159,6 @@ fun SettingsContent(
                 }
             }
 
-            //Distance units settings
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Distance",
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                )
-                Surface(
-                    color = Color.LightGray,
-                    contentColor = Color.LightGray,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(1.dp)
-                ) {
-                    Row {
-                        UnitChip(preferenceUnits, preferenceHelper::put, text = "m")
-                        UnitChip(preferenceUnits, preferenceHelper::put, text = "mi")
-                    }
-                }
-            }
-
             //Time format units settings
             Row(
                 modifier = Modifier
