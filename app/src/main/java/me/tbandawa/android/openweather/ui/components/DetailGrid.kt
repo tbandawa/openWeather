@@ -8,12 +8,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
+import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Current
+import timber.log.Timber
 
 @Composable
 fun DetailGrid(
-    current: Current
+    current: Current,
+    preferenceUnits: PreferenceUnits
 ) {
+
+    Timber.d("$preferenceUnits")
 
     val context = LocalContext.current
 

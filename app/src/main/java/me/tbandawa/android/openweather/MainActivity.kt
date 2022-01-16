@@ -8,6 +8,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -39,6 +40,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
+            Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
+            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
+
             val result = viewModel.oneCallWeather.value
 
             OpenWeatherTheme {
@@ -52,7 +56,7 @@ class MainActivity : ComponentActivity() {
                             Scaffold(
                                 topBar = { MainToolBar() }
                             ) {
-                                MainContent(result.data!!)
+                                MainContent(result.data!!, preferenceUnits.value)
                             }
                         }
                         is NetworkResult.Error -> {

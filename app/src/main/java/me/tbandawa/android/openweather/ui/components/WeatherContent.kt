@@ -18,12 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
+import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Current
 import java.util.*
 
 @Composable
 fun WeatherContent(
-    current: Current
+    current: Current,
+    preferenceUnits: PreferenceUnits
 ) {
 
     val context = LocalContext.current
@@ -60,6 +62,6 @@ fun WeatherContent(
                 fontSize = 18.sp
             )
         )
-        DetailGrid(current)
+        DetailGrid(current, preferenceUnits)
     }
 }
