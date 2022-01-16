@@ -52,7 +52,7 @@ fun UnitChip(
                 "hPa","inHg" -> {
                     preferenceUnits.pressure = text
                 }
-                "km","mi" -> {
+                "m","mi" -> {
                     preferenceUnits.distance = text
                 }
                 "24-hour", "12-hour" -> {

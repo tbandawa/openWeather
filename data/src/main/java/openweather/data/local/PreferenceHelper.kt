@@ -17,7 +17,7 @@ class PreferenceHelper(val context: Context) : LiveData<PreferenceUnits>() {
     }
 
     fun get(): PreferenceUnits {
-        val prefString = preferences.getString("units", "{\"distance\":\"km\",\"pressure\":\"hPa\",\"speed\":\"m/s\",\"temperature\":\"°C\",\"time\":\"12-hour\"}")
+        val prefString = preferences.getString("units", "{\"distance\":\"m\",\"pressure\":\"hPa\",\"speed\":\"m/s\",\"temperature\":\"°C\",\"time\":\"12-hour\"}")
         return GsonBuilder().create().fromJson(prefString, PreferenceUnits::class.java)
     }
 

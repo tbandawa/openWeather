@@ -182,7 +182,7 @@ fun SettingsContent(
                     modifier = Modifier.padding(1.dp)
                 ) {
                     Row {
-                        UnitChip(preferenceUnits, preferenceHelper::put, text = "km")
+                        UnitChip(preferenceUnits, preferenceHelper::put, text = "m")
                         UnitChip(preferenceUnits, preferenceHelper::put, text = "mi")
                     }
                 }
