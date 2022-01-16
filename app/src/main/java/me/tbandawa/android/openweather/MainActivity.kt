@@ -21,11 +21,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.tbandawa.android.openweather.ui.components.MainContent
 import me.tbandawa.android.openweather.ui.components.MainToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
+import openweather.data.local.PreferenceHelper
 import openweather.domain.models.NetworkResult
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var preferenceHelper: PreferenceHelper
 
     private val viewModel: HomeViewModel by viewModels()
 
