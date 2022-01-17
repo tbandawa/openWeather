@@ -3,105 +3,81 @@ package me.tbandawa.android.openweather
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
-import dagger.hilt.android.AndroidEntryPoint
-import me.tbandawa.android.openweather.ui.components.MainContent
-import me.tbandawa.android.openweather.ui.components.MainToolBar
+import androidx.compose.runtime.*
+import com.google.accompanist.permissions.rememberPermissionState
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
-import openweather.data.local.PreferenceHelper
-import openweather.domain.models.NetworkResult
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import me.tbandawa.android.openweather.ui.components.PermissionContent
+import me.tbandawa.android.openweather.ui.components.RationaleContent
 import timber.log.Timber
-import javax.inject.Inject
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
 
-@AndroidEntryPoint
+@OptIn(ExperimentalPermissionsApi::class)
+@ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var preferenceHelper: PreferenceHelper
-
-    private val viewModel: HomeViewModel by viewModels()
-
-    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
-            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
-
-            val result = viewModel.oneCallWeather.value
-
             OpenWeatherTheme {
                 Surface(color = MaterialTheme.colors.background) {
+                    val context = LocalContext.current
 
-                    when(result) {
-                        is NetworkResult.Loading -> {
-                            LoadingContent()
+                    // Track if the user doesn't want to see the rationale any more.
+                    var doNotShowRationale by rememberSaveable { mutableStateOf(false) }
+
+                    // Location permission state
+                    val locationPermissionState = rememberPermissionState(
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+
+                    when {
+                        // If the location permission is granted, then continue to fetch location
+                        locationPermissionState.hasPermission -> {
+                            Timber.d("location permission is granted")
+                            val intent = Intent(context.applicationContext, WeatherActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            context.startActivity(intent)
                         }
-                        is NetworkResult.Success -> {
-                            Scaffold(
-                                topBar = { MainToolBar() }
-                            ) {
-                                MainContent(result.data!!, preferenceUnits.value)
+
+                        // If the user denied the permission but a rationale should be shown, or the user sees
+                        // the permission for the first time, explain why the feature is needed by the app and allow
+                        // the user to be presented with the permission again or to not see the rationale any more.
+                        locationPermissionState.shouldShowRationale ||
+                                !locationPermissionState.permissionRequested -> {
+                            if (doNotShowRationale) {
+                                Timber.d("Feature not available")
+                            } else {
+                                PermissionContent { locationPermissionState.launchPermissionRequest() }
                             }
                         }
-                        is NetworkResult.Error -> {
-                            Timber.d(result.message)
+
+                        // If the criteria above hasn't been met, the user denied the permission. Let's present
+                        // the user with a FAQ in case they want to know more and send them to the Settings screen
+                        // to enable it the future there if they want to.
+                        else -> {
+                            RationaleContent()
                         }
                     }
-
-
                 }
             }
         }
     }
+
 }
 
-@Composable
-fun LoadingContent(){
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        val (centerLayout, textTitle) = createRefs()
-        Text(
-            text = "openWeather",
-            style = TextStyle(
-                color = Color.Black,
-                fontWeight = FontWeight.Light,
-                fontSize = 12.sp,
-                textAlign = TextAlign.Center
-            ),
-            modifier = Modifier
-                .constrainAs(textTitle) {
-                    bottom.linkTo(parent.bottom)
-                }
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max)
-                .padding(0.dp, 0.dp, 0.dp, 10.dp)
-        )
-    }
-}
-
-@ExperimentalAnimationApi
+@ExperimentalPermissionsApi
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
     OpenWeatherTheme {
-        LoadingContent()
+        PermissionContent(launchPermissionRequest = {})
     }
 }
