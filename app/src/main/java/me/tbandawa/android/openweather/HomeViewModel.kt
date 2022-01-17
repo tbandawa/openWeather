@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import openweather.domain.models.CurrentWeather
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
@@ -20,24 +19,10 @@ class HomeViewModel @Inject constructor(
 
     val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
 
-    val currentWeather: MutableState<NetworkResult<CurrentWeather>?> = mutableStateOf(null)
-
-    init {
-        fetchWeather()
-    }
-
-    private fun fetchWeather(){
+    private fun fetchOneCall(lat: Long, lon: Long){
         viewModelScope.launch {
-            repository.fetchOneCall((-26.2023).toLong(), 28.0436.toLong()).collect { result ->
+            repository.fetchOneCall(lat, lon).collect { result ->
                 oneCallWeather.value = result
-            }
-        }
-    }
-
-    private fun fetchCurrentWeather(){
-        viewModelScope.launch {
-            repository.fetchCurrentWeather("Johannesburg").collect { result ->
-                currentWeather.value = result
             }
         }
     }
