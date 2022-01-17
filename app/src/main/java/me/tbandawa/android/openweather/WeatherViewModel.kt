@@ -13,7 +13,7 @@ import openweather.domain.repository.OpenWeatherRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class WeatherViewModel @Inject constructor(
     private val repository: OpenWeatherRepository
 ) : ViewModel() {
 

@@ -22,7 +22,7 @@ class WeatherActivity : ComponentActivity() {
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: WeatherViewModel by viewModels()
 
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
