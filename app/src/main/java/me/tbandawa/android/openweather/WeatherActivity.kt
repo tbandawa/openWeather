@@ -8,6 +8,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.livedata.observeAsState
 import dagger.hilt.android.AndroidEntryPoint
+import me.tbandawa.android.openweather.ui.components.LoadingContent
 import me.tbandawa.android.openweather.ui.components.MainContent
 import me.tbandawa.android.openweather.ui.components.MainToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
