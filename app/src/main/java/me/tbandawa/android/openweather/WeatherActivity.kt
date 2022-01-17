@@ -33,6 +33,7 @@ class WeatherActivity : ComponentActivity() {
             Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
             val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
 
+            //viewModel.fetchOneCall((-26.2023).toLong(), 28.0436.toLong())
             val result = viewModel.oneCallWeather.value
 
             OpenWeatherTheme {

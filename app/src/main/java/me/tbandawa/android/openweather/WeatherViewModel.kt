@@ -19,7 +19,7 @@ class WeatherViewModel @Inject constructor(
 
     val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
 
-    private fun fetchOneCall(lat: Long, lon: Long){
+    fun fetchOneCall(lat: Long, lon: Long){
         viewModelScope.launch {
             repository.fetchOneCall(lat, lon).collect { result ->
                 oneCallWeather.value = result

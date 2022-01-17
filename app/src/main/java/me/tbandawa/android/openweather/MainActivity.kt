@@ -41,6 +41,7 @@ class MainActivity : ComponentActivity() {
                     when {
                         // If the location permission is granted, then continue to fetch location
                         locationPermissionState.hasPermission -> {
+                            Timber.d("location permission is granted")
                             val intent = Intent(context.applicationContext, WeatherActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             context.startActivity(intent)
@@ -77,6 +78,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainPreview() {
     OpenWeatherTheme {
-        RationaleContent()
+        PermissionContent(launchPermissionRequest = {})
     }
 }
