@@ -97,6 +97,8 @@ class MainActivity : ComponentActivity(), LocationListener {
                                                 Timber.d("location from network: lat -> $latitude, lon -> $longitude")
                                             }
                                         }
+                                    } else {
+                                        Timber.d("Network Not Enabled")
                                     }
 
                                     // if GPS Enabled get lat/long using GPS Services
@@ -118,12 +120,14 @@ class MainActivity : ComponentActivity(), LocationListener {
                                                 }
                                             }
                                         }
+                                    } else {
+                                        Timber.d("GPS Not Enabled")
                                     }
                                 }
                             } catch (e: Exception) {
                                 e.printStackTrace()
+                                Timber.d("ERROR -> ${e.message}")
                             }
-
 
                         }
 

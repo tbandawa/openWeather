@@ -1,6 +1,6 @@
 package me.tbandawa.android.openweather.service
 
-import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -9,15 +9,10 @@ import android.location.LocationListener
 import android.os.IBinder
 import android.location.LocationManager
 import android.os.Bundle
-import android.app.Activity
-import androidx.core.app.ActivityCompat
-import android.content.pm.PackageManager
 import timber.log.Timber
 import java.lang.Exception
 
-class LocationService(context: Context) : Service(), LocationListener {
-
-    private var mContext: Context? = null
+class LocationService(val context: Context) : Service(), LocationListener {
 
     var isGPSEnabled = false
 
@@ -37,13 +32,12 @@ class LocationService(context: Context) : Service(), LocationListener {
 
     protected var locationManager: LocationManager? = null
 
-    init { getLocation() }
+    init { getGeoLocation() }
 
-
-    @JvmName("getLocation1")
-    fun getLocation(): Location? {
+    @SuppressLint("MissingPermission")
+    fun getGeoLocation(): Location? {
         try {
-            locationManager = mContext!!.getSystemService(LOCATION_SERVICE) as LocationManager
+            locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
 
             // getting GPS status
             isGPSEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -57,23 +51,6 @@ class LocationService(context: Context) : Service(), LocationListener {
                 canGetLocation = true
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
-                    //check the network permission
-                    if (ActivityCompat.checkSelfPermission(
-                            mContext!!,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                            mContext!!, Manifest.permission.ACCESS_COARSE_LOCATION
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        ActivityCompat.requestPermissions(
-                            (mContext as Activity?)!!,
-                            arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            ),
-                            101
-                        )
-                    }
                     locationManager!!.requestLocationUpdates(
                         LocationManager.NETWORK_PROVIDER,
                         MIN_TIME_BW_UPDATES,
@@ -93,16 +70,6 @@ class LocationService(context: Context) : Service(), LocationListener {
                 // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
-                        //check the network permission
-                        if (ActivityCompat.checkSelfPermission(
-                                mContext!!,
-                                Manifest.permission.ACCESS_FINE_LOCATION
-                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                                mContext!!, Manifest.permission.ACCESS_COARSE_LOCATION
-                            ) != PackageManager.PERMISSION_GRANTED
-                        ) {
-
-                        }
                         locationManager!!.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
                             MIN_TIME_BW_UPDATES,
@@ -128,22 +95,6 @@ class LocationService(context: Context) : Service(), LocationListener {
 
 
     fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }
-
-    @JvmName("getLatitude1")
-    fun getLatitude(): Double {
-        if (location != null) {
-            latitude = location!!.latitude
-        }
-        return latitude
-    }
-
-    @JvmName("getLongitude1")
-    fun getLongitude(): Double {
-        if (location != null) {
-            longitude = location!!.longitude
-        }
-        return longitude
-    }
 
     fun canGetLocation(): Boolean = canGetLocation
 
