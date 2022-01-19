@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
                     when {
                         locationPermissionState.allPermissionsGranted -> {
                             LocationService(context)
+                            Timber.d("Coordinates: ${LocationService(context).coordinates.value}")
                         }
 
                         locationPermissionState.shouldShowRationale ||

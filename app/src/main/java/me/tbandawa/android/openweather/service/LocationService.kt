@@ -7,6 +7,8 @@ import android.content.Intent
 import android.location.*
 import android.os.IBinder
 import android.os.Bundle
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import timber.log.Timber
 import java.lang.Exception
 
@@ -17,13 +19,15 @@ class LocationService(
 
     private var location: Location? = null
 
-    private var latitude = 0.0
+    private var latitude: Double = 0.0
 
-    private var longitude = 0.0
+    private var longitude: Double = 0.0
 
     private var isLocation: Boolean = false
 
     private var locationManager: LocationManager? = null
+
+    val coordinates: MutableState<Coordinates?> = mutableStateOf(null)
 
     override fun onBind(arg0: Intent?): IBinder? = null
 
@@ -40,12 +44,7 @@ class LocationService(
                 if (location != null) {
                     latitude = location!!.latitude
                     longitude = location!!.longitude
-
-                    if (isLocation.not()) {
-                        isLocation = true
-                        Timber.d("location from network: lat -> $latitude, lon -> $longitude")
-                    }
-
+                    updateLocation()
                 }
             }
 
@@ -60,12 +59,7 @@ class LocationService(
                     if (location != null) {
                         latitude = location!!.latitude
                         longitude = location!!.longitude
-
-                        if (isLocation.not()) {
-                            isLocation = true
-                            Timber.d("location from gps: lat -> $latitude, lon -> $longitude")
-                        }
-
+                        updateLocation()
                     }
                 }
             }
@@ -74,15 +68,19 @@ class LocationService(
         }
     }
 
+    private fun updateLocation() {
+        if (isLocation.not()) {
+            isLocation = true
+            coordinates.value = Coordinates(latitude.toFloat(), longitude.toFloat())
+        }
+    }
+
     fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }
 
     override fun onLocationChanged(location: Location) {
-        val lat = location.latitude
-        val lng = location.longitude
-        if (isLocation.not()) {
-            isLocation = true
-            Timber.d("on ${location.provider} location changed: lat -> $lat, lon -> $lng")
-        }
+        latitude = location.latitude
+        longitude = location.longitude
+        updateLocation()
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
