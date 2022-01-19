@@ -8,8 +8,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.livedata.observeAsState
 import dagger.hilt.android.AndroidEntryPoint
+import me.tbandawa.android.openweather.ui.WeatherContent
 import me.tbandawa.android.openweather.ui.components.LoadingContent
-import me.tbandawa.android.openweather.ui.components.MainContent
 import me.tbandawa.android.openweather.ui.components.MainToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.data.local.PreferenceHelper
@@ -30,30 +30,24 @@ class WeatherActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            Timber.d("${preferenceHelper.observeAsState(preferenceHelper.get()).value}")
             val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
-
-            //viewModel.fetchOneCall((-26.2023).toLong(), 28.0436.toLong())
+            viewModel.fetchOneCall((-26.2023).toLong(), 28.0436.toLong())
             val result = viewModel.oneCallWeather.value
 
             OpenWeatherTheme {
-                Surface(color = MaterialTheme.colors.background) {
+                //Surface(color = MaterialTheme.colors.background) {
                     when(result) {
                         is NetworkResult.Loading -> {
                             LoadingContent()
                         }
                         is NetworkResult.Success -> {
-                            Scaffold(
-                                topBar = { MainToolBar() }
-                            ) {
-                                MainContent(result.data!!, preferenceUnits.value)
-                            }
+                            WeatherContent(oneCall = result.data!!, preferenceUnits = preferenceUnits.value)
                         }
                         is NetworkResult.Error -> {
                             Timber.d(result.message)
                         }
                     }
-                }
+                //}
             }
 
         }
