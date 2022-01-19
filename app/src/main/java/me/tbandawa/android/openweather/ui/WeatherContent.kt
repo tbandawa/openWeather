@@ -21,9 +21,8 @@ import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
 import me.tbandawa.android.openweather.ui.components.DetailGrid
-import me.tbandawa.android.openweather.ui.components.MainToolBar
+import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import openweather.data.local.PreferenceUnits
-import openweather.domain.models.Current
 import openweather.domain.models.OneCall
 import java.util.*
 
@@ -36,7 +35,7 @@ fun WeatherContent(
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
-            topBar = { MainToolBar() }
+            topBar = { WeatherToolBar() }
         ) {
             ConstraintLayout(
                 modifier = Modifier
