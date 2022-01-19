@@ -40,7 +40,7 @@ fun LoadingContent(){
                     .padding(0.dp, 0.dp, 8.dp, 0.dp)
             )
             Text(
-                text = "openWeather",
+                text = "open Weather",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Medium,
