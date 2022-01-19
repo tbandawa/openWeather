@@ -20,49 +20,47 @@ import me.tbandawa.android.openweather.ui.components.ForecastToolBar
 fun ForecastContent(){
 
     Surface(color = MaterialTheme.colors.background) {
-        Surface(color = MaterialTheme.colors.background) {
-            Scaffold(
-                topBar = { ForecastToolBar() }
+        Scaffold(
+            topBar = { ForecastToolBar() }
+        ) {
+            ConstraintLayout(
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-                ConstraintLayout(
+                val (topLayout, recyclerLayout) = createRefs()
+                Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .constrainAs(topLayout) {
+                            top.linkTo(parent.top)
+                        }
+                        .fillMaxWidth()
+                        .height(IntrinsicSize.Max)
                 ) {
-                    val (topLayout, recyclerLayout) = createRefs()
-                    Column(
+                    Text(
+                        text = "Next 7 Days",
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 22.sp
+                        ),
                         modifier = Modifier
-                            .constrainAs(topLayout) {
-                                top.linkTo(parent.top)
-                            }
-                            .fillMaxWidth()
-                            .height(IntrinsicSize.Max)
-                    ) {
-                        Text(
-                            text = "Next 7 Days",
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 22.sp
-                            ),
-                            modifier = Modifier
-                                .padding(16.dp, 25.dp, 16.dp, 15.dp)
-                        )
-                    }
-                    Column(
+                            .padding(16.dp, 25.dp, 16.dp, 15.dp)
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .constrainAs(recyclerLayout) {
+                            top.linkTo(topLayout.bottom)
+                        }
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                ) {
+                    LazyColumn(
                         modifier = Modifier
-                            .constrainAs(recyclerLayout) {
-                                top.linkTo(topLayout.bottom)
-                            }
-                            .fillMaxWidth()
-                            .fillMaxHeight()
+                            .fillMaxSize()
                     ) {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxSize()
-                        ) {
-                            items(5) { index ->
-                                ForecastItem()
-                            }
+                        items(5) { index ->
+                            ForecastItem()
                         }
                     }
                 }
