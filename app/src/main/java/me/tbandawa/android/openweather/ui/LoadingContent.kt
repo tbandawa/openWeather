@@ -23,7 +23,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import me.tbandawa.android.openweather.R
-import timber.log.Timber
+import me.tbandawa.android.openweather.service.LocationService
 
 @ExperimentalPermissionsApi
 @Composable
@@ -78,7 +78,11 @@ fun LoadingContent(){
 
     when {
         locationPermissionState.allPermissionsGranted -> {
-            Timber.d("allPermissionsGranted")
+            LocationService(context).coordinates.value?.let { coordinates ->
+
+            } ?: run {
+                EnableGpsContent()
+            }
         }
         locationPermissionState.shouldShowRationale ||
                 !locationPermissionState.permissionRequested -> {
