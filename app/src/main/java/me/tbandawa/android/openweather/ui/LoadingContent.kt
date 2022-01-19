@@ -83,7 +83,7 @@ fun LoadingContent(){
         locationPermissionState.shouldShowRationale ||
                 !locationPermissionState.permissionRequested -> {
             if (doNotShowRationale) {
-
+                NoGpsContent()
             } else {
                 PermissionContent {
                     locationPermissionState.launchMultiplePermissionRequest()
