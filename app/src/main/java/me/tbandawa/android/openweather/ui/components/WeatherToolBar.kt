@@ -21,7 +21,7 @@ import me.tbandawa.android.openweather.SettingsActivity
 
 @ExperimentalAnimationApi
 @Composable
-fun MainToolBar() {
+fun WeatherToolBar() {
 
     val context = LocalContext.current
 
