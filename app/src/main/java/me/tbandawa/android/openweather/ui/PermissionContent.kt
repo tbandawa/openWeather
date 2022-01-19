@@ -21,6 +21,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 fun PermissionContent(
     launchPermissionRequest: () -> Unit
 ){
+
     Surface(color = MaterialTheme.colors.background) {
         ConstraintLayout(
             modifier = Modifier
@@ -105,4 +106,5 @@ fun PermissionContent(
 
         }
     }
+
 }

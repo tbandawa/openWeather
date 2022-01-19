@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import me.tbandawa.android.openweather.ui.components.SettingsContent
+import me.tbandawa.android.openweather.ui.SettingsContent
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.data.local.PreferenceHelper
