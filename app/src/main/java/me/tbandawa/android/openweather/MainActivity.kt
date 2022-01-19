@@ -9,11 +9,15 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
 import me.tbandawa.android.openweather.ui.LoadingContent
 import me.tbandawa.android.openweather.ui.PermissionContent
+import me.tbandawa.android.openweather.ui.RationaleContent
 import me.tbandawa.android.openweather.ui.WeatherContent
 import openweather.data.local.PreferenceHelper
 import openweather.domain.models.NetworkResult
@@ -24,35 +28,27 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var preferenceHelper: PreferenceHelper
-
-    private val viewModel: MainViewModel by viewModels()
-
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-
-            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
-            viewModel.fetchOneCall((-20.1837).toLong(), 28.5203.toLong())
-
+            val navController = rememberNavController()
             OpenWeatherTheme {
-                when(val result = viewModel.oneCallWeather.value) {
-                    is NetworkResult.Loading -> {
+                NavHost(navController, startDestination = "loading") {
+                    composable(route = "loading") {
                         LoadingContent()
                     }
-                    is NetworkResult.Success -> {
-                        WeatherContent(result.data!!, preferenceUnits.value)
+                    composable(route = "permissions") {
+                        PermissionContent {}
                     }
-                    is NetworkResult.Error -> {
-
+                    composable(route = "rationale") {
+                        RationaleContent()
                     }
                 }
             }
-
         }
+
     }
 
 }

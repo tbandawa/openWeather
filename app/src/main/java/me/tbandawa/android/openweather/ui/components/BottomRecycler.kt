@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import me.tbandawa.android.openweather.ForecastActivity
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Hourly
 
@@ -60,7 +59,7 @@ fun BottomRecycler(
                 }
                 .padding(0.dp, 8.dp, 8.dp, 8.dp)
                 .clickable {
-                    context.startActivity(Intent(context, ForecastActivity::class.java))
+
                 }
         )
         LazyRow(
