@@ -75,10 +75,11 @@ fun BottomRecycler(
                 .padding(0.dp, 0.dp, 0.dp, 8.dp)
                 .fillMaxWidth()
         ) {
-            items(hourly) { item ->  
+            items(hourly) { item ->
                 HourlyItem(
                     hourly = item,
-                    unit = preferenceUnits.temperature
+                    timeUnit = preferenceUnits.time,
+                    temperatureUnit = preferenceUnits.temperature
                 )
             }
         }
