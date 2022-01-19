@@ -40,7 +40,7 @@ fun WeatherToolBar() {
         actions = {
             IconButton(
                 onClick = {
-                    context.startActivity(Intent(context, SettingsActivity::class.java))
+
                 }
             ) {
                 Icon(

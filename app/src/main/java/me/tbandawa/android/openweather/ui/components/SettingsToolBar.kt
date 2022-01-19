@@ -35,7 +35,7 @@ fun SettingsToolBar() {
         navigationIcon = {
             IconButton(
                 onClick = {
-                    (context as ComponentActivity).finish()
+
                 }
             ) {
                 Icon(
