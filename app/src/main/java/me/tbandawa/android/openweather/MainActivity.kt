@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
 
-    private val viewModel: WeatherViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
