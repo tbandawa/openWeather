@@ -12,9 +12,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
+import me.tbandawa.android.openweather.ui.LoadingContent
 import me.tbandawa.android.openweather.ui.PermissionContent
 import me.tbandawa.android.openweather.ui.WeatherContent
-import me.tbandawa.android.openweather.ui.components.*
 import openweather.data.local.PreferenceHelper
 import openweather.domain.models.NetworkResult
 import javax.inject.Inject

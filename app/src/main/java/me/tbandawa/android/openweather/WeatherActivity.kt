@@ -5,12 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.*
 import androidx.compose.runtime.livedata.observeAsState
 import dagger.hilt.android.AndroidEntryPoint
 import me.tbandawa.android.openweather.ui.WeatherContent
-import me.tbandawa.android.openweather.ui.components.LoadingContent
-import me.tbandawa.android.openweather.ui.components.MainToolBar
+import me.tbandawa.android.openweather.ui.LoadingContent
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.data.local.PreferenceHelper
 import openweather.domain.models.NetworkResult
