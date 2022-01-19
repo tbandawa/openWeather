@@ -83,9 +83,8 @@ fun LoadingContent(){
         locationPermissionState.shouldShowRationale ||
                 !locationPermissionState.permissionRequested -> {
             if (doNotShowRationale) {
-                Timber.d("Feature not available")
+
             } else {
-                Timber.d("launchMultiplePermissionRequest()")
                 PermissionContent {
                     locationPermissionState.launchMultiplePermissionRequest()
                 }
