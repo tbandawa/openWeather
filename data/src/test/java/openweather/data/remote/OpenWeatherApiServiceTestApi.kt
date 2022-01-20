@@ -31,7 +31,7 @@ class OpenWeatherApiServiceTestApi: ApiBaseTest() {
     fun `one call weather api`() = runBlocking {
 
         enqueueResponse("one_call_weather.json")
-        val response = service.fetchOneCall("api_key", 1L, 2L)
+        val response = service.fetchOneCall("api_key", 1.0, 1.0)
         val request = mockWebServer.takeRequest()
 
         assertThat(request.path, `is`("/onecall?appid=api_key&lat=1&lon=2"))

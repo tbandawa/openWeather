@@ -71,7 +71,7 @@ class LocationService(
     private fun updateLocation() {
         if (isLocation.not()) {
             isLocation = true
-            coordinates.value = Coordinates(latitude.toFloat(), longitude.toFloat())
+            coordinates.value = Coordinates(latitude, longitude)
         }
     }
 

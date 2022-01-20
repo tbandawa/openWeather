@@ -38,7 +38,7 @@ class OpenWeatherRepositoryImpl @Inject constructor(
         })
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun fetchOneCall(lat: Long, lon: Long): Flow<NetworkResult<OneCall>> = flow {
+    override suspend fun fetchOneCall(lat: Double, lon: Double): Flow<NetworkResult<OneCall>> = flow {
         emit(NetworkResult.Loading())
         emit(safeApiCall(oneCallMapper) {
             openWeatherApi.fetchOneCall(

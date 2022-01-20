@@ -11,8 +11,7 @@ import openweather.domain.models.OneCall
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyLong
-import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.*
 import org.mockito.Mockito.`when`
 import retrofit2.Response
 
@@ -65,14 +64,14 @@ open class OpenWeatherRepositoryTest : BaseMockTest() {
 
         val oneCallResponse = readJsonResponse<OneCallResponse>("one_call_weather.json")
 
-        `when`(openWeatherApi.fetchOneCall(anyString(), anyLong(), anyLong())).thenReturn(Response.success(oneCallResponse))
+        `when`(openWeatherApi.fetchOneCall(anyString(), anyDouble(), anyDouble())).thenReturn(Response.success(oneCallResponse))
 
-        openWeatherRepository.fetchOneCall(1L, 1L).collect { value: NetworkResult<OneCall> ->
+        openWeatherRepository.fetchOneCall(1.0, 1.0).collect { value: NetworkResult<OneCall> ->
 
             if(value is NetworkResult.Success) {
                 MatcherAssert.assertThat(
                     value.data?.current?.sunrise,
-                    CoreMatchers.`is`(1629927390)
+                    CoreMatchers.`is`(1630815384)
                 )
             }
 

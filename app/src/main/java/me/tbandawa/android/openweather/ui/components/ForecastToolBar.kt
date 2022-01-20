@@ -1,5 +1,6 @@
 package me.tbandawa.android.openweather.ui.components
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -8,38 +9,30 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
 
 @Composable
-fun SettingsToolBar(navigateUp: () -> Unit) {
+fun ForecastToolBar() {
 
+    val context = LocalContext.current
     TopAppBar(
         title = {
-            Text(
-                text = "Settings",
-                style = TextStyle(
-                    color = Color.Black,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 22.sp
-                )
-            )
+            Text(text = "Johannesburg, South Africa")
         },
         navigationIcon = {
             IconButton(
                 onClick = {
-                    navigateUp.invoke()
+                    (context as ComponentActivity).finish()
                 }
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(25.dp),
+                        .size(30.dp),
                     tint = Color.Black
                 )
             }

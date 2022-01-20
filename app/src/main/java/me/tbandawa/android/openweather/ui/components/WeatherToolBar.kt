@@ -1,6 +1,5 @@
 package me.tbandawa.android.openweather.ui.components
 
-import android.content.Intent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
@@ -17,11 +16,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
-import me.tbandawa.android.openweather.SettingsActivity
 
 @ExperimentalAnimationApi
 @Composable
-fun WeatherToolBar() {
+fun WeatherToolBar(navigateToSettings: () -> Unit) {
 
     val context = LocalContext.current
 
@@ -40,7 +38,7 @@ fun WeatherToolBar() {
         actions = {
             IconButton(
                 onClick = {
-                    context.startActivity(Intent(context, SettingsActivity::class.java))
+                    navigateToSettings.invoke()
                 }
             ) {
                 Icon(

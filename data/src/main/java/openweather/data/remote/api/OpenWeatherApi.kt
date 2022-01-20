@@ -13,7 +13,7 @@ interface OpenWeatherApi {
     suspend fun fetchCurrentWeather(@Query("appid") appid: String, @Query("q") q: String) : Response<CurrentWeatherResponse>
 
     @GET("onecall")
-    suspend fun fetchOneCall(@Query("appid") appid: String, @Query("lat") lat: Long, @Query("lon") lon: Long) : Response<OneCallResponse>
+    suspend fun fetchOneCall(@Query("appid") appid: String, @Query("lat") lat: Double, @Query("lon") lon: Double) : Response<OneCallResponse>
 
     @GET("forecast")
     suspend fun fetchFiveDayWeather(@Query("appid") appid: String, @Query("q") q: String) : Response<FiveDayWeatherForecastResponse>
