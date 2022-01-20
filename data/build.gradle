@@ -14,7 +14,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField "String", 'OPEN_WEATHER_BASE_URL', '"https://api.openweathermap.org/data/2.5/"'
+        buildConfigField "String", 'OPEN_WEATHER_BASE_URL', '"https://api.openweathermap_.org/data/2.5/"'
         buildConfigField "String", 'OPEN_WEATHER_API_KEY', '"dfc3d17632993a8fd49021d3c3d20f96"'
     }
 

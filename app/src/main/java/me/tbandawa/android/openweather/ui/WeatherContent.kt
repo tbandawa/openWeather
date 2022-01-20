@@ -14,30 +14,49 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
 import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import openweather.data.local.PreferenceUnits
+import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
+import timber.log.Timber
 import java.util.*
 
 @ExperimentalAnimationApi
 @Composable
 fun WeatherContent(
-    oneCall: OneCall,
-    preferenceUnits: PreferenceUnits
+    viewModel: MainViewModel,
+    latitude: Double,
+    longitude: Double
 ) {
+
+    /*viewModel.fetchOneCall(latitude, longitude)
+
+    when(val result = viewModel.oneCallWeather.value) {
+        is NetworkResult.Loading -> {
+            Timber.d("LOADING...")
+        }
+        is NetworkResult.Success -> {
+            Timber.d("SUCCESS -> ${result.data}")
+        }
+        is NetworkResult.Error -> {
+            Timber.d("ERROR -> ${result.message}")
+        }
+    }*/
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = { WeatherToolBar() }
         ) {
-            ConstraintLayout(
+            /*ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
@@ -94,7 +113,16 @@ fun WeatherContent(
                 ) {
                     BottomRecycler(oneCall.hourly!!, preferenceUnits)
                 }
-            }
+            }*/
+            Text(
+                text = "Location: lat -> $latitude, lon -> $longitude",
+                style = TextStyle(
+                    color = Color.Black,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center
+                )
+            )
         }
     }
 

@@ -23,11 +23,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.service.Coordinates
 import me.tbandawa.android.openweather.service.LocationService
 
 @ExperimentalPermissionsApi
 @Composable
-fun LoadingContent(){
+fun LoadingContent(
+    navigateToWeather: (Coordinates) -> Unit
+){
 
     val context = LocalContext.current
 
@@ -78,8 +81,9 @@ fun LoadingContent(){
 
     when {
         locationPermissionState.allPermissionsGranted -> {
-            LocationService(context).coordinates.value?.let { coordinates ->
-
+            val locationService = LocationService(context)
+            locationService.coordinates.value?.let { coordinates ->
+                navigateToWeather(coordinates)
             } ?: run {
                 EnableGpsContent()
             }
@@ -97,7 +101,6 @@ fun LoadingContent(){
         else -> {
             RationaleContent()
         }
-
     }
 
 }
