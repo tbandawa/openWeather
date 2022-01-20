@@ -64,12 +64,14 @@ class MainActivity : ComponentActivity() {
                     composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
-                        LaunchedEffect(Unit) {
+                        /*LaunchedEffect(Unit) {
                             viewModel.fetchOneCall(latitude!!, longitude!!)
-                        }
+                        }*/
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
+                            latitude!!,
+                            longitude!!,
                             navigateToSettings
                         )
                     }

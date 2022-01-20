@@ -7,9 +7,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,18 +41,29 @@ import java.util.*
 fun WeatherContent(
     preferenceHelper: PreferenceHelper,
     viewModel: MainViewModel,
+    latitude: Double,
+    longitude: Double,
     navigateToSettings: () -> Unit
 ) {
 
     Surface(color = MaterialTheme.colors.background) {
 
-        val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
+        var isLoaded by rememberSaveable { mutableStateOf(false) }
 
-        when(val result = viewModel.oneCallWeather.observeAsState().value) {
+        LaunchedEffect(Unit) {
+            if (isLoaded.not())
+                viewModel.fetchOneCall(latitude, longitude)
+        }
+
+        val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
+        val result = viewModel.oneCallWeather.value
+
+        when(result) {
             is NetworkResult.Loading -> {
                 LoadingScreen()
             }
             is NetworkResult.Success -> {
+                isLoaded = true
                 WeatherScreen(
                     preferenceUnits = preferenceUnits,
                     oneCall = result.data!!,
