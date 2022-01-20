@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
@@ -37,9 +36,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
+            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
+
             val navController = rememberNavController()
             val navigateUp: () -> Unit = { navController.navigateUp() }
-            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
 
             val navigateToWeather: (Coordinates) -> Unit = { coordinates ->
                 navController.navigate("weather/${coordinates.latitude}/${coordinates.longitude}") {
@@ -64,9 +64,6 @@ class MainActivity : ComponentActivity() {
                     composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
-                        /*LaunchedEffect(Unit) {
-                            viewModel.fetchOneCall(latitude!!, longitude!!)
-                        }*/
                         WeatherContent(
                             preferenceHelper,
                             viewModel,

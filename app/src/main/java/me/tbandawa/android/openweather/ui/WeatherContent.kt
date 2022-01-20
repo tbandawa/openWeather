@@ -3,10 +3,8 @@ package me.tbandawa.android.openweather.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
@@ -50,6 +48,8 @@ fun WeatherContent(
 
         var isLoaded by rememberSaveable { mutableStateOf(false) }
 
+        val retry: () -> Unit = { viewModel.fetchOneCall(latitude, longitude) }
+
         LaunchedEffect(Unit) {
             if (isLoaded.not())
                 viewModel.fetchOneCall(latitude, longitude)
@@ -71,7 +71,7 @@ fun WeatherContent(
                 )
             }
             is NetworkResult.Error -> {
-
+                ErrorScreen(retry)
             }
         }
 
@@ -187,5 +187,73 @@ fun LoadingScreen() {
                 .height(IntrinsicSize.Max)
                 .padding(0.dp, 0.dp, 0.dp, 10.dp)
         )
+    }
+}
+
+@Composable
+fun ErrorScreen(
+    retry: () -> Unit
+) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 20.dp, bottom = 50.dp, end = 20.dp)
+    ) {
+
+        val (titleLayout, descriptionLayout, retryButton) = createRefs()
+
+        Text(
+            text = "Ooops!",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier
+                .constrainAs(titleLayout) {
+                    bottom.linkTo(descriptionLayout.top)
+                    start.linkTo(parent.start)
+                }
+                .height(IntrinsicSize.Min)
+                .padding(0.dp, 0.dp, 0.dp, 10.dp)
+        )
+
+        Text(
+            text = "Error! Unable to resolve host",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp
+            ),
+            modifier = Modifier
+                .constrainAs(descriptionLayout) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(retryButton.top)
+                }
+                .width(300.dp)
+                .height(IntrinsicSize.Max)
+                .padding(bottom = 10.dp)
+        )
+
+        Button(
+            onClick = {
+                retry.invoke()
+            },
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .constrainAs(retryButton) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(end = 5.dp),
+            colors = ButtonDefaults.textButtonColors(
+                backgroundColor = Color.Black,
+                contentColor = Color.White
+            )
+        ) {
+            Text(text = "Retry")
+        }
+
     }
 }
