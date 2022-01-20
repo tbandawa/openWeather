@@ -56,9 +56,8 @@ fun WeatherContent(
         }
 
         val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
-        val result = viewModel.oneCallWeather.value
 
-        when(result) {
+        when(val result = viewModel.oneCallWeather.value) {
             is NetworkResult.Loading -> {
                 LoadingScreen()
             }

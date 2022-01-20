@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,20 +21,20 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
-import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
-    preferenceHelper: PreferenceHelper,
-    preferenceUnits: PreferenceUnits,
+    viewModel: MainViewModel,
     navigateUp: () -> Unit
 ) {
+
+    val preferenceUnits by viewModel.preferenceUnits
 
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
@@ -99,8 +100,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, "°C")
-                                UnitChip(preferenceUnits, preferenceHelper::put, "°F")
+                                UnitChip(preferenceUnits, viewModel::savePreference, "°C")
+                                UnitChip(preferenceUnits, viewModel::savePreference, "°F")
                             }
                         }
                     }
@@ -128,9 +129,9 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "m/s")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "km/h")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "mph")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "m/s")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "km/h")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "mph")
                             }
                         }
                     }
@@ -158,8 +159,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "hPa")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "inHg")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "hPa")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "inHg")
                             }
                         }
                     }
@@ -187,8 +188,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "12-hour")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "24-hour")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "12-hour")
+                                UnitChip(preferenceUnits, viewModel::savePreference, text = "24-hour")
                             }
                         }
                     }

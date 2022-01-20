@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -33,8 +32,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-
-            val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
 
             val navController = rememberNavController()
             val navigateUp: () -> Unit = { navController.navigateUp() }
@@ -73,9 +70,9 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = "settings") {
+                        val viewModel = hiltViewModel<MainViewModel>()
                         SettingsContent(
-                            preferenceHelper,
-                            preferenceUnits,
+                            viewModel,
                             navigateUp
                         )
                     }
