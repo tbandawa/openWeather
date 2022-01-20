@@ -1,7 +1,7 @@
 package me.tbandawa.android.openweather
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,12 +17,13 @@ class MainViewModel @Inject constructor(
     private val repository: OpenWeatherRepository
 ) : ViewModel() {
 
-    val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
+    private val _oneCallWeather = MutableLiveData<NetworkResult<OneCall>>()
+    val oneCallWeather: LiveData<NetworkResult<OneCall>> = _oneCallWeather
 
     fun fetchOneCall(lat: Double, lon: Double){
         viewModelScope.launch {
             repository.fetchOneCall(lat, lon).collect { result ->
-                oneCallWeather.value = result
+                _oneCallWeather.postValue(result)
             }
         }
     }

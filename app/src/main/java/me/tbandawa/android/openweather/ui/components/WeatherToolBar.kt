@@ -19,7 +19,7 @@ import me.tbandawa.android.openweather.R
 
 @ExperimentalAnimationApi
 @Composable
-fun WeatherToolBar() {
+fun WeatherToolBar(navigateToSettings: () -> Unit) {
 
     val context = LocalContext.current
 
@@ -38,7 +38,7 @@ fun WeatherToolBar() {
         actions = {
             IconButton(
                 onClick = {
-
+                    navigateToSettings.invoke()
                 }
             ) {
                 Icon(

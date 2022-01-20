@@ -31,7 +31,8 @@ import openweather.data.local.PreferenceUnits
 @Composable
 fun SettingsContent(
     preferenceHelper: PreferenceHelper,
-    preferenceUnits: PreferenceUnits
+    preferenceUnits: PreferenceUnits,
+    navigateUp: () -> Unit
 ) {
 
     val uriHandler = LocalUriHandler.current
@@ -43,7 +44,7 @@ fun SettingsContent(
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
-            topBar = { SettingsToolBar() }
+            topBar = { SettingsToolBar(navigateUp) }
         ) {
             ConstraintLayout(
                 modifier = Modifier
