@@ -55,7 +55,14 @@ fun UnitChip(
                 }
             }
 
-            setPreference(preferenceUnits)
+            val newUnits = PreferenceUnits(
+                preferenceUnits.temperature,
+                preferenceUnits.speed,
+                preferenceUnits.pressure,
+                preferenceUnits.time
+            )
+
+            setPreference(newUnits)
 
         }
     ) {

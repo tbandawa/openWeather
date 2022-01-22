@@ -10,12 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.tbandawa.android.openweather.R
+import coil.compose.rememberImagePainter
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.extensions.toTime
 import openweather.domain.models.Hourly
@@ -26,6 +25,13 @@ fun HourlyItem(
     timeUnit: String,
     temperatureUnit: String
 ) {
+
+    val hourlyIcon = rememberImagePainter(
+        data = "https://openweathermap.org/img/wn/${hourly.weather?.get(0)?.icon}@2x.png",
+        builder = {
+            crossfade(true)
+        }
+    )
 
     Column(modifier = Modifier
         .width(70.dp)
@@ -41,7 +47,7 @@ fun HourlyItem(
             )
         )
         Image(
-            painter = painterResource(R.drawable.ic_cloud),
+            painter = hourlyIcon,
             contentDescription = null,
             modifier = Modifier
                 .size(35.dp, 35.dp)
