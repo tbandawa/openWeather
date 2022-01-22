@@ -87,7 +87,7 @@ fun Int.toTime(unit: String) : String {
     }
 }
 
-fun Int.toDay(unit: String) : String {
+fun Int.toDay() : String {
     val seconds = this*1000L
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = seconds

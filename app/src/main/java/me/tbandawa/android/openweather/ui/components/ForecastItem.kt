@@ -69,7 +69,7 @@ fun ForecastItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Sun",
+                text = daily.dt!!.toDay(),
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
