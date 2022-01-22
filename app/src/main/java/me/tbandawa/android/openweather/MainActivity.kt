@@ -3,11 +3,11 @@ package me.tbandawa.android.openweather
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -26,6 +26,8 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
+
+    private val viewModel: MainViewModel by viewModels()
 
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +65,6 @@ class MainActivity : ComponentActivity() {
                     composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
-                        val viewModel = hiltViewModel<MainViewModel>()
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
@@ -75,9 +76,8 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = "forecast") {
-                        val viewModel = hiltViewModel<MainViewModel>()
                         ForecastContent(
-                            preferenceHelper,
+                            preferenceHelper.get(),
                             viewModel,
                             navigateUp
                         )

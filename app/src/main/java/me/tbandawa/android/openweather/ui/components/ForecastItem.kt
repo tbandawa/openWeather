@@ -21,10 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
+import openweather.data.local.PreferenceUnits
+import openweather.domain.models.Daily
 
 @ExperimentalAnimationApi
 @Composable
-fun ForecastItem() {
+fun ForecastItem(
+    daily: Daily,
+    preferenceUnits: PreferenceUnits
+) {
 
     var visible by remember { mutableStateOf(false) }
 
