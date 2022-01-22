@@ -22,7 +22,8 @@ import openweather.domain.models.Hourly
 @Composable
 fun BottomRecycler(
     hourly: List<Hourly>,
-    preferenceUnits: PreferenceUnits
+    preferenceUnits: PreferenceUnits,
+    navigateToForecast: () -> Unit
 ) {
 
     ConstraintLayout {
@@ -55,7 +56,7 @@ fun BottomRecycler(
                 }
                 .padding(0.dp, 8.dp, 8.dp, 8.dp)
                 .clickable {
-
+                    navigateToForecast.invoke()
                 }
         )
         LazyRow(

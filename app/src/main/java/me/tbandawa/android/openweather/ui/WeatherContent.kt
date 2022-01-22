@@ -42,7 +42,8 @@ fun WeatherContent(
     viewModel: MainViewModel,
     latitude: Double,
     longitude: Double,
-    navigateToSettings: () -> Unit
+    navigateToSettings: () -> Unit,
+    navigateToForecast: () -> Unit
 ) {
 
     Surface(color = MaterialTheme.colors.background) {
@@ -67,7 +68,8 @@ fun WeatherContent(
                 WeatherScreen(
                     preferenceUnits = preferenceUnits,
                     oneCall = result.data!!,
-                    navigateToSettings
+                    navigateToSettings,
+                    navigateToForecast
                 )
             }
             is NetworkResult.Error -> {
@@ -84,7 +86,8 @@ fun WeatherContent(
 fun WeatherScreen(
     preferenceUnits: PreferenceUnits,
     oneCall: OneCall,
-    navigateToSettings: () -> Unit
+    navigateToSettings: () -> Unit,
+    navigateToForecast: () -> Unit
 ) {
 
     val weatherIcon = rememberImagePainter(
@@ -152,7 +155,11 @@ fun WeatherScreen(
                     }
                     .fillMaxWidth()
             ) {
-                BottomRecycler(oneCall.hourly!!, preferenceUnits)
+                BottomRecycler(
+                    oneCall.hourly!!,
+                    preferenceUnits,
+                    navigateToForecast
+                )
             }
         }
     }
