@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil.compose.rememberImagePainter
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
 import openweather.data.local.PreferenceUnits
@@ -34,6 +34,13 @@ fun ForecastItem(
 ) {
 
     var visible by remember { mutableStateOf(false) }
+
+    val weatherIcon = rememberImagePainter(
+        data = "https://openweathermap.org/img/wn/${daily.weather?.get(0)?.icon}@4x.png",
+        builder = {
+            crossfade(true)
+        }
+    )
 
     ConstraintLayout(
         modifier = Modifier
@@ -65,7 +72,7 @@ fun ForecastItem(
                 )
             )
             Text(
-                text = "22°C",
+                text = daily.temp?.max!!.toTemperature(preferenceUnits.temperature),
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Medium,
@@ -75,7 +82,7 @@ fun ForecastItem(
                     .padding(16.dp, 0.dp, 0.dp, 0.dp)
             )
             Text(
-                text = "22°C",
+                text = daily.temp?.min!!.toTemperature(preferenceUnits.temperature),
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Light,
@@ -85,7 +92,7 @@ fun ForecastItem(
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
             )
             Image(
-                painter = painterResource(R.drawable.weather),
+                painter = weatherIcon,
                 contentDescription = null,
                 modifier = Modifier
                     .size(45.dp, 40.dp)
