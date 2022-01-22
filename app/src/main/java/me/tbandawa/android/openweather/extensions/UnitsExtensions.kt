@@ -86,3 +86,11 @@ fun Int.toTime(unit: String) : String {
         else -> {""}
     }
 }
+
+fun Int.toDay(unit: String) : String {
+    val seconds = this*1000L
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = seconds
+    val formatter = SimpleDateFormat("EEE")
+    return formatter.format(calendar.time)
+}
