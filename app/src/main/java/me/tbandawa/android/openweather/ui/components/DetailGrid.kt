@@ -3,14 +3,12 @@ package me.tbandawa.android.openweather.ui.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Current
-import timber.log.Timber
 
 @Composable
 fun DetailGrid(
