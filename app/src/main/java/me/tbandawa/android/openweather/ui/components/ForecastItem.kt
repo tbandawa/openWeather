@@ -116,14 +116,14 @@ fun ForecastItem() {
         ) {
             Column {
                 Row {
-                    MoreItem()
-                    MoreItem()
-                    MoreItem()
+                    MoreItem(painterResource(R.drawable.ic_cloud), "Cloud Cover", "")
+                    MoreItem(painterResource(R.drawable.ic_rain), "Chance", "")
+                    MoreItem(painterResource(R.drawable.ic_wind), "Wind Speed", "")
                 }
                 Row {
-                    MoreItem()
-                    MoreItem()
-                    MoreItem()
+                    MoreItem(painterResource(R.drawable.ic_uv), "UV Index", "")
+                    MoreItem(painterResource(R.drawable.ic_humidity), "Humidity", "")
+                    MoreItem(painterResource(R.drawable.ic_dew), "Dew Point", "")
                 }
             }
         }
