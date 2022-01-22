@@ -12,12 +12,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
+import openweather.data.local.PreferenceHelper
 
 @ExperimentalAnimationApi
 @Composable
-fun ForecastContent(){
+fun ForecastContent(
+    preferenceHelper: PreferenceHelper,
+    viewModel: MainViewModel
+){
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
