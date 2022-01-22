@@ -43,6 +43,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            val navigateToForecast: () -> Unit = {
+                navController.navigate("forecast")
+            }
+
             val navigateToSettings: () -> Unit = {
                 navController.navigate("settings")
             }
