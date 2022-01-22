@@ -69,7 +69,8 @@ class MainActivity : ComponentActivity() {
                             viewModel,
                             latitude!!,
                             longitude!!,
-                            navigateToSettings
+                            navigateToSettings,
+                            navigateToForecast
                         )
                     }
 
