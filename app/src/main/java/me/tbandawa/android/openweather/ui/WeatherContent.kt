@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil.compose.rememberImagePainter
 import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
@@ -85,6 +86,14 @@ fun WeatherScreen(
     oneCall: OneCall,
     navigateToSettings: () -> Unit
 ) {
+
+    val weatherIcon = rememberImagePainter(
+        data = "https://openweathermap.org/img/wn/${oneCall.current?.weather?.get(0)?.icon}@4x.png",
+        builder = {
+            crossfade(true)
+        }
+    )
+
     Scaffold(
         topBar = { WeatherToolBar(navigateToSettings) }
     ) {
@@ -108,7 +117,7 @@ fun WeatherScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.weather),
+                        painter = weatherIcon,
                         contentDescription = null,
                         modifier = Modifier
                             .size(200.dp, 200.dp)
