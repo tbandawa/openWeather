@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.extensions.*
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Daily
 
@@ -90,7 +92,7 @@ fun ForecastItem(
                     .padding(16.dp, 0.dp, 8.dp, 0.dp)
             )
             Text(
-                text = "Partly Cloudy",
+                text = "${daily.weather?.get(0)?.description?.replaceFirstChar { it.uppercase() }}",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
@@ -121,14 +123,14 @@ fun ForecastItem(
         ) {
             Column {
                 Row {
-                    MoreItem(painterResource(R.drawable.ic_cloud), "Cloud Cover", "")
-                    MoreItem(painterResource(R.drawable.ic_rain), "Chance", "")
-                    MoreItem(painterResource(R.drawable.ic_wind), "Wind Speed", "")
+                    MoreItem(painterResource(R.drawable.ic_cloud), "Cloud Cover", daily.clouds!!.toCloudCover())
+                    MoreItem(painterResource(R.drawable.ic_pressure), "Pressure", daily.pressure!!.toPressure(preferenceUnits.pressure))
+                    MoreItem(painterResource(R.drawable.ic_wind), "Wind Speed", daily.windSpeed!!.toSpeed(preferenceUnits.speed))
                 }
                 Row {
-                    MoreItem(painterResource(R.drawable.ic_uv), "UV Index", "")
-                    MoreItem(painterResource(R.drawable.ic_humidity), "Humidity", "")
-                    MoreItem(painterResource(R.drawable.ic_dew), "Dew Point", "")
+                    MoreItem(painterResource(R.drawable.ic_uv), "UV Index", daily.uvi!!.toUV())
+                    MoreItem(painterResource(R.drawable.ic_humidity), "Humidity", daily.humidity!!.toHumidity())
+                    MoreItem(painterResource(R.drawable.ic_dew), "Dew Point", daily.dewPoint!!.toDewPoint(preferenceUnits.temperature))
                 }
             }
         }
