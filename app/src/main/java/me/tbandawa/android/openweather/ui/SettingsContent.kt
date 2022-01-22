@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +26,6 @@ import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
 import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
-import timber.log.Timber
 
 @ExperimentalMaterialApi
 @Composable
@@ -42,11 +41,8 @@ fun SettingsContent(
         putExtra(Intent.EXTRA_SUBJECT, "Feedback - open Radio")
     }
 
-    var preferenceUnits by remember { mutableStateOf(PreferenceUnits()) }
-    Timber.d("we got -> $preferenceUnits")
-    val setPreference: (PreferenceUnits) -> Unit = { it ->
-        preferenceUnits = it
-    }
+    preferenceHelper.observeAsState(preferenceHelper.get()).value
+    val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
@@ -106,14 +102,14 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, setPreference, "°C")
-                                UnitChip(preferenceUnits, setPreference, "°F")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, "°C")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, "°F")
                             }
                         }
                     }
 
                     //Wind speed units settings
-                    /*Row(
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 20.dp),
@@ -135,9 +131,9 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "m/s")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "km/h")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "mph")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "m/s")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "km/h")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "mph")
                             }
                         }
                     }
@@ -165,8 +161,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "hPa")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "inHg")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "hPa")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "inHg")
                             }
                         }
                     }
@@ -194,11 +190,11 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "12-hour")
-                                UnitChip(preferenceUnits, preferenceHelper::put, text = "24-hour")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "12-hour")
+                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "24-hour")
                             }
                         }
-                    }*/
+                    }
 
                     //Horizontal divider
                     HorizontalDivider()
