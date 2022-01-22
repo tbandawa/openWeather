@@ -13,7 +13,7 @@ class PreferenceHelper(val context: Context) : LiveData<PreferenceUnits>() {
     fun put(preferenceUnits: PreferenceUnits) {
         val jsonString = GsonBuilder().create().toJson(preferenceUnits)
         preferences.edit().putString("units", jsonString).apply()
-        postValue(get())
+        value = preferenceUnits
     }
 
     fun get(): PreferenceUnits {

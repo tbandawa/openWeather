@@ -12,6 +12,7 @@ import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,7 +21,7 @@ class MainViewModel @Inject constructor(
     private val preferenceHelper: PreferenceHelper
 ) : ViewModel() {
 
-    val preferenceUnits: MutableState<PreferenceUnits> = mutableStateOf(preferenceHelper.get())
+    //val preferenceUnits: MutableState<PreferenceUnits> = mutableStateOf(preferenceHelper.get())
 
     val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
 
@@ -32,8 +33,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun savePreference(units: PreferenceUnits) {
+    /*fun savePreference(units: PreferenceUnits) {
         preferenceHelper.put(units)
-    }
+        preferenceUnits.value = preferenceHelper.get()
+    }*/
 
 }

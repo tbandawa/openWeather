@@ -16,24 +16,26 @@ import openweather.data.local.PreferenceUnits
 @ExperimentalMaterialApi
 @Composable
 fun UnitChip(
-    preferenceUnits: PreferenceUnits,
+    preferenceUnits: State<PreferenceUnits>,
     setPreference: (PreferenceUnits) -> Unit,
     text: String
 ) {
 
+    val units by preferenceUnits
+
     Surface(
         color = when (text) {
-            preferenceUnits.temperature,
-            preferenceUnits.speed,
-            preferenceUnits.pressure,
-            preferenceUnits.time -> MaterialTheme.colors.onSurface
+            units.temperature,
+            units.speed,
+            units.pressure,
+            units.time -> MaterialTheme.colors.onSurface
             else -> Color.Transparent
         },
         contentColor = when (text) {
-            preferenceUnits.temperature,
-            preferenceUnits.speed,
-            preferenceUnits.pressure,
-            preferenceUnits.time -> MaterialTheme.colors.onPrimary
+            units.temperature,
+            units.speed,
+            units.pressure,
+            units.time -> MaterialTheme.colors.onPrimary
             else -> Color.White
         },
         shape = CircleShape,
@@ -42,20 +44,20 @@ fun UnitChip(
 
             when (text) {
                 "°C","°F" -> {
-                    preferenceUnits.temperature = text
+                    units.temperature = text
                 }
                 "m/s","km/h","mph" -> {
-                    preferenceUnits.speed = text
+                    units.speed = text
                 }
                 "hPa","inHg" -> {
-                    preferenceUnits.pressure = text
+                    units.pressure = text
                 }
                 "24-hour", "12-hour" -> {
-                    preferenceUnits.time = text
+                    units.time = text
                 }
             }
 
-            setPreference(preferenceUnits)
+            setPreference(units)
 
         }
     ) {

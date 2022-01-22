@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                     composable(route = "settings") {
                         val viewModel = hiltViewModel<MainViewModel>()
                         SettingsContent(
-                            viewModel,
+                            preferenceHelper,
                             navigateUp
                         )
                     }
