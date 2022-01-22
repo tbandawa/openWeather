@@ -7,21 +7,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: OpenWeatherRepository,
-    private val preferenceHelper: PreferenceHelper
+    private val repository: OpenWeatherRepository
 ) : ViewModel() {
-
-    //val preferenceUnits: MutableState<PreferenceUnits> = mutableStateOf(preferenceHelper.get())
 
     val oneCallWeather: MutableState<NetworkResult<OneCall>?> = mutableStateOf(null)
 
@@ -32,10 +26,5 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
-    /*fun savePreference(units: PreferenceUnits) {
-        preferenceHelper.put(units)
-        preferenceUnits.value = preferenceHelper.get()
-    }*/
 
 }

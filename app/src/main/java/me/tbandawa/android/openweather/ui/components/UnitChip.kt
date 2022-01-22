@@ -16,26 +16,24 @@ import openweather.data.local.PreferenceUnits
 @ExperimentalMaterialApi
 @Composable
 fun UnitChip(
-    preferenceUnits: State<PreferenceUnits>,
+    preferenceUnits: PreferenceUnits,
     setPreference: (PreferenceUnits) -> Unit,
     text: String
 ) {
 
-    val units by preferenceUnits
-
     Surface(
         color = when (text) {
-            units.temperature,
-            units.speed,
-            units.pressure,
-            units.time -> MaterialTheme.colors.onSurface
+            preferenceUnits.temperature,
+            preferenceUnits.speed,
+            preferenceUnits.pressure,
+            preferenceUnits.time -> MaterialTheme.colors.onSurface
             else -> Color.Transparent
         },
         contentColor = when (text) {
-            units.temperature,
-            units.speed,
-            units.pressure,
-            units.time -> MaterialTheme.colors.onPrimary
+            preferenceUnits.temperature,
+            preferenceUnits.speed,
+            preferenceUnits.pressure,
+            preferenceUnits.time -> MaterialTheme.colors.onPrimary
             else -> Color.White
         },
         shape = CircleShape,
@@ -44,20 +42,27 @@ fun UnitChip(
 
             when (text) {
                 "°C","°F" -> {
-                    units.temperature = text
+                    preferenceUnits.temperature = text
                 }
                 "m/s","km/h","mph" -> {
-                    units.speed = text
+                    preferenceUnits.speed = text
                 }
                 "hPa","inHg" -> {
-                    units.pressure = text
+                    preferenceUnits.pressure = text
                 }
                 "24-hour", "12-hour" -> {
-                    units.time = text
+                    preferenceUnits.time = text
                 }
             }
 
-            setPreference(units)
+            val newUnits = PreferenceUnits(
+                preferenceUnits.temperature,
+                preferenceUnits.speed,
+                preferenceUnits.pressure,
+                preferenceUnits.time
+            )
+
+            setPreference(newUnits)
 
         }
     ) {

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -70,7 +70,6 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(route = "settings") {
-                        val viewModel = hiltViewModel<MainViewModel>()
                         SettingsContent(
                             preferenceHelper,
                             navigateUp

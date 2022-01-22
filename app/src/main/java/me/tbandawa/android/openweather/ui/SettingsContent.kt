@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +25,7 @@ import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
 import openweather.data.local.PreferenceHelper
+import openweather.data.local.PreferenceUnits
 import timber.log.Timber
 
 @ExperimentalMaterialApi
@@ -36,13 +35,17 @@ fun SettingsContent(
     navigateUp: () -> Unit
 ) {
 
-    val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
-
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
     val intent = Intent(Intent.ACTION_SENDTO).apply {
         data = Uri.parse("mailto:tonderaibandawa@gmail.com")
         putExtra(Intent.EXTRA_SUBJECT, "Feedback - open Radio")
+    }
+
+    var preferenceUnits by remember { mutableStateOf(PreferenceUnits()) }
+    Timber.d("we got -> $preferenceUnits")
+    val setPreference: (PreferenceUnits) -> Unit = { it ->
+        preferenceUnits = it
     }
 
     Surface(color = MaterialTheme.colors.background) {
@@ -55,6 +58,7 @@ fun SettingsContent(
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
                 val (contentLayout, bottomLayout) = createRefs()
+
                 Column(
                     modifier = Modifier
                         .constrainAs(contentLayout) {
@@ -102,14 +106,14 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits, preferenceHelper::put, "°C")
-                                UnitChip(preferenceUnits, preferenceHelper::put, "°F")
+                                UnitChip(preferenceUnits, setPreference, "°C")
+                                UnitChip(preferenceUnits, setPreference, "°F")
                             }
                         }
                     }
 
                     //Wind speed units settings
-                    Row(
+                    /*Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 20.dp),
@@ -194,7 +198,7 @@ fun SettingsContent(
                                 UnitChip(preferenceUnits, preferenceHelper::put, text = "24-hour")
                             }
                         }
-                    }
+                    }*/
 
                     //Horizontal divider
                     HorizontalDivider()
