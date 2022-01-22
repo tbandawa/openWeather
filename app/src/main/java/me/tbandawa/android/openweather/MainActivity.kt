@@ -69,6 +69,14 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
+                    composable(route = "forecast") {
+                        val viewModel = hiltViewModel<MainViewModel>()
+                        ForecastContent(
+                            preferenceHelper,
+                            viewModel
+                        )
+                    }
+
                     composable(route = "settings") {
                         SettingsContent(
                             preferenceHelper,
