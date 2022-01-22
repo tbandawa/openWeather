@@ -21,12 +21,13 @@ import openweather.data.local.PreferenceHelper
 @Composable
 fun ForecastContent(
     preferenceHelper: PreferenceHelper,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    navigateUp: () -> Unit
 ){
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
-            topBar = { ForecastToolBar() }
+            topBar = { ForecastToolBar(navigateUp) }
         ) {
             ConstraintLayout(
                 modifier = Modifier

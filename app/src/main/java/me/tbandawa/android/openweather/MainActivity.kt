@@ -73,7 +73,8 @@ class MainActivity : ComponentActivity() {
                         val viewModel = hiltViewModel<MainViewModel>()
                         ForecastContent(
                             preferenceHelper,
-                            viewModel
+                            viewModel,
+                            navigateUp
                         )
                     }
 
