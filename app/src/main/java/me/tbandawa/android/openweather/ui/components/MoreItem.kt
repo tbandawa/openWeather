@@ -26,7 +26,6 @@ fun MoreItem(
 ) {
     ConstraintLayout(
         modifier = Modifier
-            .background(color = Color.White)
             .height(57.dp)
             .padding(5.dp, 5.dp, 5.dp, 5.dp)
     ) {

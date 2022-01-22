@@ -44,7 +44,12 @@ fun ForecastItem(
 
     ConstraintLayout(
         modifier = Modifier
-            .background(color = Color.White)
+            .background(
+                color = when (visible) {
+                    true -> { Color.LightGray }
+                    false -> { Color.White }
+                }
+            )
             .fillMaxWidth()
             .padding(10.dp, 5.dp, 10.dp, 5.dp)
             .clickable {
