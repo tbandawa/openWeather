@@ -90,7 +90,7 @@ fun ForecastItem(
                     style = TextStyle(
                         color = Color.Black,
                         fontWeight = FontWeight.Medium,
-                        fontSize = 16.sp
+                        fontSize = 14.sp
                     ),
                     modifier = Modifier
                         .padding(16.dp, 0.dp, 0.dp, 0.dp)
@@ -100,7 +100,7 @@ fun ForecastItem(
                     style = TextStyle(
                         color = Color.Black,
                         fontWeight = FontWeight.Light,
-                        fontSize = 16.sp
+                        fontSize = 14.sp
                     ),
                     modifier = Modifier
                         .padding(8.dp, 0.dp, 0.dp, 0.dp)
