@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.extensions.toTime
 import openweather.domain.models.Hourly
@@ -27,7 +29,7 @@ fun HourlyItem(
 ) {
 
     val hourlyIcon = rememberImagePainter(
-        data = "https://openweathermap.org/img/wn/${hourly.weather?.get(0)?.icon}@2x.png",
+        data = "${OPEN_WEATHER_ICON_URL}${hourly.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}",
         builder = {
             crossfade(true)
         }

@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
 import openweather.data.local.PreferenceUnits
@@ -36,7 +38,7 @@ fun ForecastItem(
     var visible by remember { mutableStateOf(false) }
 
     val weatherIcon = rememberImagePainter(
-        data = "https://openweathermap.org/img/wn/${daily.weather?.get(0)?.icon}@4x.png",
+        data = "${OPEN_WEATHER_ICON_URL}${daily.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}",
         builder = {
             crossfade(true)
         }
