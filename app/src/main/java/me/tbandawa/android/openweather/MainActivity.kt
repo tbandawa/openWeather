@@ -3,11 +3,11 @@ package me.tbandawa.android.openweather
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,6 +27,8 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
 
+    private val viewModel: MainViewModel by viewModels()
+
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,10 @@ class MainActivity : ComponentActivity() {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }
                 }
+            }
+
+            val navigateToForecast: () -> Unit = {
+                navController.navigate("forecast")
             }
 
             val navigateToSettings: () -> Unit = {
@@ -59,13 +65,21 @@ class MainActivity : ComponentActivity() {
                     composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
-                        val viewModel = hiltViewModel<MainViewModel>()
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
                             latitude!!,
                             longitude!!,
-                            navigateToSettings
+                            navigateToSettings,
+                            navigateToForecast
+                        )
+                    }
+
+                    composable(route = "forecast") {
+                        ForecastContent(
+                            preferenceHelper.get(),
+                            viewModel,
+                            navigateUp
                         )
                     }
 

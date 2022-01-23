@@ -3,6 +3,7 @@ package me.tbandawa.android.openweather.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,16 +13,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
+import openweather.data.local.PreferenceUnits
 
 @ExperimentalAnimationApi
 @Composable
-fun ForecastContent(){
+fun ForecastContent(
+    preferenceUnits: PreferenceUnits,
+    viewModel: MainViewModel,
+    navigateUp: () -> Unit
+){
+
+    val dailyItems = viewModel.oneCallWeather.value?.data?.daily
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
-            topBar = { ForecastToolBar() }
+            topBar = { ForecastToolBar(navigateUp) }
         ) {
             ConstraintLayout(
                 modifier = Modifier
@@ -59,8 +68,13 @@ fun ForecastContent(){
                         modifier = Modifier
                             .fillMaxSize()
                     ) {
-                        items(5) { index ->
-                            ForecastItem()
+                        dailyItems?.let {
+                            items(it) { daily ->
+                                ForecastItem(
+                                    daily,
+                                    preferenceUnits
+                                )
+                            }
                         }
                     }
                 }

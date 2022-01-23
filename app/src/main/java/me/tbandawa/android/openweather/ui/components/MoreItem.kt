@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -18,16 +19,19 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.R
 
 @Composable
-fun MoreItem() {
+fun MoreItem(
+    painter: Painter,
+    title: String,
+    value: String
+) {
     ConstraintLayout(
         modifier = Modifier
-            .background(color = Color.White)
             .height(57.dp)
             .padding(5.dp, 5.dp, 5.dp, 5.dp)
     ) {
         val (detailIcon, detailTitle, detailValue) = createRefs()
         Image(
-            painter = painterResource(R.drawable.ic_cloud),
+            painter = painter,
             contentDescription = null,
             modifier = Modifier
                 .constrainAs(detailIcon) {
@@ -38,7 +42,7 @@ fun MoreItem() {
                 .padding(0.dp, 0.dp, 8.dp, 0.dp)
         )
         Text(
-            text = "Wind Speed",
+            text = title,
             style = TextStyle(
                 color = Color.Black,
                 fontSize = 14.sp,
@@ -54,7 +58,7 @@ fun MoreItem() {
                 .padding(0.dp, 8.dp, 0.dp, 0.dp)
         )
         Text(
-            text = "22°C",
+            text = value,
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Medium,
