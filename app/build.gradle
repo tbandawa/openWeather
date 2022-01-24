@@ -18,6 +18,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField "String", 'OPEN_WEATHER_ICON_URL', '"https://openweathermap.org/img/wn/"'
+        buildConfigField "String", 'OPEN_WEATHER_ICON_4X', '"@4x.png"'
+        buildConfigField "String", 'OPEN_WEATHER_ICON_2X', '"@2x.png"'
     }
 
     buildTypes {

@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_4X
+import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
@@ -91,7 +93,7 @@ fun WeatherScreen(
 ) {
 
     val weatherIcon = rememberImagePainter(
-        data = "https://openweathermap.org/img/wn/${oneCall.current?.weather?.get(0)?.icon}@4x.png",
+        data = "${OPEN_WEATHER_ICON_URL}${oneCall.current?.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_4X}",
         builder = {
             crossfade(true)
         }

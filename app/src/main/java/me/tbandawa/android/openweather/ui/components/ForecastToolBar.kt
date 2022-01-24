@@ -31,7 +31,7 @@ fun ForecastToolBar(
                     painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(30.dp),
+                        .size(25.dp),
                     tint = Color.Black
                 )
             }
