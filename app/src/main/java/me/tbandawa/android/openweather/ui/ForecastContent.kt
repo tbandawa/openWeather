@@ -61,13 +61,11 @@ fun ForecastContent(
                     modifier = Modifier
                         .padding(top = 8.dp, bottom = 8.dp)
                 ) {
-                    dailyItems?.let {
-                        items(dailyItems) { daily ->
-                            ForecastItem(
-                                daily,
-                                preferenceUnits
-                            )
-                        }
+                    items(dailyItems!!) { daily ->
+                        ForecastItem(
+                            daily,
+                            preferenceUnits
+                        )
                     }
                 }
 
