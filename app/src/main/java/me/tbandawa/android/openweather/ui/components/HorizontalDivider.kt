@@ -14,5 +14,5 @@ fun HorizontalDivider() {
     Spacer(modifier = Modifier
         .height(1.dp)
         .fillMaxWidth()
-        .background(color = Color.LightGray))
+        .background(color = Color.Black))
 }

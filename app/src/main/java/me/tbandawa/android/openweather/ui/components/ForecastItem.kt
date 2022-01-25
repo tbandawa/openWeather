@@ -45,7 +45,7 @@ fun ForecastItem(
     )
 
     Box(modifier = Modifier
-        .padding(top = 3.dp, bottom = 3.dp, start = 6.dp, end = 6.dp)
+        .padding(top = 3.dp, bottom = 3.dp, start = 0.dp, end = 0.dp)
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -109,8 +109,8 @@ fun ForecastItem(
                     painter = weatherIcon,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(45.dp, 40.dp)
-                        .padding(16.dp, 0.dp, 8.dp, 0.dp)
+                        .size(55.dp, 50.dp)
+                        .padding(5.dp, 0.dp, 5.dp, 0.dp)
                 )
                 Text(
                     text = "${daily.weather?.get(0)?.description?.replaceFirstChar { it.uppercase() }}",
