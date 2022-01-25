@@ -52,8 +52,8 @@ fun HourlyItem(
             painter = hourlyIcon,
             contentDescription = null,
             modifier = Modifier
-                .size(35.dp, 35.dp)
-                .padding(0.dp, 5.dp, 0.dp, 5.dp)
+                .size(55.dp, 55.dp)
+                .padding(0.dp, 0.dp, 0.dp, 0.dp)
         )
         Text(
             text = hourly.temp!!.toTemperature(temperatureUnit),
