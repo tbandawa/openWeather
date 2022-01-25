@@ -36,8 +36,11 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             val navController = rememberNavController()
+
+            // Back navigation callback
             val navigateUp: () -> Unit = { navController.navigateUp() }
 
+            // Weather navigation callback
             val navigateToWeather: (Coordinates) -> Unit = { coordinates ->
                 navController.navigate("weather/${coordinates.latitude}/${coordinates.longitude}") {
                     launchSingleTop = true
@@ -45,10 +48,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            // Forecast navigation callback
             val navigateToForecast: () -> Unit = {
                 navController.navigate("forecast")
             }
 
+            // Settings navigation callback
             val navigateToSettings: () -> Unit = {
                 navController.navigate("settings")
             }
