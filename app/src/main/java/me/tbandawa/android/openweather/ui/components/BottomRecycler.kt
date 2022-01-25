@@ -28,7 +28,10 @@ fun BottomRecycler(
 ) {
 
     ConstraintLayout {
+
         val (textHourly, textWeekly, hourlyRow) = createRefs()
+
+        // Hourly text
         Text(
             text = "Today",
             style = TextStyle(
@@ -43,6 +46,8 @@ fun BottomRecycler(
                 }
                 .padding(8.dp, 8.dp, 0.dp, 8.dp)
         )
+
+        // Hourly horizontal list
         LazyRow(
             modifier = Modifier
                 .constrainAs(hourlyRow) {
@@ -62,6 +67,8 @@ fun BottomRecycler(
                 )
             }
         }
+
+        // Next 7 days forecast link
         Text(
             text = "Next 7 Days",
             style = TextStyle(
@@ -81,5 +88,7 @@ fun BottomRecycler(
                     navigateToForecast.invoke()
                 }
         )
+
     }
+
 }
