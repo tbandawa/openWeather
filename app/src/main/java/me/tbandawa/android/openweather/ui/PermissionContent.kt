@@ -33,6 +33,7 @@ fun PermissionContent(
 
             val (titleLayout, descriptionLayout, allowButton, cancelButton) = createRefs()
 
+            // Permission title text
             Text(
                 text = "Location Access",
                 style = TextStyle(
@@ -50,6 +51,7 @@ fun PermissionContent(
                     .padding(0.dp, 0.dp, 0.dp, 10.dp)
             )
 
+            // Permission description text
             Text(
                 text = "Allow openWeather to access your location",
                 style = TextStyle(
@@ -68,6 +70,7 @@ fun PermissionContent(
                     .padding(bottom = 10.dp)
             )
 
+            // Show permission dialog
             Button(
                 onClick = { launchPermissionRequest.invoke() },
                 shape = RoundedCornerShape(50),
@@ -85,6 +88,7 @@ fun PermissionContent(
                 Text(text = "Allow")
             }
 
+            // Exit button
             Button(
                 onClick = {
                     (context as ComponentActivity).finish()
