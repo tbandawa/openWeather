@@ -29,6 +29,7 @@ fun EnableGpsContent() {
 
             val (titleLayout, descriptionLayout, cancelButton) = createRefs()
 
+            // Enable location text
             Text(
                 text = "Enable location.",
                 style = TextStyle(
@@ -46,6 +47,7 @@ fun EnableGpsContent() {
                     .padding(0.dp, 0.dp, 0.dp, 10.dp)
             )
 
+            // Location needed explanation text
             Text(
                 text = "openWeather needs the location to know where you are.",
                 style = TextStyle(
