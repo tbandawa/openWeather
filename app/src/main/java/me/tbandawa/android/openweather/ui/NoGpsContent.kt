@@ -31,6 +31,7 @@ fun NoGpsContent() {
 
             val (titleLayout, descriptionLayout, cancelButton) = createRefs()
 
+            // No gps text
             Text(
                 text = "Location feature no found.",
                 style = TextStyle(
@@ -48,6 +49,7 @@ fun NoGpsContent() {
                     .padding(0.dp, 0.dp, 0.dp, 10.dp)
             )
 
+            // Rationale description text
             Text(
                 text = "openWeather needs the location to know where you are.",
                 style = TextStyle(
@@ -65,6 +67,7 @@ fun NoGpsContent() {
                     .padding(bottom = 10.dp)
             )
 
+            // Exit button
             Button(
                 onClick = {
                     (context as ComponentActivity).finish()
