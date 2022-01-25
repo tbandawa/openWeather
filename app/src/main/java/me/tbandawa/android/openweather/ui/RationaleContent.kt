@@ -34,6 +34,7 @@ fun RationaleContent() {
 
             val (titleLayout, descriptionLayout, allowButton, cancelButton) = createRefs()
 
+            // Title text
             Text(
                 text = "Location access permission denied.",
                 style = TextStyle(
@@ -51,6 +52,7 @@ fun RationaleContent() {
                     .padding(0.dp, 0.dp, 0.dp, 10.dp)
             )
 
+            // Rationale text
             Text(
                 text = "openWeather needs access location to know where you are. Please grant access on the Settings screen.",
                 style = TextStyle(
@@ -69,6 +71,7 @@ fun RationaleContent() {
                     .padding(bottom = 10.dp)
             )
 
+            // Open app settings button
             Button(
                 onClick = {
                     context.startActivity(
@@ -93,6 +96,7 @@ fun RationaleContent() {
                 Text(text = "Open Settings")
             }
 
+            // Exit button
             Button(
                 onClick = {
                     (context as ComponentActivity).finish()
