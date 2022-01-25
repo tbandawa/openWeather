@@ -14,5 +14,5 @@ fun VerticalDivider() {
     Spacer(modifier = Modifier
         .width(1.dp)
         .height(57.dp)
-        .background(color = Color.LightGray))
+        .background(color = Color.Black))
 }
