@@ -45,7 +45,7 @@ fun ForecastItem(
     )
 
     Box(modifier = Modifier
-        .padding(top = 3.dp, bottom = 3.dp, start = 6.dp, end = 6.dp)
+        .padding(top = 3.dp, bottom = 3.dp, start = 0.dp, end = 0.dp)
     ) {
         ConstraintLayout(
             modifier = Modifier
