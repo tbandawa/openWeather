@@ -12,10 +12,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
+import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import openweather.data.local.PreferenceUnits
 
 @ExperimentalAnimationApi
@@ -32,53 +32,47 @@ fun ForecastContent(
         Scaffold(
             topBar = { ForecastToolBar(navigateUp) }
         ) {
-            ConstraintLayout(
+
+            // Header layout
+            Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
-                val (topLayout, recyclerLayout) = createRefs()
-                Column(
+
+                // Next 7 days text
+                Text(
+                    text = "Next 7 Days",
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 18.sp
+                    ),
                     modifier = Modifier
-                        .constrainAs(topLayout) {
-                            top.linkTo(parent.top)
-                        }
-                        .fillMaxWidth()
-                        .height(IntrinsicSize.Max)
-                ) {
-                    Text(
-                        text = "Next 7 Days",
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp
-                        ),
-                        modifier = Modifier
-                            .padding(16.dp, 25.dp, 16.dp, 15.dp)
-                    )
-                }
-                Column(
+                        .padding(0.dp, 16.dp, 0.dp, 8.dp)
+                )
+
+                // Horizontal divider
+                HorizontalDivider()
+
+                // Forecast list
+                LazyColumn(
                     modifier = Modifier
-                        .constrainAs(recyclerLayout) {
-                            top.linkTo(topLayout.bottom)
-                        }
-                        .fillMaxWidth()
-                        .fillMaxHeight()
+                        .padding(top = 8.dp, bottom = 8.dp)
                 ) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        dailyItems?.let {
-                            items(it) { daily ->
-                                ForecastItem(
-                                    daily,
-                                    preferenceUnits
-                                )
-                            }
+                    dailyItems?.let {
+                        items(dailyItems) { daily ->
+                            ForecastItem(
+                                daily,
+                                preferenceUnits
+                            )
                         }
                     }
                 }
+
             }
+
         }
     }
 
