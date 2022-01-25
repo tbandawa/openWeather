@@ -48,11 +48,13 @@ fun SettingsContent(
         Scaffold(
             topBar = { SettingsToolBar(navigateUp) }
         ) {
+
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
+
                 val (contentLayout, bottomLayout) = createRefs()
 
                 Column(
@@ -64,7 +66,7 @@ fun SettingsContent(
                         .height(IntrinsicSize.Max)
                 ) {
 
-                    //Units text
+                    // Units text
                     Text(
                         text = "Units",
                         style = TextStyle(
@@ -76,10 +78,10 @@ fun SettingsContent(
                             .padding(0.dp, 16.dp, 0.dp, 8.dp)
                     )
 
-                    //Horizontal divider
+                    // Horizontal divider
                     HorizontalDivider()
 
-                    //Temperature units settings
+                    // Temperature units settings
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -108,7 +110,7 @@ fun SettingsContent(
                         }
                     }
 
-                    //Wind speed units settings
+                    // Wind speed units settings
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -138,7 +140,7 @@ fun SettingsContent(
                         }
                     }
 
-                    //Pressure units settings
+                    // Pressure units settings
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -167,7 +169,7 @@ fun SettingsContent(
                         }
                     }
 
-                    //Time format units settings
+                    // Time format units settings
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -196,9 +198,10 @@ fun SettingsContent(
                         }
                     }
 
-                    //Horizontal divider
+                    // Horizontal divider
                     HorizontalDivider()
 
+                    // Icons source row
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -228,6 +231,7 @@ fun SettingsContent(
                         )
                     }
 
+                    // Github link row
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -256,6 +260,7 @@ fun SettingsContent(
                         )
                     }
 
+                    // Email link row
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -286,6 +291,7 @@ fun SettingsContent(
 
                 }
 
+                // Powered by OpenWeather text
                 Row(
                     modifier = Modifier
                         .constrainAs(bottomLayout) {
@@ -307,7 +313,9 @@ fun SettingsContent(
                 }
 
             }
+
         }
+
     }
 
 }
