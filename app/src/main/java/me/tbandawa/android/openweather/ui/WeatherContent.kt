@@ -50,17 +50,21 @@ fun WeatherContent(
 
     Surface(color = MaterialTheme.colors.background) {
 
+        // Boolean state to hold if request was successful
         var isLoaded by rememberSaveable { mutableStateOf(false) }
 
+        // Retry callback
         val retry: () -> Unit = { viewModel.fetchOneCall(latitude, longitude) }
 
         LaunchedEffect(Unit) {
+            // If request unsuccessful, call again
             if (isLoaded.not())
                 viewModel.fetchOneCall(latitude, longitude)
         }
 
         val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
 
+        // Update UI according to network result state
         when(val result = viewModel.oneCallWeather.value) {
             is NetworkResult.Loading -> {
                 LoadingScreen()
@@ -102,11 +106,14 @@ fun WeatherScreen(
     Scaffold(
         topBar = { WeatherToolBar(navigateToSettings) }
     ) {
+
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+
             val (topLayout, bottomLayout) = createRefs()
+
             Column(
                 modifier = Modifier
                     .constrainAs(topLayout) {
@@ -115,18 +122,23 @@ fun WeatherScreen(
                     .fillMaxWidth()
                     .fillMaxHeight()
             ) {
+
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(0.dp, 35.dp, 0.dp, 0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+
+                    // Main weather image
                     Image(
                         painter = weatherIcon,
                         contentDescription = null,
                         modifier = Modifier
                             .size(200.dp, 200.dp)
                     )
+
+                    // Temperature text
                     Text(
                         text = oneCall.current?.temp!!.toTemperature(preferenceUnits.temperature),
                         style = TextStyle(
@@ -135,6 +147,8 @@ fun WeatherScreen(
                             fontSize = 32.sp
                         )
                     )
+
+                    // Weather description text
                     Text(
                         text = oneCall.current!!.weather?.get(0)!!.description!!.replaceFirstChar {
                             if (it.isLowerCase()) it.titlecase(
@@ -147,9 +161,14 @@ fun WeatherScreen(
                             fontSize = 18.sp
                         )
                     )
+
                     DetailGrid(oneCall.current!!, preferenceUnits)
+
                 }
+
             }
+
+            // Bottom composable containing hourly items
             Column(
                 modifier = Modifier
                     .constrainAs(bottomLayout) {
@@ -163,8 +182,11 @@ fun WeatherScreen(
                     navigateToForecast
                 )
             }
+
         }
+
     }
+
 }
 
 @ExperimentalAnimationApi
@@ -174,7 +196,10 @@ fun LoadingScreen() {
         modifier = Modifier
             .fillMaxSize()
     ) {
+
         val (centerLayout, textTitle) = createRefs()
+
+        // Open weather image
         Image(
             painter = painterResource(R.drawable.weather),
             contentDescription = null,
@@ -188,6 +213,8 @@ fun LoadingScreen() {
                 .size(225.dp, 225.dp)
                 .padding(0.dp, 0.dp, 8.dp, 0.dp)
         )
+
+        // Open weather text
         Text(
             text = "open Weather",
             style = TextStyle(
@@ -204,7 +231,9 @@ fun LoadingScreen() {
                 .height(IntrinsicSize.Max)
                 .padding(0.dp, 0.dp, 0.dp, 10.dp)
         )
+
     }
+
 }
 
 @Composable
@@ -219,6 +248,7 @@ fun ErrorScreen(
 
         val (titleLayout, descriptionLayout, retryButton) = createRefs()
 
+        // Ooops text
         Text(
             text = "Ooops!",
             style = TextStyle(
@@ -236,6 +266,7 @@ fun ErrorScreen(
                 .padding(0.dp, 0.dp, 0.dp, 10.dp)
         )
 
+        // Error message text
         Text(
             text = "Error! Unable to resolve host",
             style = TextStyle(
@@ -253,6 +284,7 @@ fun ErrorScreen(
                 .padding(bottom = 10.dp)
         )
 
+        // Retry button
         Button(
             onClick = {
                 retry.invoke()

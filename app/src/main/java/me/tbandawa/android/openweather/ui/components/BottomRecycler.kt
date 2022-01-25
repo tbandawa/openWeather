@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -27,7 +28,10 @@ fun BottomRecycler(
 ) {
 
     ConstraintLayout {
+
         val (textHourly, textWeekly, hourlyRow) = createRefs()
+
+        // Hourly text
         Text(
             text = "Today",
             style = TextStyle(
@@ -42,31 +46,15 @@ fun BottomRecycler(
                 }
                 .padding(8.dp, 8.dp, 0.dp, 8.dp)
         )
-        Text(
-            text = "Next 7 Days",
-            style = TextStyle(
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
-            ),
-            modifier = Modifier
-                .constrainAs(textWeekly) {
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top)
-                }
-                .padding(0.dp, 8.dp, 8.dp, 8.dp)
-                .clickable {
-                    navigateToForecast.invoke()
-                }
-        )
+
+        // Hourly horizontal list
         LazyRow(
             modifier = Modifier
                 .constrainAs(hourlyRow) {
                     top.linkTo(textHourly.bottom)
-                    top.linkTo(textWeekly.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
+                    bottom.linkTo(textWeekly.top)
                 }
                 .padding(0.dp, 0.dp, 0.dp, 8.dp)
                 .fillMaxWidth()
@@ -79,5 +67,28 @@ fun BottomRecycler(
                 )
             }
         }
+
+        // Next 7 days forecast link
+        Text(
+            text = "Next 7 Days",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            ),
+            textDecoration = TextDecoration.Underline,
+            modifier = Modifier
+                .constrainAs(textWeekly) {
+                    end.linkTo(parent.end)
+                    top.linkTo(hourlyRow.bottom)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(top = 4.dp, end = 8.dp, bottom = 10.dp)
+                .clickable {
+                    navigateToForecast.invoke()
+                }
+        )
+
     }
+
 }
