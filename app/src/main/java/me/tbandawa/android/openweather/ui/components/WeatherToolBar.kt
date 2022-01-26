@@ -20,8 +20,7 @@ import me.tbandawa.android.openweather.extensions.toDate
 @ExperimentalAnimationApi
 @Composable
 fun WeatherToolBar(
-    country: String,
-    city: String,
+    location: String,
     day: Int,
     navigateToSettings: () -> Unit
 ) {
@@ -29,7 +28,7 @@ fun WeatherToolBar(
     TopAppBar(
         title = {
             Column {
-                Text(text = "$city, $country")
+                Text(text = location)
                 Text(
                     text = day.toDate(),
                     style = TextStyle(fontSize = 12.sp)

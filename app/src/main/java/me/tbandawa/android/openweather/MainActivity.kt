@@ -42,15 +42,15 @@ class MainActivity : ComponentActivity() {
 
             // Weather navigation callback
             val navigateToWeather: (LocationInfo) -> Unit = { locationInfo ->
-                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}/${locationInfo.country}/${locationInfo.city}") {
+                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}/${locationInfo.location}") {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }
                 }
             }
 
             // Forecast navigation callback
-            val navigateToForecast: (country: String, city: String) -> Unit = { country, city ->
-                navController.navigate("forecast/${country}/$city")
+            val navigateToForecast: (location: String) -> Unit = { location ->
+                navController.navigate("forecast/${location}")
             }
 
             // Settings navigation callback
@@ -67,31 +67,27 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    composable(route = "weather/{latitude}/{longitude}/{country}/{city}") { backStackEntry ->
+                    composable(route = "weather/{latitude}/{longitude}/{location}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
-                        val country = backStackEntry.arguments?.getString("country")
-                        val city = backStackEntry.arguments?.getString("city")
+                        val location = backStackEntry.arguments?.getString("location")
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
                             latitude!!,
                             longitude!!,
-                            country!!,
-                            city!!,
+                            location!!,
                             navigateToSettings,
-                            { navigateToForecast(country, city) }
+                            { navigateToForecast(location) }
                         )
                     }
 
-                    composable(route = "forecast/{country}/{city}") { backStackEntry ->
-                        val country = backStackEntry.arguments?.getString("country")
-                        val city = backStackEntry.arguments?.getString("city")
+                    composable(route = "forecast/{location}") { backStackEntry ->
+                        val location = backStackEntry.arguments?.getString("location")
                         ForecastContent(
                             preferenceHelper.get(),
                             viewModel,
-                            country!!,
-                            city!!,
+                            location!!,
                             navigateUp
                         )
                     }
