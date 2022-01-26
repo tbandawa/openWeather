@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
 
             // Weather navigation callback
             val navigateToWeather: (LocationInfo) -> Unit = { locationInfo ->
-                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}") {
+                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}/${locationInfo.country}/${locationInfo.city}") {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }
                 }
@@ -67,9 +67,11 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
+                    composable(route = "weather/{latitude}/{longitude}/{country}/{city}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
+                        val country = backStackEntry.arguments?.getString("country")
+                        val city = backStackEntry.arguments?.getString("city")
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
