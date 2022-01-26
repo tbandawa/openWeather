@@ -33,8 +33,8 @@ fun LoadingContent(
             // Create location service and observe gps coordinates and navigate to weather
             // content else prompt user to enable device location services
             val locationService = LocationService(context)
-            locationService.locationInfo.value?.let { coordinates ->
-                navigateToWeather(coordinates)
+            locationService.locationInfo.value?.let { locationInfo ->
+                navigateToWeather(locationInfo)
             } ?: run {
                 EnableGpsContent()
             }

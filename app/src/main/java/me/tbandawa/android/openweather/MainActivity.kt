@@ -41,8 +41,8 @@ class MainActivity : ComponentActivity() {
             val navigateUp: () -> Unit = { navController.navigateUp() }
 
             // Weather navigation callback
-            val navigateToWeather: (LocationInfo) -> Unit = { coordinates ->
-                navController.navigate("weather/${coordinates.latitude}/${coordinates.longitude}") {
+            val navigateToWeather: (LocationInfo) -> Unit = { locationInfo ->
+                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}") {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }
                 }
