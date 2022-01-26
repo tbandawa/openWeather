@@ -78,13 +78,19 @@ class LocationService(
         val city = addresses[0].locality
         val country = addresses[0].countryName
 
+        val locationName: String = when {
+            country.isNotEmpty() && city.isEmpty() -> { country }
+            country.isEmpty() && city.isNotEmpty() -> { city }
+            country.isEmpty() && city.isEmpty() -> { "open Weather" }
+            else -> { "$country, $city" }
+        }
+
         if (isLocation.not()) {
             isLocation = true
             locationInfo.value = LocationInfo(
                 latitude,
                 longitude,
-                country,
-                city
+                locationName
             )
         }
 
