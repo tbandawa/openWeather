@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
-import me.tbandawa.android.openweather.service.Coordinates
+import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.ui.*
 import openweather.data.local.PreferenceHelper
 import javax.inject.Inject
@@ -41,16 +41,16 @@ class MainActivity : ComponentActivity() {
             val navigateUp: () -> Unit = { navController.navigateUp() }
 
             // Weather navigation callback
-            val navigateToWeather: (Coordinates) -> Unit = { coordinates ->
-                navController.navigate("weather/${coordinates.latitude}/${coordinates.longitude}") {
+            val navigateToWeather: (LocationInfo) -> Unit = { locationInfo ->
+                navController.navigate("weather/${locationInfo.latitude}/${locationInfo.longitude}/${locationInfo.country}/${locationInfo.city}") {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }
                 }
             }
 
             // Forecast navigation callback
-            val navigateToForecast: () -> Unit = {
-                navController.navigate("forecast")
+            val navigateToForecast: (country: String, city: String) -> Unit = { country, city ->
+                navController.navigate("forecast/${country}/$city")
             }
 
             // Settings navigation callback
@@ -67,23 +67,31 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    composable(route = "weather/{latitude}/{longitude}") { backStackEntry ->
+                    composable(route = "weather/{latitude}/{longitude}/{country}/{city}") { backStackEntry ->
                         val latitude = backStackEntry.arguments?.getString("latitude")?.toDouble()
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
+                        val country = backStackEntry.arguments?.getString("country")
+                        val city = backStackEntry.arguments?.getString("city")
                         WeatherContent(
                             preferenceHelper,
                             viewModel,
                             latitude!!,
                             longitude!!,
+                            country!!,
+                            city!!,
                             navigateToSettings,
-                            navigateToForecast
+                            { navigateToForecast(country, city) }
                         )
                     }
 
-                    composable(route = "forecast") {
+                    composable(route = "forecast/{country}/{city}") { backStackEntry ->
+                        val country = backStackEntry.arguments?.getString("country")
+                        val city = backStackEntry.arguments?.getString("city")
                         ForecastContent(
                             preferenceHelper.get(),
                             viewModel,
+                            country!!,
+                            city!!,
                             navigateUp
                         )
                     }

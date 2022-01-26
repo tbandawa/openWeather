@@ -23,6 +23,8 @@ import openweather.domain.models.Hourly
 @Composable
 fun BottomRecycler(
     hourly: List<Hourly>,
+    country: String,
+    city: String,
     preferenceUnits: PreferenceUnits,
     navigateToForecast: () -> Unit
 ) {
