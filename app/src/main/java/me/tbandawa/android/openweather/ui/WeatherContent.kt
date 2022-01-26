@@ -113,6 +113,7 @@ fun WeatherScreen(
         topBar = { WeatherToolBar(
             country,
             city,
+            oneCall.current?.dt!!,
             navigateToSettings
         ) }
     ) {

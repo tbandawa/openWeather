@@ -15,12 +15,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.extensions.toDate
 
 @ExperimentalAnimationApi
 @Composable
 fun WeatherToolBar(
     country: String,
     city: String,
+    day: Int,
     navigateToSettings: () -> Unit
 ) {
 
@@ -29,7 +31,7 @@ fun WeatherToolBar(
             Column {
                 Text(text = "$city, $country")
                 Text(
-                    text = "22, Aug 2021",
+                    text = day.toDate(),
                     style = TextStyle(fontSize = 12.sp)
                 )
             }
