@@ -11,6 +11,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import timber.log.Timber
 import java.lang.Exception
+import android.location.Geocoder
+import java.util.*
 
 @SuppressLint("MissingPermission")
 class LocationService(
@@ -27,7 +29,7 @@ class LocationService(
 
     private var locationManager: LocationManager? = null
 
-    val coordinates: MutableState<Coordinates?> = mutableStateOf(null)
+    val locationInfo: MutableState<LocationInfo?> = mutableStateOf(null)
 
     override fun onBind(arg0: Intent?): IBinder? = null
 
@@ -69,10 +71,23 @@ class LocationService(
     }
 
     private fun updateLocation() {
+
+        // Get country and city from geocoder
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        val city = addresses[0].locality
+        val country = addresses[0].countryName
+
         if (isLocation.not()) {
             isLocation = true
-            coordinates.value = Coordinates(latitude, longitude)
+            locationInfo.value = LocationInfo(
+                latitude,
+                longitude,
+                country,
+                city
+            )
         }
+
     }
 
     fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }

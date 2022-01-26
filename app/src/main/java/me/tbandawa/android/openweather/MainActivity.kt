@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
-import me.tbandawa.android.openweather.service.Coordinates
+import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.ui.*
 import openweather.data.local.PreferenceHelper
 import javax.inject.Inject
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             val navigateUp: () -> Unit = { navController.navigateUp() }
 
             // Weather navigation callback
-            val navigateToWeather: (Coordinates) -> Unit = { coordinates ->
+            val navigateToWeather: (LocationInfo) -> Unit = { coordinates ->
                 navController.navigate("weather/${coordinates.latitude}/${coordinates.longitude}") {
                     launchSingleTop = true
                     popUpTo("loading") { inclusive = true }

@@ -8,13 +8,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import me.tbandawa.android.openweather.service.Coordinates
+import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.service.LocationService
 
 @ExperimentalPermissionsApi
 @Composable
 fun LoadingContent(
-    navigateToWeather: (Coordinates) -> Unit
+    navigateToWeather: (LocationInfo) -> Unit
 ){
 
     val context = LocalContext.current
@@ -33,7 +33,7 @@ fun LoadingContent(
             // Create location service and observe gps coordinates and navigate to weather
             // content else prompt user to enable device location services
             val locationService = LocationService(context)
-            locationService.coordinates.value?.let { coordinates ->
+            locationService.locationInfo.value?.let { coordinates ->
                 navigateToWeather(coordinates)
             } ?: run {
                 EnableGpsContent()
