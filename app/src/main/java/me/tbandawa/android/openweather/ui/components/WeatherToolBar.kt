@@ -26,8 +26,8 @@ fun WeatherToolBar(
 
     TopAppBar(
         title = {
-            Column() {
-                Text(text = "$country, $city")
+            Column {
+                Text(text = "$city, $country")
                 Text(
                     text = "22, Aug 2021",
                     style = TextStyle(fontSize = 12.sp)
