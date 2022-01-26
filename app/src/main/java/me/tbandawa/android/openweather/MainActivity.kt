@@ -49,8 +49,8 @@ class MainActivity : ComponentActivity() {
             }
 
             // Forecast navigation callback
-            val navigateToForecast: () -> Unit = {
-                navController.navigate("forecast")
+            val navigateToForecast: (country: String, city: String) -> Unit = { country, city ->
+                navController.navigate("forecast/${country}/$city")
             }
 
             // Settings navigation callback
@@ -80,14 +80,18 @@ class MainActivity : ComponentActivity() {
                             country!!,
                             city!!,
                             navigateToSettings,
-                            navigateToForecast
+                            { navigateToForecast(country, city) }
                         )
                     }
 
-                    composable(route = "forecast") {
+                    composable(route = "forecast/{country}/{city}") { backStackEntry ->
+                        val country = backStackEntry.arguments?.getString("country")
+                        val city = backStackEntry.arguments?.getString("city")
                         ForecastContent(
                             preferenceHelper.get(),
                             viewModel,
+                            country!!,
+                            city!!,
                             navigateUp
                         )
                     }

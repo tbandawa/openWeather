@@ -189,6 +189,8 @@ fun WeatherScreen(
             ) {
                 BottomRecycler(
                     oneCall.hourly!!,
+                    country,
+                    city,
                     preferenceUnits,
                     navigateToForecast
                 )

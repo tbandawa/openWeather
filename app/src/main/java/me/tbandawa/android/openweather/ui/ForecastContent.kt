@@ -23,6 +23,8 @@ import openweather.data.local.PreferenceUnits
 fun ForecastContent(
     preferenceUnits: PreferenceUnits,
     viewModel: MainViewModel,
+    country: String,
+    city: String,
     navigateUp: () -> Unit
 ){
 
@@ -30,7 +32,11 @@ fun ForecastContent(
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
-            topBar = { ForecastToolBar(navigateUp) }
+            topBar = { ForecastToolBar(
+                country,
+                city,
+                navigateUp
+            )}
         ) {
 
             // Header layout
