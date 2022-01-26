@@ -10,7 +10,6 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -19,14 +18,16 @@ import me.tbandawa.android.openweather.R
 
 @ExperimentalAnimationApi
 @Composable
-fun WeatherToolBar(navigateToSettings: () -> Unit) {
-
-    val context = LocalContext.current
+fun WeatherToolBar(
+    country: String,
+    city: String,
+    navigateToSettings: () -> Unit
+) {
 
     TopAppBar(
         title = {
             Column() {
-                Text(text = "Johannesburg")
+                Text(text = "$country, $city")
                 Text(
                     text = "22, Aug 2021",
                     style = TextStyle(fontSize = 12.sp)
