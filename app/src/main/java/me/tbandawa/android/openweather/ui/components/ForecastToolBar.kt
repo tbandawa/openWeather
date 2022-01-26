@@ -14,14 +14,13 @@ import me.tbandawa.android.openweather.R
 
 @Composable
 fun ForecastToolBar(
-    country: String,
-    city: String,
+    location: String,
     navigateUp: () -> Unit
 ) {
 
     TopAppBar(
         title = {
-            Text(text = "$city, $country")
+            Text(text = location)
         },
         navigationIcon = {
             IconButton(

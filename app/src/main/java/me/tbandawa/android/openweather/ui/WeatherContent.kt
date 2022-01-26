@@ -44,8 +44,7 @@ fun WeatherContent(
     viewModel: MainViewModel,
     latitude: Double,
     longitude: Double,
-    country: String,
-    city: String,
+    location: String,
     navigateToSettings: () -> Unit,
     navigateToForecast: () -> Unit
 ) {
@@ -76,8 +75,7 @@ fun WeatherContent(
                 WeatherScreen(
                     preferenceUnits = preferenceUnits,
                     oneCall = result.data!!,
-                    country,
-                    city,
+                    location,
                     navigateToSettings,
                     navigateToForecast
                 )
@@ -96,8 +94,7 @@ fun WeatherContent(
 fun WeatherScreen(
     preferenceUnits: PreferenceUnits,
     oneCall: OneCall,
-    country: String,
-    city: String,
+    location: String,
     navigateToSettings: () -> Unit,
     navigateToForecast: () -> Unit
 ) {
@@ -111,8 +108,7 @@ fun WeatherScreen(
 
     Scaffold(
         topBar = { WeatherToolBar(
-            country,
-            city,
+            location,
             oneCall.current?.dt!!,
             navigateToSettings
         ) }
@@ -189,8 +185,6 @@ fun WeatherScreen(
             ) {
                 BottomRecycler(
                     oneCall.hourly!!,
-                    country,
-                    city,
                     preferenceUnits,
                     navigateToForecast
                 )
