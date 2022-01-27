@@ -21,10 +21,6 @@ class LocationService(
 
     private var location: Location? = null
 
-    private var latitude: Double = 0.0
-
-    private var longitude: Double = 0.0
-
     private var isLocation: Boolean = false
 
     private var locationManager: LocationManager? = null
@@ -44,9 +40,7 @@ class LocationService(
             if (locationManager != null) {
                 location = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (location != null) {
-                    latitude = location!!.latitude
-                    longitude = location!!.longitude
-                    updateLocation()
+                    updateLocation(location!!.latitude, location!!.longitude)
                 }
             }
 
@@ -59,9 +53,7 @@ class LocationService(
                 if (locationManager != null) {
                     location = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     if (location != null) {
-                        latitude = location!!.latitude
-                        longitude = location!!.longitude
-                        updateLocation()
+                        updateLocation(location!!.latitude, location!!.longitude)
                     }
                 }
             }
@@ -70,7 +62,7 @@ class LocationService(
         }
     }
 
-    private fun updateLocation() {
+    private fun updateLocation(latitude: Double, longitude: Double) {
 
         // Get country and city from geocoder
         val geocoder = Geocoder(context, Locale.getDefault())
@@ -99,9 +91,7 @@ class LocationService(
     fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }
 
     override fun onLocationChanged(location: Location) {
-        latitude = location.latitude
-        longitude = location.longitude
-        updateLocation()
+        updateLocation(location.latitude, location.longitude)
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
