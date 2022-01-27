@@ -18,11 +18,15 @@ A simple android weather app demonstrating Jetpack Compose. Data is provided by 
 
 #### App Specs
 * Minimum SDK 21
+* Target SDK 31
+* Compile SDK 31
+
+#### Libraries
 * [Kotlin](https://kotlinlang.org/)
-* Android Architecture Components (LiveData, Lifecycle, ViewModel, Navigation Component, ConstraintLayout)
+* Android Architecture Components (ViewModel, Navigation Component, ConstraintLayout)
 * [Coil](https://coil-kt.github.io/coil/) image loading library for Android Jetpack Compose support
 * [Hilt](https://dagger.dev/hilt/) for dependency injection.
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) libraries.
 * [Accompanist](https://github.com/google/accompanist) utils for Jetpack Compose.
-* [Retrofit](https://square.github.io/retrofit) for fetching data from SWAPI.
+* [Retrofit](https://square.github.io/retrofit) for fetching data from the OpenWeatherMap API.
 * [Timber](https://github.com/JakeWharton/timber) for logging events.
