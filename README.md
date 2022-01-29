@@ -2,7 +2,7 @@
 A simple android weather app demonstrating Jetpack Compose. Data is provided by [OpenWeatherMap API](https://openweathermap.org/api)
 
 <p align="center">
-  <img src="/blob/openweather.png" width=100% height=40% alt="open Weather">
+	![open Weather]</blob/openweather.png" width=100% height=40%>
 </p>
 
 #### App Architecture.
