@@ -87,6 +87,8 @@ class LocationService(
         if (isLocation.not()) {
             isLocation = true
 
+            Timber.d("location -> ($latitude, $longitude), address -> $locationName")
+
             locationInfo.value = LocationInfo(
                 latitude,
                 longitude,
