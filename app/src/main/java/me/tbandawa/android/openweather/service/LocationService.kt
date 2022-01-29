@@ -12,6 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import timber.log.Timber
 import java.lang.Exception
 import android.location.Geocoder
+import kotlinx.coroutines.*
+import java.io.IOException
 import java.util.*
 
 @SuppressLint("MissingPermission")
@@ -64,26 +66,33 @@ class LocationService(
 
     private fun updateLocation(latitude: Double, longitude: Double) {
 
-        // Get country and city from geocoder
         val geocoder = Geocoder(context, Locale.getDefault())
-        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-        val city = addresses[0].locality
-        val country = addresses[0].countryName
+        var locationName: String? = null
 
-        val locationName: String = when {
-            country.isNotEmpty() && city.isEmpty() -> { country }
-            country.isEmpty() && city.isNotEmpty() -> { city }
-            country.isEmpty() && city.isEmpty() -> { "open Weather" }
-            else -> { "$country, $city" }
+        try {
+            val addressList = geocoder.getFromLocation(
+                latitude, longitude, 1
+            )
+            if (addressList != null && addressList.size > 0) {
+                val address = addressList[0]
+                locationName = "${address.countryName}, ${address.locality}"
+            }
+        } catch (e: IOException) {
+            Timber.d("Unable connect to Geocoder -> ${e.message}")
+        } finally {
+            if (locationName.isNullOrEmpty())
+                locationName = "open Weather"
         }
 
         if (isLocation.not()) {
             isLocation = true
+
             locationInfo.value = LocationInfo(
                 latitude,
                 longitude,
                 locationName
             )
+
         }
 
     }
