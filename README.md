@@ -1,7 +1,9 @@
 # <b>openWeather</b>
 A simple android weather app demonstrating Jetpack Compose. Data is provided by [OpenWeatherMap API](https://openweathermap.org/api)
 
-<img "/blob/openweather.png" width=100% height=40%>
+
+
+<img src="/blob/openweather.png" width=100% height=40%>
 
 #### App Architecture.
 * [Unidirectional data flow (UDF)](https://developer.android.com/jetpack/compose/architecture#udf), where state flows down composables and events flow up from composables.
