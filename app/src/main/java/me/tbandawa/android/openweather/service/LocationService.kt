@@ -12,6 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import timber.log.Timber
 import java.lang.Exception
 import android.location.Geocoder
+import kotlinx.coroutines.*
+import java.io.IOException
 import java.util.*
 
 @SuppressLint("MissingPermission")
@@ -20,10 +22,6 @@ class LocationService(
     ) : Service(), LocationListener {
 
     private var location: Location? = null
-
-    private var latitude: Double = 0.0
-
-    private var longitude: Double = 0.0
 
     private var isLocation: Boolean = false
 
@@ -44,9 +42,7 @@ class LocationService(
             if (locationManager != null) {
                 location = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (location != null) {
-                    latitude = location!!.latitude
-                    longitude = location!!.longitude
-                    updateLocation()
+                    updateLocation(location!!.latitude, location!!.longitude)
                 }
             }
 
@@ -59,9 +55,7 @@ class LocationService(
                 if (locationManager != null) {
                     location = locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     if (location != null) {
-                        latitude = location!!.latitude
-                        longitude = location!!.longitude
-                        updateLocation()
+                        updateLocation(location!!.latitude, location!!.longitude)
                     }
                 }
             }
@@ -70,28 +64,37 @@ class LocationService(
         }
     }
 
-    private fun updateLocation() {
+    private fun updateLocation(latitude: Double, longitude: Double) {
 
-        // Get country and city from geocoder
         val geocoder = Geocoder(context, Locale.getDefault())
-        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-        val city = addresses[0].locality
-        val country = addresses[0].countryName
+        var locationName: String? = null
 
-        val locationName: String = when {
-            country.isNotEmpty() && city.isEmpty() -> { country }
-            country.isEmpty() && city.isNotEmpty() -> { city }
-            country.isEmpty() && city.isEmpty() -> { "open Weather" }
-            else -> { "$country, $city" }
+        try {
+            val addressList = geocoder.getFromLocation(
+                latitude, longitude, 1
+            )
+            if (addressList != null && addressList.size > 0) {
+                val address = addressList[0]
+                locationName = "${address.countryName}, ${address.locality}"
+            }
+        } catch (e: IOException) {
+            Timber.d("Unable connect to Geocoder -> ${e.message}")
+        } finally {
+            if (locationName.isNullOrEmpty())
+                locationName = "open Weather"
         }
 
         if (isLocation.not()) {
             isLocation = true
+
+            Timber.d("location -> ($latitude, $longitude), address -> $locationName")
+
             locationInfo.value = LocationInfo(
                 latitude,
                 longitude,
                 locationName
             )
+
         }
 
     }
@@ -99,9 +102,7 @@ class LocationService(
     fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }
 
     override fun onLocationChanged(location: Location) {
-        latitude = location.latitude
-        longitude = location.longitude
-        updateLocation()
+        updateLocation(location.latitude, location.longitude)
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
