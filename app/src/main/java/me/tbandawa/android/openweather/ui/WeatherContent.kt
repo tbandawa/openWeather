@@ -15,6 +15,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +36,7 @@ import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
+import timber.log.Timber
 import java.util.*
 
 @ExperimentalAnimationApi
@@ -50,6 +52,13 @@ fun WeatherContent(
 ) {
 
     Surface(color = MaterialTheme.colors.background) {
+
+        val configuration = LocalConfiguration.current
+        Timber.d("screenWidthDp -> ${configuration.screenWidthDp}")
+
+        BoxWithConstraints {
+            Timber.d("maxWidth -> $maxWidth")
+        }
 
         // Boolean state to hold if request was successful
         var isLoaded by rememberSaveable { mutableStateOf(false) }
