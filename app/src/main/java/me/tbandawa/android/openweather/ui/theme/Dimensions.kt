@@ -1,5 +1,6 @@
 package me.tbandawa.android.openweather.ui.theme
 
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -42,3 +43,7 @@ val large = Dimensions(
     detailItemHeight = 57.dp,
     detailIconSize = 30.dp
 )
+
+val sw360dpDimensions = compositionLocalOf { sw360dp }
+val sw480dpDimensions = compositionLocalOf { sw480dp }
+val largeDimensions = compositionLocalOf { large }
