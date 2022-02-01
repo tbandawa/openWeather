@@ -1,22 +1,21 @@
 package me.tbandawa.android.openweather.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import me.tbandawa.android.openweather.R
+import me.tbandawa.android.openweather.ui.theme.dimensions
 
 @Composable
 fun MoreItem(
@@ -26,8 +25,8 @@ fun MoreItem(
 ) {
     ConstraintLayout(
         modifier = Modifier
-            .height(57.dp)
-            .padding(5.dp, 5.dp, 5.dp, 5.dp)
+            .height(dimensions.moreItemHeight)
+            .padding(top = 5.dp, end = 5.dp, bottom = 5.dp)
     ) {
         val (detailIcon, detailTitle, detailValue) = createRefs()
         Image(
@@ -38,24 +37,23 @@ fun MoreItem(
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                 }
-                .size(25.dp, 30.dp)
+                .size(dimensions.moreIconSize, dimensions.moreIconSize)
                 .padding(0.dp, 0.dp, 8.dp, 0.dp)
         )
         Text(
             text = title,
             style = TextStyle(
                 color = Color.Black,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                lineHeight = 8.sp
+                fontSize = dimensions.moreTextSize,
+                fontWeight = FontWeight.Bold
             ),
             modifier = Modifier
                 .constrainAs(detailTitle) {
                     start.linkTo(detailIcon.end)
                     top.linkTo(parent.top)
                 }
-                .size(80.dp, 28.dp)
-                .padding(0.dp, 8.dp, 0.dp, 0.dp)
+                .width(dimensions.detailTextWidth)
+                .padding(top = dimensions.moreTextPadding)
         )
         Text(
             text = value,

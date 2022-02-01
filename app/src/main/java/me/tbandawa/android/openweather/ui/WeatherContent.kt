@@ -31,10 +31,12 @@ import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
 import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
+import timber.log.Timber
 import java.util.*
 
 @ExperimentalAnimationApi
@@ -133,7 +135,7 @@ fun WeatherScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(0.dp, 35.dp, 0.dp, 0.dp),
+                        .padding(top = dimensions.weatherIconPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
@@ -142,7 +144,7 @@ fun WeatherScreen(
                         painter = weatherIcon,
                         contentDescription = null,
                         modifier = Modifier
-                            .size(200.dp, 200.dp)
+                            .size(dimensions.weatherIconSize, dimensions.weatherIconSize)
                     )
 
                     // Temperature text

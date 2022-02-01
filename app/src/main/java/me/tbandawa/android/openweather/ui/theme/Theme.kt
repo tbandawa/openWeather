@@ -5,6 +5,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.platform.LocalConfiguration
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -36,3 +38,21 @@ fun OpenWeatherTheme(
         content = content
     )
 }
+
+val dimensions: Dimensions
+    @Composable
+    @ReadOnlyComposable
+    get() {
+        val sw = LocalConfiguration.current.smallestScreenWidthDp
+        return when {
+            sw <= 360 -> {
+                LocalSw360dpDimensions.current
+            }
+            sw <= 480 -> {
+                LocalSw480dpDimensions.current
+            }
+            else -> {
+                LocalLargeDimensions.current
+            }
+        }
+    }

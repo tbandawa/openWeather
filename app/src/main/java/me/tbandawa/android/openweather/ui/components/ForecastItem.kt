@@ -45,7 +45,7 @@ fun ForecastItem(
     )
 
     Box(modifier = Modifier
-        .padding(top = 3.dp, bottom = 3.dp, start = 0.dp, end = 0.dp)
+        .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -60,7 +60,6 @@ fun ForecastItem(
                     }
                 )
                 .fillMaxWidth()
-                .padding(10.dp, 5.dp, 10.dp, 5.dp)
                 .clickable {
                     visible = !visible
                 }
