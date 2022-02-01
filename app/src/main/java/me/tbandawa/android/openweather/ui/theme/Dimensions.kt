@@ -82,6 +82,6 @@ data class Large(
     override val moreTextSize: TextUnit = 15.sp
 ): Dimensions
 
-val sw360dpDimensions = compositionLocalOf { Sw360dp() }
-val sw480dpDimensions = compositionLocalOf { Sw480dp() }
-val largeDimensions = compositionLocalOf { Large() }
+val LocalSw360dpDimensions = compositionLocalOf { Sw360dp() }
+val LocalSw480dpDimensions = compositionLocalOf { Sw480dp() }
+val LocalLargeDimensions = compositionLocalOf { Large() }

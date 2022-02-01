@@ -46,13 +46,13 @@ val dimensions: Dimensions
         val sw = LocalConfiguration.current.smallestScreenWidthDp
         return when {
             sw <= 360 -> {
-                sw360dpDimensions.current
+                LocalSw360dpDimensions.current
             }
             sw <= 480 -> {
-                sw480dpDimensions.current
+                LocalSw480dpDimensions.current
             }
             else -> {
-                largeDimensions.current
+                LocalLargeDimensions.current
             }
         }
     }
