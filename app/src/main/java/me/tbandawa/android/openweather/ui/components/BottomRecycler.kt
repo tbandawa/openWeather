@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Hourly
 
@@ -37,7 +38,7 @@ fun BottomRecycler(
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                fontSize = dimensions.forecastTextSize
             ),
             modifier = Modifier
                 .constrainAs(textHourly) {
@@ -74,7 +75,7 @@ fun BottomRecycler(
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                fontSize = dimensions.forecastTextSize
             ),
             textDecoration = TextDecoration.Underline,
             modifier = Modifier

@@ -12,6 +12,7 @@ interface Dimensions {
     val hourlyIconSize: Dp
     val unitIconSize: Dp
     val hourlyItemWidth: Dp
+    val forecastTextSize: TextUnit
     val detailItemHeight: Dp
     val detailTextPadding: Dp
     val detailTextWidth: Dp
@@ -30,6 +31,7 @@ data class Sw360dp(
     override val hourlyIconSize: Dp = 40.dp,
     override val unitIconSize: Dp = 20.dp,
     override val hourlyItemWidth: Dp = 60.dp,
+    override val forecastTextSize: TextUnit = 14.sp,
     override val detailItemHeight: Dp = 45.dp,
     override val detailTextPadding: Dp = 2.dp,
     override val detailTextWidth: Dp = 70.dp,
@@ -48,6 +50,7 @@ data class Sw480dp(
     override val hourlyIconSize: Dp = 45.dp,
     override val unitIconSize: Dp = 25.dp,
     override val hourlyItemWidth: Dp = 75.dp,
+    override val forecastTextSize: TextUnit = 15.sp,
     override val detailItemHeight: Dp = 45.dp,
     override val detailTextPadding: Dp = 4.dp,
     override val detailTextWidth: Dp = 85.dp,
@@ -66,6 +69,7 @@ data class Large(
     override val hourlyIconSize: Dp = 55.dp,
     override val unitIconSize: Dp = 30.dp,
     override val hourlyItemWidth: Dp = 70.dp,
+    override val forecastTextSize: TextUnit = 16.sp,
     override val detailItemHeight: Dp = 57.dp,
     override val detailTextPadding: Dp = 6.dp,
     override val detailTextWidth: Dp = 80.dp,
