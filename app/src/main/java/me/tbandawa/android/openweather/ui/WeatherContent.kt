@@ -15,7 +15,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +31,7 @@ import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
 import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
@@ -52,13 +52,6 @@ fun WeatherContent(
 ) {
 
     Surface(color = MaterialTheme.colors.background) {
-
-        val configuration = LocalConfiguration.current
-        Timber.d("screenWidthDp -> ${configuration.screenWidthDp}")
-
-        BoxWithConstraints {
-            Timber.d("maxWidth -> $maxWidth")
-        }
 
         // Boolean state to hold if request was successful
         var isLoaded by rememberSaveable { mutableStateOf(false) }
@@ -142,7 +135,7 @@ fun WeatherScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(0.dp, 35.dp, 0.dp, 0.dp),
+                        .padding(top = dimensions.weatherIconPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
@@ -151,7 +144,7 @@ fun WeatherScreen(
                         painter = weatherIcon,
                         contentDescription = null,
                         modifier = Modifier
-                            .size(200.dp, 200.dp)
+                            .size(dimensions.weatherIconSize, dimensions.weatherIconSize)
                     )
 
                     // Temperature text

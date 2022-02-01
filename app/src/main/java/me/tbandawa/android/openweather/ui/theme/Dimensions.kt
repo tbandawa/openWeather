@@ -2,48 +2,62 @@ package me.tbandawa.android.openweather.ui.theme
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class Dimensions (
-    weatherIconPadding: Dp,
-    weatherIconSize: Dp,
-    hourlyIconSize: Dp,
-    unitIconSize: Dp,
-    hourlyItemWidth: Dp,
-    detailItemHeight: Dp,
-    detailIconSize: Dp
-)
+interface Dimensions {
+    val weatherIconPadding: Dp
+    val weatherIconSize: Dp
+    val hourlyIconSize: Dp
+    val unitIconSize: Dp
+    val hourlyItemWidth: Dp
+    val detailItemHeight: Dp
+    val detailTextPadding: Dp
+    val detailTextWidth: Dp
+    val detailTextSize: TextUnit
+    val detailIconSize: Dp
+}
 
-val sw360dp = Dimensions(
-    weatherIconPadding = 20.dp,
-    weatherIconSize = 100.dp,
-    hourlyIconSize = 40.dp,
-    unitIconSize = 20.dp,
-    hourlyItemWidth = 55.dp,
-    detailItemHeight = 47.dp,
-    detailIconSize = 20.dp
-)
+data class Sw360dp(
+    override val weatherIconPadding: Dp = 35.dp,
+    override val weatherIconSize: Dp = 100.dp,
+    override val hourlyIconSize: Dp = 40.dp,
+    override val unitIconSize: Dp = 20.dp,
+    override val hourlyItemWidth: Dp = 60.dp,
+    override val detailItemHeight: Dp = 45.dp,
+    override val detailTextPadding: Dp = 2.dp,
+    override val detailTextWidth: Dp = 70.dp,
+    override val detailTextSize: TextUnit = 13.sp,
+    override val detailIconSize: Dp = 20.dp
+): Dimensions
 
-val sw480dp = Dimensions(
-    weatherIconPadding = 25.dp,
-    weatherIconSize = 150.dp,
-    hourlyIconSize = 40.dp,
-    unitIconSize = 25.dp,
-    hourlyItemWidth = 55.dp,
-    detailItemHeight = 50.dp,
-    detailIconSize = 25.dp
-)
+data class Sw480dp(
+    override val weatherIconPadding: Dp = 45.dp,
+    override val weatherIconSize: Dp = 150.dp,
+    override val hourlyIconSize: Dp = 45.dp,
+    override val unitIconSize: Dp = 25.dp,
+    override val hourlyItemWidth: Dp = 75.dp,
+    override val detailItemHeight: Dp = 45.dp,
+    override val detailTextPadding: Dp = 4.dp,
+    override val detailTextWidth: Dp = 85.dp,
+    override val detailTextSize: TextUnit = 13.sp,
+    override val detailIconSize: Dp = 25.dp
+): Dimensions
 
-val large = Dimensions(
-    weatherIconPadding = 35.dp,
-    weatherIconSize = 200.dp,
-    hourlyIconSize = 55.dp,
-    unitIconSize = 30.dp,
-    hourlyItemWidth = 70.dp,
-    detailItemHeight = 57.dp,
-    detailIconSize = 30.dp
-)
+data class Large(
+    override val weatherIconPadding: Dp = 35.dp,
+    override val weatherIconSize: Dp = 200.dp,
+    override val hourlyIconSize: Dp = 55.dp,
+    override val unitIconSize: Dp = 30.dp,
+    override val hourlyItemWidth: Dp = 70.dp,
+    override val detailItemHeight: Dp = 57.dp,
+    override val detailTextPadding: Dp = 6.dp,
+    override val detailTextWidth: Dp = 80.dp,
+    override val detailTextSize: TextUnit = 15.sp,
+    override val detailIconSize: Dp = 30.dp
+): Dimensions
 
-val sw360dpDimensions = compositionLocalOf { sw360dp }
-val sw480dpDimensions = compositionLocalOf { sw480dp }
-val largeDimensions = compositionLocalOf { large }
+val sw360dpDimensions = compositionLocalOf { Sw360dp() }
+val sw480dpDimensions = compositionLocalOf { Sw480dp() }
+val largeDimensions = compositionLocalOf { Large() }

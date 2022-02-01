@@ -19,6 +19,7 @@ import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.extensions.toTime
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.domain.models.Hourly
 
 @Composable
@@ -36,7 +37,7 @@ fun HourlyItem(
     )
 
     Column(modifier = Modifier
-        .width(70.dp)
+        .width(dimensions.hourlyItemWidth)
         .padding(5.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -52,7 +53,7 @@ fun HourlyItem(
             painter = hourlyIcon,
             contentDescription = null,
             modifier = Modifier
-                .size(55.dp, 55.dp)
+                .size(dimensions.hourlyIconSize, dimensions.hourlyIconSize)
                 .padding(0.dp, 0.dp, 0.dp, 0.dp)
         )
         Text(
