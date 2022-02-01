@@ -29,6 +29,12 @@ fun ForecastContent(
 
     val dailyItems = viewModel.oneCallWeather.value?.data?.daily
 
+    var expandedItem by remember{ mutableStateOf(0) }
+
+    val showMore: (Int) -> Unit = {
+        expandedItem = it
+    }
+
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = { ForecastToolBar(
@@ -68,7 +74,9 @@ fun ForecastContent(
                     items(dailyItems!!) { daily ->
                         ForecastItem(
                             daily,
-                            preferenceUnits
+                            expandedItem,
+                            preferenceUnits,
+                            showMore
                         )
                     }
                 }

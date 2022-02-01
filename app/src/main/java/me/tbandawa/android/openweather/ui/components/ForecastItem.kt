@@ -32,10 +32,10 @@ import openweather.domain.models.Daily
 @Composable
 fun ForecastItem(
     daily: Daily,
-    preferenceUnits: PreferenceUnits
+    expandedItem: Int,
+    preferenceUnits: PreferenceUnits,
+    showMore: (Int) -> Unit
 ) {
-
-    var visible by remember { mutableStateOf(false) }
 
     val weatherIcon = rememberImagePainter(
         data = "${OPEN_WEATHER_ICON_URL}${daily.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}",
@@ -50,18 +50,21 @@ fun ForecastItem(
         ConstraintLayout(
             modifier = Modifier
                 .background(
-                    color = when (visible) {
-                        true -> {
+                    color = when (expandedItem) {
+                        daily.dt!! -> {
                             Color.LightGray
                         }
-                        false -> {
+                        else -> {
                             Color.White
                         }
                     }
                 )
                 .fillMaxWidth()
                 .clickable {
-                    visible = !visible
+                    if (expandedItem == daily.dt!!)
+                        showMore(0)
+                    else
+                        showMore(daily.dt!!)
                 }
         ) {
             val (visibleLayout, moreLayout) = createRefs()
@@ -133,7 +136,7 @@ fun ForecastItem(
                         bottom.linkTo(parent.bottom)
                     }
                     .padding(0.dp, 0.dp, 0.dp, 16.dp),
-                visible = visible,
+                visible = expandedItem == daily.dt!!,
                 enter = fadeIn(
                     initialAlpha = 0.4f
                 ),
