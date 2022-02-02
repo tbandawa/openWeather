@@ -17,7 +17,7 @@ fun DetailGrid(
 ) {
     Column(
         modifier = Modifier
-            .padding(0.dp, 35.dp, 0.dp, 0.dp)
+            .padding(0.dp, 15.dp, 0.dp, 0.dp)
             .width(IntrinsicSize.Max)
     ) {
         Row {
