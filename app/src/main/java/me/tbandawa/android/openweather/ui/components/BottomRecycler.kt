@@ -14,7 +14,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.data.local.PreferenceUnits
@@ -45,29 +44,8 @@ fun BottomRecycler(
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
                 }
-                .padding(8.dp, 8.dp, 0.dp, 8.dp)
+                .padding(start = 8.dp)
         )
-
-        // Hourly horizontal list
-        LazyRow(
-            modifier = Modifier
-                .constrainAs(hourlyRow) {
-                    top.linkTo(textHourly.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(textWeekly.top)
-                }
-                .padding(0.dp, 0.dp, 0.dp, 8.dp)
-                .fillMaxWidth()
-        ) {
-            items(hourly) { item ->
-                HourlyItem(
-                    hourly = item,
-                    timeUnit = preferenceUnits.time,
-                    temperatureUnit = preferenceUnits.temperature
-                )
-            }
-        }
 
         // Next 7 days forecast link
         Text(
@@ -81,14 +59,35 @@ fun BottomRecycler(
             modifier = Modifier
                 .constrainAs(textWeekly) {
                     end.linkTo(parent.end)
-                    top.linkTo(hourlyRow.bottom)
-                    bottom.linkTo(parent.bottom)
+                    top.linkTo(parent.top)
                 }
-                .padding(top = 4.dp, end = 8.dp, bottom = 10.dp)
+                .padding(end = 8.dp)
                 .clickable {
                     navigateToForecast.invoke()
                 }
         )
+
+        // Hourly horizontal list
+        LazyRow(
+            modifier = Modifier
+                .constrainAs(hourlyRow) {
+                    top.linkTo(textHourly.bottom)
+                    top.linkTo(textWeekly.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(0.dp, 0.dp, 0.dp, 2.dp)
+                .fillMaxWidth()
+        ) {
+            items(hourly) { item ->
+                HourlyItem(
+                    hourly = item,
+                    timeUnit = preferenceUnits.time,
+                    temperatureUnit = preferenceUnits.temperature
+                )
+            }
+        }
 
     }
 

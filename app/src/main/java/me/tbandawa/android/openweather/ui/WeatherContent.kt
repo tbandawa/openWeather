@@ -32,11 +32,11 @@ import me.tbandawa.android.openweather.ui.components.BottomRecycler
 import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import me.tbandawa.android.openweather.ui.theme.dimensions
+import me.tbandawa.android.openweather.ui.theme.orientation
 import openweather.data.local.PreferenceHelper
 import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
-import timber.log.Timber
 import java.util.*
 
 @ExperimentalAnimationApi
@@ -132,47 +132,106 @@ fun WeatherScreen(
                     .fillMaxHeight()
             ) {
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = dimensions.weatherIconPadding),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                when (orientation) {
+                    1 -> {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = dimensions.weatherIconPadding)
+                                .wrapContentSize(Alignment.Center),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
 
-                    // Main weather image
-                    Image(
-                        painter = weatherIcon,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(dimensions.weatherIconSize, dimensions.weatherIconSize)
-                    )
+                            // Main weather image
+                            Image(
+                                painter = weatherIcon,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(dimensions.weatherIconSize, dimensions.weatherIconSize)
+                            )
 
-                    // Temperature text
-                    Text(
-                        text = oneCall.current?.temp!!.toTemperature(preferenceUnits.temperature),
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 32.sp
-                        )
-                    )
+                            // Temperature text
+                            Text(
+                                text = oneCall.current?.temp!!.toTemperature(preferenceUnits.temperature),
+                                style = TextStyle(
+                                    color = Color.Black,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 32.sp
+                                )
+                            )
 
-                    // Weather description text
-                    Text(
-                        text = oneCall.current!!.weather?.get(0)!!.description!!.replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(
-                                Locale.getDefault()
-                            ) else it.toString()
-                        },
-                        style = TextStyle(
-                            color = Color.Black,
-                            fontWeight = FontWeight.Medium,
-                            fontSize = 18.sp
-                        )
-                    )
+                            // Weather description text
+                            Text(
+                                text = oneCall.current!!.weather?.get(0)!!.description!!.replaceFirstChar {
+                                    if (it.isLowerCase()) it.titlecase(
+                                        Locale.getDefault()
+                                    ) else it.toString()
+                                },
+                                style = TextStyle(
+                                    color = Color.Black,
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 18.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            )
 
-                    DetailGrid(oneCall.current!!, preferenceUnits)
+                            DetailGrid(oneCall.current!!, preferenceUnits)
 
+                        }
+                    }
+                    2 -> {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(IntrinsicSize.Max),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .width(IntrinsicSize.Min)
+                                    .padding(start = 25.dp, end = 35.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+
+                                // Main weather image
+                                Image(
+                                    painter = weatherIcon,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(dimensions.weatherIconSize, dimensions.weatherIconSize)
+                                )
+
+                                // Temperature text
+                                Text(
+                                    text = oneCall.current?.temp!!.toTemperature(preferenceUnits.temperature),
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 30.sp,
+                                        textAlign = TextAlign.Center
+                                    )
+                                )
+
+                                // Weather description text
+                                Text(
+                                    text = oneCall.current!!.weather?.get(0)!!.description!!.replaceFirstChar {
+                                        if (it.isLowerCase()) it.titlecase(
+                                            Locale.getDefault()
+                                        ) else it.toString()
+                                    },
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontWeight = FontWeight.Medium,
+                                        fontSize = 16.sp,
+                                        textAlign = TextAlign.Center
+                                    )
+                                )
+
+                            }
+                            DetailGrid(oneCall.current!!, preferenceUnits)
+                        }
+                    }
                 }
 
             }
