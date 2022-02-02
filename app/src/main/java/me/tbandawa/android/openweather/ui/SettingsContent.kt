@@ -3,6 +3,7 @@ package me.tbandawa.android.openweather.ui
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -25,6 +26,7 @@ import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
+import me.tbandawa.android.openweather.ui.theme.orientation
 import openweather.data.local.PreferenceHelper
 
 @ExperimentalMaterialApi
@@ -85,7 +87,19 @@ fun SettingsContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp),
+                            .padding(
+                                top = when (orientation) {
+                                    1 -> {
+                                        20.dp
+                                    }
+                                    2 -> {
+                                        5.dp
+                                    }
+                                    else -> {
+                                        20.dp
+                                    }
+                                }
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -114,7 +128,19 @@ fun SettingsContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp),
+                            .padding(
+                                top = when (orientation) {
+                                    1 -> {
+                                        20.dp
+                                    }
+                                    2 -> {
+                                        5.dp
+                                    }
+                                    else -> {
+                                        20.dp
+                                    }
+                                }
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -144,7 +170,19 @@ fun SettingsContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp),
+                            .padding(
+                                top = when (orientation) {
+                                    1 -> {
+                                        20.dp
+                                    }
+                                    2 -> {
+                                        5.dp
+                                    }
+                                    else -> {
+                                        20.dp
+                                    }
+                                }
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -173,7 +211,31 @@ fun SettingsContent(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp, bottom = 45.dp),
+                            .padding(
+                                top = when (orientation) {
+                                    1 -> {
+                                        20.dp
+                                    }
+                                    2 -> {
+                                        5.dp
+                                    }
+                                    else -> {
+                                        20.dp
+                                    }
+                                },
+                                bottom = when (orientation) {
+                                    1 -> {
+                                        45.dp
+                                    }
+                                    2 -> {
+                                        5.dp
+                                    }
+                                    else -> {
+                                        45.dp
+                                    }
+                                }
+
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -201,92 +263,189 @@ fun SettingsContent(
                     // Horizontal divider
                     HorizontalDivider()
 
-                    // Icons source row
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(35.dp)
-                            .padding(top = 15.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.svg_repo),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .height(30.dp)
-                                .padding(end = 8.dp)
-                        )
-                        Text(
-                            text = "Icons source",
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp,
-                            ),
-                            textDecoration = TextDecoration.Underline,
-                            modifier = Modifier
-                                .clickable {
-                                    uriHandler.openUri("https://icons8.com/")
-                                }
-                        )
-                    }
+                    when(orientation) {
+                        1 -> {
+                            // Icons source row
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(35.dp)
+                                    .padding(top = 15.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.svg_repo),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .height(30.dp)
+                                        .padding(end = 8.dp)
+                                )
+                                Text(
+                                    text = "Icons source",
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 16.sp,
+                                    ),
+                                    textDecoration = TextDecoration.Underline,
+                                    modifier = Modifier
+                                        .clickable {
+                                            uriHandler.openUri("https://icons8.com/")
+                                        }
+                                )
+                            }
 
-                    // Github link row
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(35.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.github),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .height(25.dp)
-                                .padding(end = 8.dp)
-                        )
-                        Text(
-                            text = "Source code",
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp,
-                            ),
-                            textDecoration = TextDecoration.Underline,
-                            modifier = Modifier
-                                .clickable {
-                                    uriHandler.openUri("https://github.com/tbandawa/openWeather")
-                                }
-                        )
-                    }
+                            // Github link row
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(35.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.github),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .height(25.dp)
+                                        .padding(end = 8.dp)
+                                )
+                                Text(
+                                    text = "Source code",
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 16.sp,
+                                    ),
+                                    textDecoration = TextDecoration.Underline,
+                                    modifier = Modifier
+                                        .clickable {
+                                            uriHandler.openUri("https://github.com/tbandawa/openWeather")
+                                        }
+                                )
+                            }
 
-                    // Email link row
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(30.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_email),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .height(30.dp)
-                                .padding(end = 8.dp)
-                        )
-                        Text(
-                            text = "E-mail",
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp,
-                            ),
-                            textDecoration = TextDecoration.Underline,
-                            modifier = Modifier
-                                .clickable {
-                                    context.startActivity(Intent.createChooser(intent, "Send Feedback"))
+                            // Email link row
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(30.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.ic_email),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .height(30.dp)
+                                        .padding(end = 8.dp)
+                                )
+                                Text(
+                                    text = "E-mail",
+                                    style = TextStyle(
+                                        color = Color.Black,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 16.sp,
+                                    ),
+                                    textDecoration = TextDecoration.Underline,
+                                    modifier = Modifier
+                                        .clickable {
+                                            context.startActivity(Intent.createChooser(intent, "Send Feedback"))
+                                        }
+                                )
+                            }
+                        }
+                        2 -> {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(1f),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                // Icons source row
+                                Row(
+                                    modifier = Modifier
+                                        .height(35.dp)
+                                        .padding(end = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Image(
+                                        painter = painterResource(R.drawable.svg_repo),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .height(20.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                    Text(
+                                        text = "Icons source",
+                                        style = TextStyle(
+                                            color = Color.Black,
+                                            fontWeight = FontWeight.Normal,
+                                            fontSize = 16.sp,
+                                        ),
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .clickable {
+                                                uriHandler.openUri("https://icons8.com/")
+                                            }
+                                    )
                                 }
-                        )
+
+                                // Github link row
+                                Row(
+                                    modifier = Modifier
+                                        .height(30.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Image(
+                                        painter = painterResource(R.drawable.github),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .height(20.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                    Text(
+                                        text = "Source code",
+                                        style = TextStyle(
+                                            color = Color.Black,
+                                            fontWeight = FontWeight.Normal,
+                                            fontSize = 16.sp,
+                                        ),
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .clickable {
+                                                uriHandler.openUri("https://github.com/tbandawa/openWeather")
+                                            }
+                                    )
+                                }
+
+                                // Email link row
+                                Row(
+                                    modifier = Modifier
+                                        .height(30.dp)
+                                        .padding(start = 15.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Image(
+                                        painter = painterResource(R.drawable.ic_email),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .height(30.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                    Text(
+                                        text = "E-mail",
+                                        style = TextStyle(
+                                            color = Color.Black,
+                                            fontWeight = FontWeight.Normal,
+                                            fontSize = 16.sp,
+                                        ),
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .clickable {
+                                                context.startActivity(Intent.createChooser(intent, "Send Feedback"))
+                                            }
+                                    )
+                                }
+                            }
+                        }
                     }
 
                 }

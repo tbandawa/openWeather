@@ -137,7 +137,8 @@ fun WeatherScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(top = dimensions.weatherIconPadding),
+                                .padding(top = dimensions.weatherIconPadding)
+                                .wrapContentSize(Alignment.Center),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
 
@@ -169,7 +170,8 @@ fun WeatherScreen(
                                 style = TextStyle(
                                     color = Color.Black,
                                     fontWeight = FontWeight.Medium,
-                                    fontSize = 18.sp
+                                    fontSize = 18.sp,
+                                    textAlign = TextAlign.Center
                                 )
                             )
 
@@ -206,7 +208,8 @@ fun WeatherScreen(
                                     style = TextStyle(
                                         color = Color.Black,
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 32.sp
+                                        fontSize = 30.sp,
+                                        textAlign = TextAlign.Center
                                     )
                                 )
 
@@ -220,7 +223,8 @@ fun WeatherScreen(
                                     style = TextStyle(
                                         color = Color.Black,
                                         fontWeight = FontWeight.Medium,
-                                        fontSize = 18.sp
+                                        fontSize = 16.sp,
+                                        textAlign = TextAlign.Center
                                     )
                                 )
 
