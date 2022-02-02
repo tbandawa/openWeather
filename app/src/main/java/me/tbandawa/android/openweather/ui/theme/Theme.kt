@@ -45,14 +45,13 @@ val dimensions: Dimensions
     get() {
         val sw = LocalConfiguration.current.smallestScreenWidthDp
         return when {
-            sw <= 360 -> {
-                LocalSw360dpDimensions.current
-            }
-            sw <= 480 -> {
-                LocalSw480dpDimensions.current
-            }
-            else -> {
-                LocalLargeDimensions.current
-            }
+            sw <= 360 -> LocalSw360dpDimensions.current
+            sw <= 480 -> LocalSw480dpDimensions.current
+            else -> LocalLargeDimensions.current
         }
     }
+
+val orientation: Int
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalConfiguration.current.orientation
