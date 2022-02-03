@@ -45,8 +45,8 @@ data class Sw360dp(
 ): Dimensions
 
 data class Sw480dp(
-    override val weatherIconPadding: Dp = 45.dp,
-    override val weatherIconSize: Dp = 125.dp,
+    override val weatherIconPadding: Dp = 15.dp,
+    override val weatherIconSize: Dp = 150.dp,
     override val hourlyIconSize: Dp = 40.dp,
     override val unitIconSize: Dp = 25.dp,
     override val hourlyItemWidth: Dp = 75.dp,
@@ -64,7 +64,7 @@ data class Sw480dp(
 ): Dimensions
 
 data class Large(
-    override val weatherIconPadding: Dp = 35.dp,
+    override val weatherIconPadding: Dp = 25.dp,
     override val weatherIconSize: Dp = 200.dp,
     override val hourlyIconSize: Dp = 55.dp,
     override val unitIconSize: Dp = 30.dp,
