@@ -22,6 +22,10 @@ android {
         buildConfigField "String", 'OPEN_WEATHER_ICON_URL', '"https://openweathermap.org/img/wn/"'
         buildConfigField "String", 'OPEN_WEATHER_ICON_4X', '"@4x.png"'
         buildConfigField "String", 'OPEN_WEATHER_ICON_2X', '"@2x.png"'
+
+        buildConfigField "String", 'OPEN_WEATHER_ICONS_SOURCE_URL', '"https://icons8.com/"'
+        buildConfigField "String", 'OPEN_WEATHER_SOURCE_CODE_URL', '"https://github.com/tbandawa/openWeather"'
+        buildConfigField "String", 'OPEN_WEATHER_AUTHER_EMAIL', '"mailto:tonderaibandawa@gmail.com"'
     }
 
     buildTypes {
