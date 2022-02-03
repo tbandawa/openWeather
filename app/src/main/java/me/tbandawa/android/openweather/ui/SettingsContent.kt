@@ -3,7 +3,6 @@ package me.tbandawa.android.openweather.ui
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -22,6 +21,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import me.tbandawa.android.openweather.BuildConfig.*
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
@@ -39,7 +39,7 @@ fun SettingsContent(
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
     val intent = Intent(Intent.ACTION_SENDTO).apply {
-        data = Uri.parse("mailto:tonderaibandawa@gmail.com")
+        data = Uri.parse(OPEN_WEATHER_AUTHER_EMAIL)
         putExtra(Intent.EXTRA_SUBJECT, "Feedback - open Radio")
     }
 
@@ -290,7 +290,7 @@ fun SettingsContent(
                                     textDecoration = TextDecoration.Underline,
                                     modifier = Modifier
                                         .clickable {
-                                            uriHandler.openUri("https://icons8.com/")
+                                            uriHandler.openUri(OPEN_WEATHER_ICONS_SOURCE_URL)
                                         }
                                 )
                             }
@@ -319,7 +319,7 @@ fun SettingsContent(
                                     textDecoration = TextDecoration.Underline,
                                     modifier = Modifier
                                         .clickable {
-                                            uriHandler.openUri("https://github.com/tbandawa/openWeather")
+                                            uriHandler.openUri(OPEN_WEATHER_SOURCE_CODE_URL)
                                         }
                                 )
                             }
