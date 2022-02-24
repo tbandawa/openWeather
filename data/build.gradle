@@ -61,6 +61,11 @@ dependencies {
     // Preference
     implementation "androidx.preference:preference-ktx:1.1.1"
 
+    // Preferences DataStore & Protobuf
+    implementation "androidx.datastore:datastore-core:1.0.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
     testImplementation 'android.arch.core:core-testing:1.1.1'
