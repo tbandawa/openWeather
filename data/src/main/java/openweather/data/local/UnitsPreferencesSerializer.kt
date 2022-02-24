@@ -8,7 +8,9 @@ import java.io.InputStream
 import java.io.OutputStream
 
 object UnitsPreferencesSerializer : Serializer<UnitsPreferences> {
+
     override val defaultValue: UnitsPreferences = UnitsPreferences.getDefaultInstance()
+
     override suspend fun readFrom(input: InputStream): UnitsPreferences {
         try {
             return UnitsPreferences.parseFrom(input)
@@ -18,4 +20,5 @@ object UnitsPreferencesSerializer : Serializer<UnitsPreferences> {
     }
 
     override suspend fun writeTo(t: UnitsPreferences, output: OutputStream) = t.writeTo(output)
+
 }
