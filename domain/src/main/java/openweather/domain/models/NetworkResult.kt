@@ -7,4 +7,5 @@ sealed class NetworkResult<M>(
     class Success<M>(data: M) : NetworkResult<M>(data)
     class Error<M>(message: String, data: M? = null) : NetworkResult<M>(data, message)
     class Loading<M> : NetworkResult<M>()
+    class Empty<M> : NetworkResult<M>()
 }

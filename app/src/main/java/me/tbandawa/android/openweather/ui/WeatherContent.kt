@@ -60,7 +60,7 @@ fun WeatherContent(
         }
 
         // Update UI according to network result state
-        when(val result = viewModel.oneCallWeather.value) {
+        when(val result = viewModel.oneCallWeather.collectAsState().value) {
             is NetworkResult.Loading -> {
                 LoadingScreen()
             }
@@ -75,6 +75,9 @@ fun WeatherContent(
                 )
             }
             is NetworkResult.Error -> {
+                ErrorScreen(retry)
+            }
+            else -> {
                 ErrorScreen(retry)
             }
         }
