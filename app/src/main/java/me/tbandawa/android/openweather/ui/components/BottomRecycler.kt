@@ -16,8 +16,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.ui.theme.dimensions
-import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Hourly
+import openweather.domain.models.PreferenceUnits
 
 @ExperimentalAnimationApi
 @Composable

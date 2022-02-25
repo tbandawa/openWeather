@@ -9,9 +9,10 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import openweather.data.BuildConfig
-import openweather.data.local.PreferenceHelper
+import openweather.data.local.UnitsPreferencesDataStoreImpl
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.repository.OpenWeatherRepositoryImpl
+import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.repository.OpenWeatherRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,9 +50,9 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun providePreferenceHelper(
+    fun provideUnitsPreferencesDataStore(
         @ApplicationContext appContext: Context
-    ): PreferenceHelper = PreferenceHelper(appContext)
+    ): UnitsPreferencesDataStore = UnitsPreferencesDataStoreImpl(appContext)
 
     @Provides
     @Singleton

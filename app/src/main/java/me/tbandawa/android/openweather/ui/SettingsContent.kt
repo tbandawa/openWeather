@@ -7,8 +7,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,18 +22,20 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import kotlinx.coroutines.launch
 import me.tbandawa.android.openweather.BuildConfig.*
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
 import me.tbandawa.android.openweather.ui.theme.orientation
-import openweather.data.local.PreferenceHelper
+import openweather.domain.datastore.UnitsPreferencesDataStore
+import openweather.domain.models.PreferenceUnits
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
-    preferenceHelper: PreferenceHelper,
+    unitsPreferencesDataStore: UnitsPreferencesDataStore,
     navigateUp: () -> Unit
 ) {
 
@@ -43,8 +46,17 @@ fun SettingsContent(
         putExtra(Intent.EXTRA_SUBJECT, "Feedback - open Radio")
     }
 
-    preferenceHelper.observeAsState(preferenceHelper.get()).value
-    val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get())
+    val preferenceUnits = unitsPreferencesDataStore.preferencesUnits.collectAsState(
+        PreferenceUnits("°C", "m/s", "hPa", "12-hour")
+    ).value
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val updateUnitsPreference: (PreferenceUnits) -> Unit = { preferenceUnits ->
+        coroutineScope.launch {
+            unitsPreferencesDataStore.savePreferencesUnits(preferenceUnits)
+        }
+    }
 
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
@@ -118,8 +130,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, "°C")
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, "°F")
+                                UnitChip(preferenceUnits, updateUnitsPreference, "°C")
+                                UnitChip(preferenceUnits, updateUnitsPreference, "°F")
                             }
                         }
                     }
@@ -159,9 +171,9 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "m/s")
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "km/h")
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "mph")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "m/s")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "km/h")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "mph")
                             }
                         }
                     }
@@ -201,8 +213,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "hPa")
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "inHg")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "hPa")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "inHg")
                             }
                         }
                     }
@@ -254,8 +266,8 @@ fun SettingsContent(
                             modifier = Modifier.padding(1.dp)
                         ) {
                             Row {
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "12-hour")
-                                UnitChip(preferenceUnits.value, preferenceHelper::put, text = "24-hour")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "12-hour")
+                                UnitChip(preferenceUnits, updateUnitsPreference, text = "24-hour")
                             }
                         }
                     }

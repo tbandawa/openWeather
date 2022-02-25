@@ -7,8 +7,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
-import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Current
+import openweather.domain.models.PreferenceUnits
 
 @Composable
 fun DetailGrid(

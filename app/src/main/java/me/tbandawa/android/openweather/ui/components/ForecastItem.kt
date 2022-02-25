@@ -25,8 +25,8 @@ import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.*
-import openweather.data.local.PreferenceUnits
 import openweather.domain.models.Daily
+import openweather.domain.models.PreferenceUnits
 
 @ExperimentalAnimationApi
 @Composable

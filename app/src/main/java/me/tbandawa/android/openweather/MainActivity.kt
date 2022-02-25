@@ -5,18 +5,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.InternalCoroutinesApi
 import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.ui.*
-import openweather.data.local.PreferenceHelper
+import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
+import openweather.domain.datastore.UnitsPreferencesDataStore
+import openweather.domain.models.PreferenceUnits
 import javax.inject.Inject
 
 @ExperimentalPermissionsApi
@@ -25,15 +27,19 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var preferenceHelper: PreferenceHelper
+    lateinit var unitsPreferencesDataStore: UnitsPreferencesDataStore
 
     private val viewModel: MainViewModel by viewModels()
 
-    @ExperimentalMaterialApi
+    @OptIn(InternalCoroutinesApi::class, androidx.compose.material.ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
+
+            val preferenceUnits = unitsPreferencesDataStore.preferencesUnits.collectAsState(
+                PreferenceUnits("°C", "m/s", "hPa", "12-hour")
+            ).value
 
             val navController = rememberNavController()
 
@@ -72,20 +78,19 @@ class MainActivity : ComponentActivity() {
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
                         val location = backStackEntry.arguments?.getString("location")
                         WeatherContent(
-                            preferenceHelper,
+                            preferenceUnits,
                             viewModel,
                             latitude!!,
                             longitude!!,
                             location!!,
-                            navigateToSettings,
-                            { navigateToForecast(location) }
-                        )
+                            navigateToSettings
+                        ) { navigateToForecast(location) }
                     }
 
                     composable(route = "forecast/{location}") { backStackEntry ->
                         val location = backStackEntry.arguments?.getString("location")
                         ForecastContent(
-                            preferenceHelper.get(),
+                            preferenceUnits,
                             viewModel,
                             location!!,
                             navigateUp
@@ -94,7 +99,7 @@ class MainActivity : ComponentActivity() {
 
                     composable(route = "settings") {
                         SettingsContent(
-                            preferenceHelper,
+                            unitsPreferencesDataStore,
                             navigateUp
                         )
                     }

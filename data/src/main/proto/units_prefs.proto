@@ -1,8 +1,11 @@
-syntax = "proto3";
+syntax = "proto2";
 
 option java_package = "openweather.data";
 option java_multiple_files = true;
 
-message Settings {
-  int my_counter = 1;
+message UnitsPreferences {
+  optional string temperature = 1 [default = "°C"];
+  optional string speed = 2 [default = "m/s"];
+  optional string pressure = 3 [default = "hPa"];
+  optional string time = 4 [default = "24-hour"];
 }

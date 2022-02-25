@@ -5,12 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,16 +28,15 @@ import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import me.tbandawa.android.openweather.ui.theme.dimensions
 import me.tbandawa.android.openweather.ui.theme.orientation
-import openweather.data.local.PreferenceHelper
-import openweather.data.local.PreferenceUnits
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
+import openweather.domain.models.PreferenceUnits
 import java.util.*
 
 @ExperimentalAnimationApi
 @Composable
 fun WeatherContent(
-    preferenceHelper: PreferenceHelper,
+    preferenceUnits: PreferenceUnits,
     viewModel: MainViewModel,
     latitude: Double,
     longitude: Double,
@@ -64,8 +58,6 @@ fun WeatherContent(
             if (isLoaded.not())
                 viewModel.fetchOneCall(latitude, longitude)
         }
-
-        val preferenceUnits = preferenceHelper.observeAsState(preferenceHelper.get()).value
 
         // Update UI according to network result state
         when(val result = viewModel.oneCallWeather.value) {
