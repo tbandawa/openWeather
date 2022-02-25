@@ -17,7 +17,7 @@ class MainViewModel @Inject constructor(
     private val repository: OpenWeatherRepository
 ) : ViewModel() {
 
-    private val _oneCallWeather = MutableStateFlow<NetworkResult<OneCall>?>(NetworkResult.Loading())
+    private val _oneCallWeather = MutableStateFlow<NetworkResult<OneCall>?>(NetworkResult.Empty())
     val oneCallWeather: StateFlow<NetworkResult<OneCall>?> = _oneCallWeather
 
     fun fetchOneCall(lat: Double, lon: Double){
