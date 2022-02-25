@@ -9,7 +9,6 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import openweather.data.BuildConfig
-import openweather.data.local.PreferenceHelper
 import openweather.data.local.UnitsPreferencesDataStoreImpl
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.repository.OpenWeatherRepositoryImpl
@@ -48,12 +47,6 @@ object DataModule {
             .client(okHttpClient)
             .build()
     }
-
-    @Provides
-    @Singleton
-    fun providePreferenceHelper(
-        @ApplicationContext appContext: Context
-    ): PreferenceHelper = PreferenceHelper(appContext)
 
     @Provides
     @Singleton
