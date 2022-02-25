@@ -14,7 +14,7 @@ A simple android weather app demonstrating Jetpack Compose. Data is provided by 
 
 #### Modules:
 * <b>app</b> - the main entry point of the application.
-* <b>domain</b> - encapsulates business logic and improves testability of the data module.
+* <b>domain</b> - encapsulates business logic and is free of any android related framework.
 * <b>data</b> - contains DTOs, repository, API(data source) and data manipulation util code.
 
 #### App Specs
