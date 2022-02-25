@@ -8,21 +8,17 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.ui.*
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
-import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalPermissionsApi
@@ -38,12 +34,6 @@ class MainActivity : ComponentActivity() {
     @OptIn(InternalCoroutinesApi::class, androidx.compose.material.ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        lifecycleScope.launch {
-            unitsPreferencesDataStore.preferencesUnits.collect {
-                Timber.d("collecting -> $it")
-            }
-        }
 
         setContent {
 

@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +22,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import me.tbandawa.android.openweather.BuildConfig.*
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
@@ -49,8 +50,10 @@ fun SettingsContent(
         PreferenceUnits("°C", "m/s", "hPa", "12-hour")
     ).value
 
+    val coroutineScope = rememberCoroutineScope()
+
     val updateUnitsPreference: (PreferenceUnits) -> Unit = { preferenceUnits ->
-        runBlocking {
+        coroutineScope.launch {
             unitsPreferencesDataStore.savePreferencesUnits(preferenceUnits)
         }
     }
