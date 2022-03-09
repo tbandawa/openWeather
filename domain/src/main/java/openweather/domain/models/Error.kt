@@ -1,6 +1,6 @@
 package openweather.domain.models
 
-data class ErrorResponse(
+data class Error(
     val cod : String,
     val message : String
 )
