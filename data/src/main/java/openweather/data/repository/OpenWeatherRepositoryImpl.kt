@@ -6,13 +6,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import openweather.data.BuildConfig
 import openweather.data.mapper.CurrentWeatherMapper
+import openweather.data.mapper.ErrorResponseMapper
 import openweather.data.mapper.FiveDayWeatherMapper
 import openweather.data.mapper.OneCallMapper
 import openweather.data.remote.api.OpenWeatherApi
-import openweather.data.remote.response.BaseResponse
-import openweather.data.remote.response.CurrentWeatherResponse
-import openweather.data.remote.response.FiveDayWeatherForecastResponse
-import openweather.data.remote.response.OneCallResponse
+import openweather.data.remote.response.*
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.*
 import openweather.domain.repository.OpenWeatherRepository
@@ -27,6 +25,8 @@ class OpenWeatherRepositoryImpl @Inject constructor(
     private val oneCallMapper: ResponseMapper<OneCallResponse, OneCall> by lazy { OneCallMapper() }
 
     private val fiveDayWeatherMapper: ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> by lazy { FiveDayWeatherMapper() }
+
+    private val errorMapper: ResponseMapper<ErrorResponse, Error> by lazy { ErrorResponseMapper() }
 
     override suspend fun fetchCurrentWeather(city: String): Flow<NetworkResult<CurrentWeather>> = flow {
         emit(NetworkResult.Loading())
