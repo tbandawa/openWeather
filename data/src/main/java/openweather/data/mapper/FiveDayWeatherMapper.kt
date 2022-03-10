@@ -3,6 +3,7 @@ package openweather.data.mapper
 import openweather.data.remote.response.FiveDayWeatherForecastResponse
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.*
+import openweather.domain.models.List
 
 class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> {
 
