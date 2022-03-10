@@ -3,8 +3,10 @@ package openweather.data.mapper
 import openweather.data.remote.response.FiveDayWeatherForecastResponse
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.*
+import openweather.domain.models.List
+import javax.inject.Inject
 
-class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> {
+class FiveDayWeatherMapper @Inject constructor(): ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> {
 
     override fun mapToModel(response: FiveDayWeatherForecastResponse): FiveDayWeatherForecast {
         return FiveDayWeatherForecast(

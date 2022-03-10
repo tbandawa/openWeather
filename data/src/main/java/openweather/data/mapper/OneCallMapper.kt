@@ -3,8 +3,9 @@ package openweather.data.mapper
 import openweather.data.remote.response.OneCallResponse
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.*
+import javax.inject.Inject
 
-class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
+class OneCallMapper @Inject constructor(): ResponseMapper<OneCallResponse, OneCall> {
 
     override fun mapToModel(response: OneCallResponse): OneCall {
         return OneCall(
