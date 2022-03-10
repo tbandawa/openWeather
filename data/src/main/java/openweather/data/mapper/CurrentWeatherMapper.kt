@@ -3,9 +3,8 @@ package openweather.data.mapper
 import openweather.data.remote.response.CurrentWeatherResponse
 import openweather.domain.mapper.ResponseMapper
 import openweather.domain.models.*
-import javax.inject.Inject
 
-class CurrentWeatherMapper @Inject constructor(): ResponseMapper<CurrentWeatherResponse, CurrentWeather> {
+class CurrentWeatherMapper : ResponseMapper<CurrentWeatherResponse, CurrentWeather> {
 
     override fun mapToModel(response: CurrentWeatherResponse): CurrentWeather {
         return CurrentWeather(
