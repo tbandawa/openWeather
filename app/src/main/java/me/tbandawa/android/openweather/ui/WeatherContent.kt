@@ -28,6 +28,7 @@ import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import me.tbandawa.android.openweather.ui.theme.dimensions
 import me.tbandawa.android.openweather.ui.theme.orientation
+import openweather.domain.models.Error
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.models.PreferenceUnits
@@ -68,17 +69,20 @@ fun WeatherContent(
                 isLoaded = true
                 WeatherScreen(
                     preferenceUnits = preferenceUnits,
-                    oneCall = result.data!!,
+                    oneCall = result.data,
                     location,
                     navigateToSettings,
                     navigateToForecast
                 )
             }
             is NetworkResult.Error -> {
-                ErrorScreen(retry)
+                ErrorScreen(result.data!!, retry)
             }
-            else -> {
-                ErrorScreen(retry)
+            is NetworkResult.Failure -> {
+                FailureScreen(result.message, retry)
+            }
+            is NetworkResult.Empty -> {
+                LoadingScreen()
             }
         }
 
@@ -301,6 +305,7 @@ fun LoadingScreen() {
 
 @Composable
 fun ErrorScreen(
+    error: Error,
     retry: () -> Unit
 ) {
     ConstraintLayout(
@@ -331,7 +336,79 @@ fun ErrorScreen(
 
         // Error message text
         Text(
-            text = "Error! Unable to resolve host",
+            text = error.message,
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp
+            ),
+            modifier = Modifier
+                .constrainAs(descriptionLayout) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(retryButton.top)
+                }
+                .width(300.dp)
+                .height(IntrinsicSize.Max)
+                .padding(bottom = 10.dp)
+        )
+
+        // Retry button
+        Button(
+            onClick = {
+                retry.invoke()
+            },
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .constrainAs(retryButton) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(parent.bottom)
+                }
+                .padding(end = 5.dp),
+            colors = ButtonDefaults.textButtonColors(
+                backgroundColor = Color.Black,
+                contentColor = Color.White
+            )
+        ) {
+            Text(text = "Retry")
+        }
+
+    }
+}
+
+@Composable
+fun FailureScreen(
+    message: String,
+    retry: () -> Unit
+) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 20.dp, bottom = 50.dp, end = 20.dp)
+    ) {
+
+        val (titleLayout, descriptionLayout, retryButton) = createRefs()
+
+        // Ooops text
+        Text(
+            text = "Ooops!",
+            style = TextStyle(
+                color = Color.Black,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier
+                .constrainAs(titleLayout) {
+                    bottom.linkTo(descriptionLayout.top)
+                    start.linkTo(parent.start)
+                }
+                .height(IntrinsicSize.Min)
+                .padding(0.dp, 0.dp, 0.dp, 10.dp)
+        )
+
+        // Error message text
+        Text(
+            text = message,
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Normal,

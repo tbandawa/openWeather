@@ -5,7 +5,7 @@ import openweather.data.base.ApiBaseTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsNull
-import org.junit.*
+import org.junit.Test
 
 class OpenWeatherApiServiceTestApi: ApiBaseTest() {
 
@@ -60,6 +60,23 @@ class OpenWeatherApiServiceTestApi: ApiBaseTest() {
 
         assertThat(response.body()?.list?.size, `is`(40))
         assertThat(response.body()?.city?.name, `is`("Beijing"))
+
+    }
+
+    @Test
+    fun `test error 400`() = runBlocking {
+
+        enqueueResponse(fileName = "error.json", code = 400)
+        val response = service.fetchOneCall("api_key", 1.0, 1.0)
+        val request = mockWebServer.takeRequest()
+
+        assertThat(request.path, `is`("/onecall?appid=api_key&lat=1.0&lon=1.0"))
+
+        assertThat(response, IsNull.notNullValue())
+
+        assertThat(response.code(), `is`(400))
+
+        assertThat(response.body(), IsNull.nullValue())
 
     }
 

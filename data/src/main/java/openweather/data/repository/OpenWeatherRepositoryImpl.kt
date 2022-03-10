@@ -14,7 +14,10 @@ import openweather.data.remote.response.CurrentWeatherResponse
 import openweather.data.remote.response.FiveDayWeatherForecastResponse
 import openweather.data.remote.response.OneCallResponse
 import openweather.domain.mapper.ResponseMapper
-import openweather.domain.models.*
+import openweather.domain.models.CurrentWeather
+import openweather.domain.models.FiveDayWeatherForecast
+import openweather.domain.models.NetworkResult
+import openweather.domain.models.OneCall
 import openweather.domain.repository.OpenWeatherRepository
 import javax.inject.Inject
 
@@ -29,7 +32,7 @@ class OpenWeatherRepositoryImpl @Inject constructor(
     private val fiveDayWeatherMapper: ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> by lazy { FiveDayWeatherMapper() }
 
     override suspend fun fetchCurrentWeather(city: String): Flow<NetworkResult<CurrentWeather>> = flow {
-        emit(NetworkResult.Loading())
+        emit(NetworkResult.Loading)
         emit(safeApiCall(currentWeatherMapper) {
             openWeatherApi.fetchCurrentWeather(
                 BuildConfig.OPEN_WEATHER_API_KEY,
@@ -39,7 +42,7 @@ class OpenWeatherRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override suspend fun fetchOneCall(lat: Double, lon: Double): Flow<NetworkResult<OneCall>> = flow {
-        emit(NetworkResult.Loading())
+        emit(NetworkResult.Loading)
         emit(safeApiCall(oneCallMapper) {
             openWeatherApi.fetchOneCall(
                 BuildConfig.OPEN_WEATHER_API_KEY,
@@ -50,7 +53,7 @@ class OpenWeatherRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override suspend fun fetchFiveDayWeather(city: String): Flow<NetworkResult<FiveDayWeatherForecast>> = flow {
-        emit(NetworkResult.Loading())
+        emit(NetworkResult.Loading)
         emit(safeApiCall(fiveDayWeatherMapper) {
             openWeatherApi.fetchFiveDayWeather(
                 BuildConfig.OPEN_WEATHER_API_KEY,

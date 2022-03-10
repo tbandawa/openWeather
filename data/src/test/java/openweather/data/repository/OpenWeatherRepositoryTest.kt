@@ -1,9 +1,16 @@
 package openweather.data.repository
 
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import openweather.data.base.BaseMockTest
-import openweather.data.remote.response.*
+import openweather.data.remote.response.CurrentWeatherResponse
+import openweather.data.remote.response.ErrorResponse
+import openweather.data.remote.response.FiveDayWeatherForecastResponse
+import openweather.data.remote.response.OneCallResponse
 import openweather.domain.models.CurrentWeather
 import openweather.domain.models.FiveDayWeatherForecast
 import openweather.domain.models.NetworkResult
@@ -11,13 +18,12 @@ import openweather.domain.models.OneCall
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 import org.junit.Test
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.anyDouble
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
 import retrofit2.Response
 
 open class OpenWeatherRepositoryTest : BaseMockTest() {
-
-
 
     @Test
     fun `test fetch current weather`() = runBlocking {
@@ -73,6 +79,31 @@ open class OpenWeatherRepositoryTest : BaseMockTest() {
                     value.data?.current?.sunrise,
                     CoreMatchers.`is`(1630815384)
                 )
+            }
+
+        }
+
+    }
+
+    @Test
+    fun `test error 400`() = runBlocking {
+
+        val errorResponse = readJsonResponse<ErrorResponse>("error.json")
+
+        var gson = Gson()
+        var jsonString = gson.toJson(errorResponse)
+
+        val responseBody: ResponseBody = jsonString
+            .toResponseBody("application/json".toMediaTypeOrNull())
+
+        `when`(openWeatherApi.fetchOneCall(anyString(), anyDouble(), anyDouble()))
+            .thenReturn(Response.error(404, responseBody))
+
+        openWeatherRepository.fetchOneCall(1.0, 1.0).collect { value: NetworkResult<OneCall> ->
+
+            if(value is NetworkResult.Error) {
+                MatcherAssert.assertThat(value.data?.cod, CoreMatchers.`is`("400"))
+                MatcherAssert.assertThat(value.data?.message, CoreMatchers.`is`("wrong latitude"))
             }
 
         }

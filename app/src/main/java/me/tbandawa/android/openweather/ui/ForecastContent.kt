@@ -22,6 +22,7 @@ import me.tbandawa.android.openweather.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
+import openweather.domain.models.NetworkResult
 import openweather.domain.models.PreferenceUnits
 
 @ExperimentalAnimationApi
@@ -33,7 +34,7 @@ fun ForecastContent(
     navigateUp: () -> Unit
 ){
 
-    val dailyItems = viewModel.oneCallWeather.value?.data?.daily
+    val dailyItems = (viewModel.oneCallWeather.collectAsState().value as NetworkResult.Success).data.daily
 
     var expandedItem by remember{ mutableStateOf(0) }
 
