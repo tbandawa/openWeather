@@ -5,14 +5,17 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.protobuf'
 
 protobuf {
+    def osx = osdetector.os == "osx" ? ":osx-x86_64" : ""
+
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.6.1'
+        artifact = 'com.google.protobuf:protoc:3.6.1' + osx
     }
     plugins {
         javalite {
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0' + osx
         }
     }
+
     generateProtoTasks {
         all().each { task ->
             task.builtins {
