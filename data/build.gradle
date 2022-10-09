@@ -8,11 +8,11 @@ protobuf {
     def osx = osdetector.os == "osx" ? ":osx-x86_64" : ""
 
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.6.1' + osx
+        artifact = "com.google.protobuf:protoc:3.6.1$osx"
     }
     plugins {
         javalite {
-            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0' + osx
+            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0$osx"
         }
     }
 
