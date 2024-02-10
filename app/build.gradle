@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "me.tbandawa.android.openweather"
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -40,7 +40,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        useIR = true
+        //useIR = true
     }
     buildFeatures {
         compose true
@@ -61,10 +61,8 @@ dependencies {
     implementation project(":domain")
     implementation project(":data")
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:2.37"
-    kapt "com.google.dagger:hilt-compiler:2.37"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-beta01'
+    // Koin
+    implementation("io.insert-koin:koin-android:3.2.0")
 
     // Navigation
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"

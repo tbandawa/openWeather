@@ -1,8 +1,10 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Minutely (
-    @SerializedName("dt") var dt : Int? = null,
-    @SerializedName("precipitation") var precipitation : Double? = null
+    @SerialName("dt") var dt : Int? = null,
+    @SerialName("precipitation") var precipitation : Double? = null
 )

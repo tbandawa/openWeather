@@ -1,15 +1,17 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Main (
-    @SerializedName("temp") var temp : Double? = null,
-    @SerializedName("feels_like") var feelsLike : Double? = null,
-    @SerializedName("temp_min") var tempMin : Double? = null,
-    @SerializedName("temp_max") var tempMax : Double? = null,
-    @SerializedName("temp_kf") var tempKf : Double? = null,
-    @SerializedName("pressure") var pressure : Int? = null,
-    @SerializedName("humidity") var humidity : Int? = null,
-    @SerializedName("sea_level") var seaLevel : Int? = null,
-    @SerializedName("grnd_level") var grndLevel : Int? = null
+    @SerialName("temp") var temp : Double? = null,
+    @SerialName("feels_like") var feelsLike : Double? = null,
+    @SerialName("temp_min") var tempMin : Double? = null,
+    @SerialName("temp_max") var tempMax : Double? = null,
+    @SerialName("temp_kf") var tempKf : Double? = null,
+    @SerialName("pressure") var pressure : Int? = null,
+    @SerialName("humidity") var humidity : Int? = null,
+    @SerialName("sea_level") var seaLevel : Int? = null,
+    @SerialName("grnd_level") var grndLevel : Int? = null
 )

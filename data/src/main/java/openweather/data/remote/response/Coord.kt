@@ -1,8 +1,10 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Coord (
-    @SerializedName("lon") var lon : Double? = null,
-    @SerializedName("lat") var lat : Double? = null
+    @SerialName("lon") var lon : Double? = null,
+    @SerialName("lat") var lat : Double? = null
 )

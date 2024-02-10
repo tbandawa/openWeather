@@ -84,6 +84,7 @@ fun WeatherContent(
             is NetworkResult.Empty -> {
                 LoadingScreen()
             }
+            else -> {}
         }
 
     }

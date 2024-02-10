@@ -1,18 +1,20 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlin.collections.List as list
 
+@Serializable
 data class List (
-    @SerializedName("dt") var dt : Int? = null,
-    @SerializedName("main") var main : Main? = null,
-    @SerializedName("weather") var weather : list<Weather>? = null,
-    @SerializedName("clouds") var clouds : Clouds? = null,
-    @SerializedName("wind") var wind : Wind? = null,
-    @SerializedName("visibility") var visibility : Int? = null,
-    @SerializedName("pop") var pop : Double? = null,
-    @SerializedName("rain") var rain : Rain? = null,
-    @SerializedName("snow") var snow : Snow? = null,
-    @SerializedName("sys") var sys : Sys? = null,
-    @SerializedName("dt_txt") var dtTxt : String? = null
+    @SerialName("dt") var dt : Int? = null,
+    @SerialName("main") var main : Main? = null,
+    @SerialName("weather") var weather : list<Weather>? = null,
+    @SerialName("clouds") var clouds : Clouds? = null,
+    @SerialName("wind") var wind : Wind? = null,
+    @SerialName("visibility") var visibility : Int? = null,
+    @SerialName("pop") var pop : Double? = null,
+    @SerialName("rain") var rain : Rain? = null,
+    @SerialName("snow") var snow : Snow? = null,
+    @SerialName("sys") var sys : Sys? = null,
+    @SerialName("dt_txt") var dtTxt : String? = null
 )
