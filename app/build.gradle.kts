@@ -64,9 +64,6 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
-    // Koin
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
-
     // Navigation
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
@@ -79,9 +76,6 @@ dependencies {
 
     // Accompanist Permissions
     implementation("com.google.accompanist:accompanist-permissions:0.20.0")
-
-    // Koin
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.5.0")

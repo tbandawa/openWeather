@@ -69,7 +69,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
 
     // Koin
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+    api("io.insert-koin:koin-androidx-compose:3.2.0")
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
