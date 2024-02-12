@@ -10,16 +10,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import me.tbandawa.android.openweather.ui.components.UnitChip
+import openweather.domain.models.PreferenceUnits
 
 @ExperimentalPermissionsApi
 @Composable
 fun EnableGpsContent() {
 
-    Surface(color = MaterialTheme.colorScheme.background) {
+    Surface(color = Color.White) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -65,4 +68,11 @@ fun EnableGpsContent() {
             )
         }
     }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Preview(showBackground = true)
+@Composable
+fun EnableGpsContentPreview() {
+    EnableGpsContent()
 }

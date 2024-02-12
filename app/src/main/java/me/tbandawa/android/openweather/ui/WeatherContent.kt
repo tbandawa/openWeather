@@ -2,6 +2,7 @@ package me.tbandawa.android.openweather.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -47,7 +48,7 @@ fun WeatherContent(
     navigateToForecast: () -> Unit
 ) {
 
-    Surface(color = MaterialTheme.colorScheme.background) {
+    Surface {
 
         // Boolean state to hold if request was successful
         var isLoaded by rememberSaveable { mutableStateOf(false) }
@@ -114,7 +115,8 @@ fun WeatherScreen(
             location,
             oneCall.current?.dt!!,
             navigateToSettings
-        ) }
+        ) },
+        containerColor = Color.White
     ) {
 
         ConstraintLayout(
@@ -265,6 +267,7 @@ fun LoadingScreen() {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .background(color = Color.White)
     ) {
 
         val (centerLayout, textTitle) = createRefs()

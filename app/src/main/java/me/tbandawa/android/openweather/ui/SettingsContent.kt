@@ -59,9 +59,10 @@ fun SettingsContent(
         }
     }
 
-    Surface(color = MaterialTheme.colorScheme.background) {
+    Surface {
         Scaffold(
-            topBar = { SettingsToolBar(navigateUp) }
+            topBar = { SettingsToolBar(navigateUp) },
+            containerColor = Color.White
         ) {
 
             ConstraintLayout(

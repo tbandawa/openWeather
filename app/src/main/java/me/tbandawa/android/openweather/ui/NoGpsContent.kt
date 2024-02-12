@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -20,7 +21,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun NoGpsContent() {
 
-    Surface(color = MaterialTheme.colorScheme.background) {
+    Surface(color = Color.White) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -86,8 +87,13 @@ fun NoGpsContent() {
             ) {
                 Text(text = "Exit")
             }
-
         }
     }
+}
 
+@OptIn(ExperimentalPermissionsApi::class)
+@Preview(showBackground = true)
+@Composable
+fun NoGpsContentPreview() {
+    NoGpsContent()
 }

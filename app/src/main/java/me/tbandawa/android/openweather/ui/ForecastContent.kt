@@ -36,7 +36,7 @@ fun ForecastContent(
 
     val dailyItems = (viewModel.oneCallWeather.collectAsState().value as NetworkResult.Success).data.daily
 
-    var expandedItem by remember{ mutableStateOf(0) }
+    var expandedItem by remember{ mutableIntStateOf(0) }
 
     val showMore: (Int) -> Unit = {
         expandedItem = it
@@ -47,7 +47,8 @@ fun ForecastContent(
             topBar = { ForecastToolBar(
                 location,
                 navigateUp
-            )}
+            )},
+            containerColor = Color.White
         ) {
 
             // Header layout
