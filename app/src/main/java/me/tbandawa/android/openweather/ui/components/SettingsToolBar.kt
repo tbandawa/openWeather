@@ -1,6 +1,5 @@
 package me.tbandawa.android.openweather.ui.components
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -66,7 +65,6 @@ fun SettingsToolBar(
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Preview(showBackground = true)
 @Composable
 fun SettingsToolBarPreview() {
