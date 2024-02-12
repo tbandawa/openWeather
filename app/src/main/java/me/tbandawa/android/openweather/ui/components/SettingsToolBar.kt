@@ -1,5 +1,6 @@
 package me.tbandawa.android.openweather.ui.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.tbandawa.android.openweather.R
@@ -61,5 +63,14 @@ fun SettingsToolBar(
                 spotColor = Color.DarkGray,
                 shape = RoundedCornerShape(10.dp)
             )
+    )
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun SettingsToolBarPreview() {
+    SettingsToolBar(
+        navigateUp = { }
     )
 }
