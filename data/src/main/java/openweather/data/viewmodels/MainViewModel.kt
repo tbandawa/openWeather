@@ -1,4 +1,4 @@
-package me.tbandawa.android.openweather
+package openweather.data.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,5 +23,4 @@ class MainViewModel(
             }
         }
     }
-
 }

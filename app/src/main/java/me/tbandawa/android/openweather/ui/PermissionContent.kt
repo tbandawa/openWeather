@@ -3,7 +3,7 @@ package me.tbandawa.android.openweather.ui
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +22,7 @@ fun PermissionContent(
     launchPermissionRequest: () -> Unit
 ){
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -81,7 +81,7 @@ fun PermissionContent(
                     }
                     .padding(end = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.Black,
+                    containerColor = Color.Black,
                     contentColor = Color.White
                 )
             ) {
@@ -101,7 +101,7 @@ fun PermissionContent(
                     }
                     .padding(start = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
+                    containerColor = Color.LightGray,
                     contentColor = Color.White
                 )
             ) {

@@ -6,28 +6,28 @@ import openweather.domain.models.*
 
 class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
 
-    override fun mapToModel(response: OneCallResponse): OneCall {
+    override fun mapToModel(entity: OneCallResponse): OneCall {
         return OneCall(
-            response.lat,
-            response.lon,
-            response.timezone,
-            response.timezoneOffset,
+            entity.lat,
+            entity.lon,
+            entity.timezone,
+            entity.timezoneOffset,
             Current(
-                response.current?.dt,
-                response.current?.sunrise,
-                response.current?.sunset,
-                response.current?.temp,
-                response.current?.feelsLike,
-                response.current?.pressure,
-                response.current?.humidity,
-                response.current?.dewPoint,
-                response.current?.uvi,
-                response.current?.clouds,
-                response.current?.visibility,
-                response.current?.windSpeed,
-                response.current?.windDeg,
-                response.current?.windGust,
-                response.current?.weather?.map { weather ->
+                entity.current?.dt,
+                entity.current?.sunrise,
+                entity.current?.sunset,
+                entity.current?.temp,
+                entity.current?.feelsLike,
+                entity.current?.pressure,
+                entity.current?.humidity,
+                entity.current?.dewPoint,
+                entity.current?.uvi,
+                entity.current?.clouds,
+                entity.current?.visibility,
+                entity.current?.windSpeed,
+                entity.current?.windDeg,
+                entity.current?.windGust,
+                entity.current?.weather?.map { weather ->
                     Weather(
                         weather.id,
                         weather.main,
@@ -36,21 +36,21 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     )
                 },
                 Rain(
-                    response.current?.rain?.one_h,
-                    response.current?.rain?.three_h
+                    entity.current?.rain?.one_h,
+                    entity.current?.rain?.three_h
                 ),
                 Snow(
-                    response.current?.snow?.one_h,
-                    response.current?.snow?.three_h
+                    entity.current?.snow?.one_h,
+                    entity.current?.snow?.three_h
                 )
             ),
-            response.minutely?.map { minutely ->
+            entity.minutely?.map { minutely ->
                 Minutely(
                     minutely.dt,
                     minutely.precipitation
                 )
             },
-            response.hourly?.map { hourly ->
+            entity.hourly?.map { hourly ->
                 Hourly(
                     hourly.dt,
                     hourly.temp,
@@ -79,7 +79,7 @@ class OneCallMapper : ResponseMapper<OneCallResponse, OneCall> {
                     )
                 )
             },
-            response.daily?.map { daily ->
+            entity.daily?.map { daily ->
                 Daily(
                     daily.dt,
                     daily.sunrise,

@@ -2,10 +2,9 @@ package me.tbandawa.android.openweather.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,7 +12,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import openweather.domain.models.PreferenceUnits
 
-@ExperimentalMaterialApi
 @Composable
 fun UnitChip(
     preferenceUnits: PreferenceUnits,
@@ -26,14 +24,14 @@ fun UnitChip(
             preferenceUnits.temperature,
             preferenceUnits.speed,
             preferenceUnits.pressure,
-            preferenceUnits.time -> MaterialTheme.colors.onSurface
+            preferenceUnits.time -> MaterialTheme.colorScheme.onSurface
             else -> Color.Transparent
         },
         contentColor = when (text) {
             preferenceUnits.temperature,
             preferenceUnits.speed,
             preferenceUnits.pressure,
-            preferenceUnits.time -> MaterialTheme.colors.onPrimary
+            preferenceUnits.time -> MaterialTheme.colorScheme.onPrimary
             else -> Color.White
         },
         shape = CircleShape,
@@ -69,7 +67,7 @@ fun UnitChip(
         Text(
             text = text,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
         )
     }

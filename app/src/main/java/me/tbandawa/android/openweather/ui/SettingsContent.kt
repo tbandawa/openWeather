@@ -6,7 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -32,7 +32,6 @@ import me.tbandawa.android.openweather.ui.theme.orientation
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
 
-@ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
     unitsPreferencesDataStore: UnitsPreferencesDataStore,
@@ -58,7 +57,7 @@ fun SettingsContent(
         }
     }
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
             topBar = { SettingsToolBar(navigateUp) }
         ) {
@@ -66,6 +65,7 @@ fun SettingsContent(
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(it)
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
 

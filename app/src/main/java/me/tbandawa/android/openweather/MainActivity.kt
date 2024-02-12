@@ -14,6 +14,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import me.tbandawa.android.openweather.service.LocationInfo
 import me.tbandawa.android.openweather.ui.*
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
+import openweather.data.local.UnitsPreferencesDataStoreImpl
+import openweather.data.viewmodels.MainViewModel
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
 import org.koin.android.ext.android.inject
@@ -27,7 +29,6 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModel()
 
-    @OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -74,22 +75,23 @@ class MainActivity : ComponentActivity() {
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
                         val location = backStackEntry.arguments?.getString("location")
                         WeatherContent(
-                            preferenceUnits,
-                            viewModel,
-                            latitude!!,
-                            longitude!!,
-                            location!!,
-                            navigateToSettings
-                        ) { navigateToForecast(location) }
+                            preferenceUnits = preferenceUnits,
+                            viewModel = viewModel,
+                            latitude = latitude!!,
+                            longitude = longitude!!,
+                            location = location!!,
+                            navigateToSettings =  { navigateToSettings() },
+                            navigateToForecast = { navigateToForecast(location) }
+                        )
                     }
 
                     composable(route = "forecast/{location}") { backStackEntry ->
                         val location = backStackEntry.arguments?.getString("location")
                         ForecastContent(
-                            preferenceUnits,
-                            viewModel,
-                            location!!,
-                            navigateUp
+                            preferenceUnits = preferenceUnits,
+                            viewModel = viewModel,
+                            location = location!!,
+                            navigateUp = navigateUp
                         )
                     }
 

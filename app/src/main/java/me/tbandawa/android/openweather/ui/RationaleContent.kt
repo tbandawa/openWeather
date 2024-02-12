@@ -6,7 +6,7 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +23,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun RationaleContent() {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,7 +89,7 @@ fun RationaleContent() {
                     }
                     .padding(end = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.Black,
+                    containerColor = Color.Black,
                     contentColor = Color.White
                 )
             ) {
@@ -109,7 +109,7 @@ fun RationaleContent() {
                     }
                     .padding(start = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
+                    containerColor = Color.LightGray,
                     contentColor = Color.White
                 )
             ) {

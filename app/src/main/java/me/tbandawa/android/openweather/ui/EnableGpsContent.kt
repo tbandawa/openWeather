@@ -1,9 +1,9 @@
 package me.tbandawa.android.openweather.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +19,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun EnableGpsContent() {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -63,8 +63,6 @@ fun EnableGpsContent() {
                     .height(IntrinsicSize.Max)
                     .padding(bottom = 10.dp)
             )
-
         }
     }
-
 }

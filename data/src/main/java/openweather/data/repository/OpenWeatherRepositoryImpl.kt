@@ -21,7 +21,7 @@ class OpenWeatherRepositoryImpl (
     private val currentWeatherMapper: CurrentWeatherMapper,
     private val oneCallMapper: OneCallMapper,
     private val fiveDayWeatherMapper: FiveDayWeatherMapper,
-    errorMapper: ErrorMapper
+    private val errorMapper: ErrorMapper
 ) : OpenWeatherRepository, BaseResponse(errorMapper) {
 
     override suspend fun fetchCurrentWeather(city: String): Flow<NetworkResult<CurrentWeather>> = flow {

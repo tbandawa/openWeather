@@ -7,7 +7,12 @@ import openweather.data.mapper.FiveDayWeatherMapper
 import openweather.data.mapper.OneCallMapper
 import openweather.data.remote.api.OpenWeatherApi
 import openweather.data.repository.OpenWeatherRepositoryImpl
+import openweather.data.viewmodels.MainViewModel
+import openweather.domain.datastore.UnitsPreferencesDataStore
+import openweather.domain.repository.OpenWeatherRepository
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 val mappersModule = module {
@@ -22,11 +27,24 @@ val apiModule = module {
 }
 
 val preferencesModule = module {
-    single { UnitsPreferencesDataStoreImpl(androidContext()) }
+    single<UnitsPreferencesDataStore> { UnitsPreferencesDataStoreImpl(androidContext()) }
 }
 
 val repositoryModule = module {
-    single { OpenWeatherRepositoryImpl(get(), get(), get(), get(), get()) }
+    single<OpenWeatherRepository> { OpenWeatherRepositoryImpl(get(), get(), get(), get(), get()) }
 }
 
-val dataModule = listOf( mappersModule, apiModule, preferencesModule, repositoryModule)
+val viewModelModule = module {
+    single { MainViewModel(get()) }
+}
+
+fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
+    appDeclaration()
+    modules(
+        mappersModule,
+        apiModule,
+        preferencesModule,
+        repositoryModule,
+        viewModelModule
+    )
+}

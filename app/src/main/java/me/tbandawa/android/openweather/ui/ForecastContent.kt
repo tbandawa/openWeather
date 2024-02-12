@@ -2,15 +2,14 @@ package me.tbandawa.android.openweather.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,12 +17,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.tbandawa.android.openweather.MainViewModel
+import openweather.data.viewmodels.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.PreferenceUnits
+import org.koin.androidx.compose.koinViewModel
 
 @ExperimentalAnimationApi
 @Composable
@@ -42,7 +42,7 @@ fun ForecastContent(
         expandedItem = it
     }
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
             topBar = { ForecastToolBar(
                 location,
@@ -53,8 +53,8 @@ fun ForecastContent(
             // Header layout
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
+                    .fillMaxSize()
+                    .padding(it)
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
 
@@ -87,10 +87,7 @@ fun ForecastContent(
                         )
                     }
                 }
-
             }
-
         }
     }
-
 }

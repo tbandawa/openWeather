@@ -3,7 +3,7 @@ package me.tbandawa.android.openweather.ui
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +20,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun NoGpsContent() {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -80,7 +80,7 @@ fun NoGpsContent() {
                     }
                     .padding(start = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
+                    containerColor = Color.LightGray,
                     contentColor = Color.White
                 )
             ) {

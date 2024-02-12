@@ -4,7 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -20,7 +20,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_4X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
-import me.tbandawa.android.openweather.MainViewModel
+import openweather.data.viewmodels.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
@@ -32,6 +32,7 @@ import openweather.domain.models.Error
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.models.PreferenceUnits
+import org.koin.androidx.compose.koinViewModel
 import java.util.*
 
 @ExperimentalAnimationApi
@@ -46,7 +47,7 @@ fun WeatherContent(
     navigateToForecast: () -> Unit
 ) {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = MaterialTheme.colorScheme.background) {
 
         // Boolean state to hold if request was successful
         var isLoaded by rememberSaveable { mutableStateOf(false) }
@@ -118,6 +119,7 @@ fun WeatherScreen(
 
         ConstraintLayout(
             modifier = Modifier
+                .padding(it)
                 .fillMaxSize()
         ) {
 
@@ -366,7 +368,7 @@ fun ErrorScreen(
                 }
                 .padding(end = 5.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = Color.Black,
+                containerColor = Color.Black,
                 contentColor = Color.White
             )
         ) {
@@ -438,7 +440,7 @@ fun FailureScreen(
                 }
                 .padding(end = 5.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = Color.Black,
+                containerColor = Color.Black,
                 contentColor = Color.White
             )
         ) {
