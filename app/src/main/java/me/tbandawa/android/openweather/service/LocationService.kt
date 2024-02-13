@@ -18,7 +18,7 @@ import java.util.*
 
 @SuppressLint("MissingPermission")
 class LocationService(
-    val context: Context
+    private val context: Context
     ) : Service(), LocationListener {
 
     private var location: Location? = null
