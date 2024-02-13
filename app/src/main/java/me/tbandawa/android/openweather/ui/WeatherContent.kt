@@ -3,11 +3,27 @@ package me.tbandawa.android.openweather.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,13 +31,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_4X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
-import openweather.data.viewmodels.MainViewModel
 import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.extensions.toTemperature
 import me.tbandawa.android.openweather.ui.components.BottomRecycler
@@ -29,12 +45,12 @@ import me.tbandawa.android.openweather.ui.components.DetailGrid
 import me.tbandawa.android.openweather.ui.components.WeatherToolBar
 import me.tbandawa.android.openweather.ui.theme.dimensions
 import me.tbandawa.android.openweather.ui.theme.orientation
+import openweather.data.viewmodels.MainViewModel
 import openweather.domain.models.Error
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.OneCall
 import openweather.domain.models.PreferenceUnits
-import org.koin.androidx.compose.koinViewModel
-import java.util.*
+import java.util.Locale
 
 @ExperimentalAnimationApi
 @Composable
@@ -50,17 +66,8 @@ fun WeatherContent(
 
     Surface {
 
-        // Boolean state to hold if request was successful
-        var isLoaded by rememberSaveable { mutableStateOf(false) }
-
         // Retry callback
         val retry: () -> Unit = { viewModel.fetchOneCall(latitude, longitude) }
-
-        LaunchedEffect(Unit) {
-            // If request unsuccessful, call again
-            if (isLoaded.not())
-                viewModel.fetchOneCall(latitude, longitude)
-        }
 
         // Update UI according to network result state
         when(val result = viewModel.oneCallWeather.collectAsState().value) {
@@ -68,7 +75,6 @@ fun WeatherContent(
                 LoadingScreen()
             }
             is NetworkResult.Success -> {
-                isLoaded = true
                 WeatherScreen(
                     preferenceUnits = preferenceUnits,
                     oneCall = result.data,
@@ -451,4 +457,11 @@ fun FailureScreen(
         }
 
     }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun WeatherContentPreview() {
+    LoadingScreen()
 }

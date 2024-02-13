@@ -34,7 +34,7 @@ fun NoGpsContent() {
 
             // No gps text
             Text(
-                text = "Location feature no found.",
+                text = "Location feature not found",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
@@ -52,11 +52,11 @@ fun NoGpsContent() {
 
             // Rationale description text
             Text(
-                text = "openWeather needs the location to know where you are.",
+                text = "openWeather needs location services to know where you are.",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {

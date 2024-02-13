@@ -37,7 +37,7 @@ fun RationaleContent() {
 
             // Title text
             Text(
-                text = "Location access permission denied.",
+                text = "Location access permission denied",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
@@ -59,7 +59,7 @@ fun RationaleContent() {
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {

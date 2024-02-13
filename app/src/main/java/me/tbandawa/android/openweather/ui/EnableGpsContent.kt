@@ -33,7 +33,7 @@ fun EnableGpsContent() {
 
             // Enable location text
             Text(
-                text = "Enable location.",
+                text = "Enable location services",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
@@ -55,7 +55,7 @@ fun EnableGpsContent() {
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {

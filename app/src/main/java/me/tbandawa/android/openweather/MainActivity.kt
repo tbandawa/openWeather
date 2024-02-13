@@ -13,9 +13,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import me.tbandawa.android.openweather.service.LocationInfo
-import me.tbandawa.android.openweather.ui.*
+import me.tbandawa.android.openweather.service.LocationService
+import me.tbandawa.android.openweather.ui.EnableGpsContent
+import me.tbandawa.android.openweather.ui.ForecastContent
+import me.tbandawa.android.openweather.ui.LoadingContent
+import me.tbandawa.android.openweather.ui.SettingsContent
+import me.tbandawa.android.openweather.ui.WeatherContent
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
-import openweather.data.local.UnitsPreferencesDataStoreImpl
 import openweather.data.viewmodels.MainViewModel
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
@@ -30,12 +34,24 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        installSplashScreen().setKeepOnScreenCondition {
-            true
+        // Create location service, observe gps coordinates and
+        // navigate call api if location info is available
+        LocationService(this@MainActivity).locationInfo.observe(this) { locationInfo ->
+            if (locationInfo != null) {
+                viewModel.fetchOneCall(
+                    lat = locationInfo.latitude,
+                    lon = locationInfo.longitude
+                )
+            } else {
+                viewModel.dismissSplash()
+            }
         }
 
-        super.onCreate(savedInstanceState)
+        installSplashScreen().setKeepOnScreenCondition {
+            viewModel.showSplash.value
+        }
 
         setContent {
 
@@ -106,14 +122,10 @@ class MainActivity : ComponentActivity() {
                             navigateUp
                         )
                     }
-
                 }
             }
-
         }
-
     }
-
 }
 
 @ExperimentalPermissionsApi
