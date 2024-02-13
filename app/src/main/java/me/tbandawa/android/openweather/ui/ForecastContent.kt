@@ -10,20 +10,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import openweather.data.viewmodels.MainViewModel
 import me.tbandawa.android.openweather.ui.components.ForecastItem
 import me.tbandawa.android.openweather.ui.components.ForecastToolBar
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
+import openweather.data.viewmodels.MainViewModel
 import openweather.domain.models.NetworkResult
 import openweather.domain.models.PreferenceUnits
-import org.koin.androidx.compose.koinViewModel
 
 @ExperimentalAnimationApi
 @Composable

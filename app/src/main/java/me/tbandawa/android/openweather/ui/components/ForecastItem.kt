@@ -5,7 +5,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -19,15 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
+import coil.compose.AsyncImage
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.R
@@ -51,13 +48,7 @@ fun ForecastItem(
     showMore: (Int) -> Unit
 ) {
 
-    val weatherIcon = rememberAsyncImagePainter(
-        ImageRequest.Builder(LocalContext.current)
-            .data(data = "${OPEN_WEATHER_ICON_URL}${daily.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}")
-            .apply(block = fun ImageRequest.Builder.() {
-                crossfade(true)
-            }).build()
-    )
+    val weatherIcon = "${OPEN_WEATHER_ICON_URL}${daily.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}"
 
     Box(modifier = Modifier
         .padding(top = 0.dp, bottom = 0.dp, start = 0.dp, end = 0.dp)
@@ -122,8 +113,8 @@ fun ForecastItem(
                     modifier = Modifier
                         .padding(8.dp, 0.dp, 0.dp, 0.dp)
                 )
-                Image(
-                    painter = weatherIcon,
+                AsyncImage(
+                    model = weatherIcon,
                     contentDescription = null,
                     modifier = Modifier
                         .size(55.dp, 50.dp)
