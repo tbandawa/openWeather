@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.OpenWeather</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/openweather_brand</item>
+
+        <!-- Status bar and Nav bar configs -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

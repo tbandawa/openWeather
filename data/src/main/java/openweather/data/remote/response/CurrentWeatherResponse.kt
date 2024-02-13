@@ -1,22 +1,24 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlin.collections.List as list
 
+@Serializable
 data class CurrentWeatherResponse(
-    @SerializedName("coord") var coord : Coord? = null,
-    @SerializedName("weather") var weather : list<Weather>? = null,
-    @SerializedName("base") var base : String? = null,
-    @SerializedName("main") var main : Main? = null,
-    @SerializedName("visibility") var visibility : Int? = null,
-    @SerializedName("wind") var wind : Wind? = null,
-    @SerializedName("clouds") var clouds : Clouds? = null,
-    @SerializedName("rain") var rain : Rain? = null,
-    @SerializedName("snow") var snow : Snow? = null,
-    @SerializedName("dt") var dt : Int? = null,
-    @SerializedName("sys") var sys : Sys? = null,
-    @SerializedName("timezone") var timezone : Int? = null,
-    @SerializedName("id") var id : Int? = null,
-    @SerializedName("name") var name : String? = null,
-    @SerializedName("cod") var cod : Int? = null
+    @SerialName("coord") var coord : Coord? = null,
+    @SerialName("weather") var weather : list<Weather>? = null,
+    @SerialName("base") var base : String? = null,
+    @SerialName("main") var main : Main? = null,
+    @SerialName("visibility") var visibility : Int? = null,
+    @SerialName("wind") var wind : Wind? = null,
+    @SerialName("clouds") var clouds : Clouds? = null,
+    @SerialName("rain") var rain : Rain? = null,
+    @SerialName("snow") var snow : Snow? = null,
+    @SerialName("dt") var dt : Int? = null,
+    @SerialName("sys") var sys : Sys? = null,
+    @SerialName("timezone") var timezone : Int? = null,
+    @SerialName("id") var id : Int? = null,
+    @SerialName("name") var name : String? = null,
+    @SerialName("cod") var cod : Int? = null
 )

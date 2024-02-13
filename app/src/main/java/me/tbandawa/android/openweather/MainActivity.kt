@@ -3,37 +3,55 @@ package me.tbandawa.android.openweather
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
 import me.tbandawa.android.openweather.service.LocationInfo
-import me.tbandawa.android.openweather.ui.*
+import me.tbandawa.android.openweather.service.LocationService
+import me.tbandawa.android.openweather.ui.EnableGpsContent
+import me.tbandawa.android.openweather.ui.ForecastContent
+import me.tbandawa.android.openweather.ui.LoadingContent
+import me.tbandawa.android.openweather.ui.SettingsContent
+import me.tbandawa.android.openweather.ui.WeatherContent
 import me.tbandawa.android.openweather.ui.theme.OpenWeatherTheme
+import openweather.data.viewmodels.MainViewModel
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalPermissionsApi
 @ExperimentalAnimationApi
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var unitsPreferencesDataStore: UnitsPreferencesDataStore
+    private val unitsPreferencesDataStore: UnitsPreferencesDataStore by inject()
+    private val viewModel: MainViewModel by viewModel()
 
-    private val viewModel: MainViewModel by viewModels()
-
-    @OptIn(InternalCoroutinesApi::class, androidx.compose.material.ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Create location service, observe gps coordinates and
+        // navigate call api if location info is available
+        LocationService(this@MainActivity).locationInfo.observe(this) { locationInfo ->
+            if (locationInfo != null) {
+                viewModel.fetchOneCall(
+                    lat = locationInfo.latitude,
+                    lon = locationInfo.longitude
+                )
+            } else {
+                viewModel.dismissSplash()
+            }
+        }
+
+        installSplashScreen().setKeepOnScreenCondition {
+            viewModel.showSplash.value
+        }
 
         setContent {
 
@@ -78,22 +96,23 @@ class MainActivity : ComponentActivity() {
                         val longitude = backStackEntry.arguments?.getString("longitude")?.toDouble()
                         val location = backStackEntry.arguments?.getString("location")
                         WeatherContent(
-                            preferenceUnits,
-                            viewModel,
-                            latitude!!,
-                            longitude!!,
-                            location!!,
-                            navigateToSettings
-                        ) { navigateToForecast(location) }
+                            preferenceUnits = preferenceUnits,
+                            viewModel = viewModel,
+                            latitude = latitude!!,
+                            longitude = longitude!!,
+                            location = location!!,
+                            navigateToSettings =  { navigateToSettings() },
+                            navigateToForecast = { navigateToForecast(location) }
+                        )
                     }
 
                     composable(route = "forecast/{location}") { backStackEntry ->
                         val location = backStackEntry.arguments?.getString("location")
                         ForecastContent(
-                            preferenceUnits,
-                            viewModel,
-                            location!!,
-                            navigateUp
+                            preferenceUnits = preferenceUnits,
+                            viewModel = viewModel,
+                            location = location!!,
+                            navigateUp = navigateUp
                         )
                     }
 
@@ -103,14 +122,10 @@ class MainActivity : ComponentActivity() {
                             navigateUp
                         )
                     }
-
                 }
             }
-
         }
-
     }
-
 }
 
 @ExperimentalPermissionsApi

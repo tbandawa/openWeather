@@ -3,7 +3,7 @@ package me.tbandawa.android.openweather.ui
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -22,7 +23,7 @@ fun PermissionContent(
     launchPermissionRequest: () -> Unit
 ){
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = Color.White) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,7 +58,7 @@ fun PermissionContent(
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {
@@ -81,7 +82,7 @@ fun PermissionContent(
                     }
                     .padding(end = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.Black,
+                    containerColor = Color.Black,
                     contentColor = Color.White
                 )
             ) {
@@ -101,14 +102,19 @@ fun PermissionContent(
                     }
                     .padding(start = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
+                    containerColor = Color.LightGray,
                     contentColor = Color.White
                 )
             ) {
                 Text(text = "Exit")
             }
-
         }
     }
+}
 
+@OptIn(ExperimentalPermissionsApi::class)
+@Preview(showBackground = true)
+@Composable
+fun PermissionContentPreview() {
+    PermissionContent(){ }
 }

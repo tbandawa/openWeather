@@ -6,7 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -29,10 +30,10 @@ import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
 import me.tbandawa.android.openweather.ui.theme.orientation
+import openweather.data.local.UnitsPreferencesDataStoreImpl
 import openweather.domain.datastore.UnitsPreferencesDataStore
 import openweather.domain.models.PreferenceUnits
 
-@ExperimentalMaterialApi
 @Composable
 fun SettingsContent(
     unitsPreferencesDataStore: UnitsPreferencesDataStore,
@@ -58,14 +59,16 @@ fun SettingsContent(
         }
     }
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface {
         Scaffold(
-            topBar = { SettingsToolBar(navigateUp) }
+            topBar = { SettingsToolBar(navigateUp) },
+            containerColor = Color.White
         ) {
 
             ConstraintLayout(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(it)
                     .padding(16.dp, 0.dp, 16.dp, 0.dp)
             ) {
 
@@ -127,7 +130,8 @@ fun SettingsContent(
                             color = Color.LightGray,
                             contentColor = Color.LightGray,
                             shape = CircleShape,
-                            modifier = Modifier.padding(1.dp)
+                            modifier = Modifier
+                                .height(35.dp)
                         ) {
                             Row {
                                 UnitChip(preferenceUnits, updateUnitsPreference, "°C")
@@ -168,7 +172,8 @@ fun SettingsContent(
                             color = Color.LightGray,
                             contentColor = Color.LightGray,
                             shape = CircleShape,
-                            modifier = Modifier.padding(1.dp)
+                            modifier = Modifier
+                                .height(35.dp)
                         ) {
                             Row {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "m/s")
@@ -210,7 +215,8 @@ fun SettingsContent(
                             color = Color.LightGray,
                             contentColor = Color.LightGray,
                             shape = CircleShape,
-                            modifier = Modifier.padding(1.dp)
+                            modifier = Modifier
+                                .height(35.dp)
                         ) {
                             Row {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "hPa")
@@ -263,7 +269,8 @@ fun SettingsContent(
                             color = Color.LightGray,
                             contentColor = Color.LightGray,
                             shape = CircleShape,
-                            modifier = Modifier.padding(1.dp)
+                            modifier = Modifier
+                                .height(35.dp)
                         ) {
                             Row {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "12-hour")
@@ -482,11 +489,16 @@ fun SettingsContent(
                         )
                     )
                 }
-
             }
-
         }
-
     }
+}
 
+@Preview(showBackground = true)
+@Composable
+fun SettingsContentPreview() {
+    SettingsContent(
+        unitsPreferencesDataStore = UnitsPreferencesDataStoreImpl(LocalContext.current),
+        navigateUp = { }
+    )
 }

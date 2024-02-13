@@ -1,9 +1,11 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Wind (
-    @SerializedName("speed") var speed : Double? = null,
-    @SerializedName("deg") var deg : Int? = null,
-    @SerializedName("gust") var gust : Double? = null
+    @SerialName("speed") var speed : Double? = null,
+    @SerialName("deg") var deg : Int? = null,
+    @SerialName("gust") var gust : Double? = null
 )

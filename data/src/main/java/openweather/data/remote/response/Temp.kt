@@ -1,12 +1,14 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Temp (
-    @SerializedName("day") var day : Double? = null,
-    @SerializedName("min") var min : Double? = null,
-    @SerializedName("max") var max : Double? = null,
-    @SerializedName("night") var night : Double? = null,
-    @SerializedName("eve") var eve : Double? = null,
-    @SerializedName("morn") var morn : Double? = null
+    @SerialName("day") var day : Double? = null,
+    @SerialName("min") var min : Double? = null,
+    @SerialName("max") var max : Double? = null,
+    @SerialName("night") var night : Double? = null,
+    @SerialName("eve") var eve : Double? = null,
+    @SerialName("morn") var morn : Double? = null
 )

@@ -1,13 +1,15 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Sys (
-    @SerializedName("type") var type : Int? = null,
-    @SerializedName("id") var id : Int? = null,
-    @SerializedName("message") var message : String? = null,
-    @SerializedName("country") var country : String? = null,
-    @SerializedName("sunrise") var sunrise : Int? = null,
-    @SerializedName("sunset") var sunset : Int? = null,
-    @SerializedName("pod") var pod : String? = null
+    @SerialName("type") var type : Int? = null,
+    @SerialName("id") var id : Int? = null,
+    @SerialName("message") var message : String? = null,
+    @SerialName("country") var country : String? = null,
+    @SerialName("sunrise") var sunrise : Int? = null,
+    @SerialName("sunset") var sunset : Int? = null,
+    @SerialName("pod") var pod : String? = null
 )

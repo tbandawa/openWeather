@@ -57,5 +57,4 @@ class UnitsPreferencesDataStoreImpl(val context: Context): UnitsPreferencesDataS
         override suspend fun writeTo(t: UnitsPreferences, output: OutputStream) = t.writeTo(output)
 
     }
-
 }

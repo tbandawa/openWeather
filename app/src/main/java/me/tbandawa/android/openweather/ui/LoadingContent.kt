@@ -19,7 +19,7 @@ fun LoadingContent(
 
     val context = LocalContext.current
 
-    var doNotShowRationale by rememberSaveable { mutableStateOf(false) }
+    val doNotShowRationale by rememberSaveable { mutableStateOf(false) }
 
     // Create permission state or required permissions
     val locationPermissionState = rememberMultiplePermissionsState(
@@ -30,8 +30,8 @@ fun LoadingContent(
     when {
         // Permissions granted
         locationPermissionState.allPermissionsGranted -> {
-            // Create location service and observe gps coordinates and navigate to weather
-            // content else prompt user to enable device location services
+            // Create location service and observe gps coordinates and navigate
+            // to weather content or else prompt user to enable device location services
             val locationService = LocationService(context)
             locationService.locationInfo.value?.let { locationInfo ->
                 navigateToWeather(locationInfo)
@@ -45,7 +45,7 @@ fun LoadingContent(
             if (doNotShowRationale) {
                 NoGpsContent()
             } else {
-                // Ask user to grant ermissions
+                // Ask user to grant permissions
                 PermissionContent {
                     locationPermissionState.launchMultiplePermissionRequest()
                 }
@@ -56,5 +56,4 @@ fun LoadingContent(
             RationaleContent()
         }
     }
-
 }

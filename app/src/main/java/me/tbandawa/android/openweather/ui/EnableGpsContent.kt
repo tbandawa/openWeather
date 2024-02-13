@@ -1,25 +1,28 @@
 package me.tbandawa.android.openweather.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import me.tbandawa.android.openweather.ui.components.UnitChip
+import openweather.domain.models.PreferenceUnits
 
 @ExperimentalPermissionsApi
 @Composable
 fun EnableGpsContent() {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = Color.White) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -30,7 +33,7 @@ fun EnableGpsContent() {
 
             // Enable location text
             Text(
-                text = "Enable location.",
+                text = "Enable location services",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
@@ -52,7 +55,7 @@ fun EnableGpsContent() {
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {
@@ -63,8 +66,13 @@ fun EnableGpsContent() {
                     .height(IntrinsicSize.Max)
                     .padding(bottom = 10.dp)
             )
-
         }
     }
+}
 
+@OptIn(ExperimentalPermissionsApi::class)
+@Preview(showBackground = true)
+@Composable
+fun EnableGpsContentPreview() {
+    EnableGpsContent()
 }

@@ -5,16 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.extensions.toTemperature
@@ -29,11 +31,12 @@ fun HourlyItem(
     temperatureUnit: String
 ) {
 
-    val hourlyIcon = rememberImagePainter(
-        data = "${OPEN_WEATHER_ICON_URL}${hourly.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}",
-        builder = {
-            crossfade(true)
-        }
+    val hourlyIcon = rememberAsyncImagePainter(
+        ImageRequest.Builder(LocalContext.current)
+            .data(data = "${OPEN_WEATHER_ICON_URL}${hourly.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_2X}")
+            .apply(block = fun ImageRequest.Builder.() {
+                crossfade(true)
+            }).build()
     )
 
     Column(modifier = Modifier

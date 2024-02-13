@@ -3,7 +3,7 @@ package me.tbandawa.android.openweather.ui
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -20,7 +21,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @Composable
 fun NoGpsContent() {
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = Color.White) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -33,7 +34,7 @@ fun NoGpsContent() {
 
             // No gps text
             Text(
-                text = "Location feature no found.",
+                text = "Location feature not found",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
@@ -51,11 +52,11 @@ fun NoGpsContent() {
 
             // Rationale description text
             Text(
-                text = "openWeather needs the location to know where you are.",
+                text = "openWeather needs location services to know where you are.",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                    fontSize = 16.sp
                 ),
                 modifier = Modifier
                     .constrainAs(descriptionLayout) {
@@ -80,14 +81,19 @@ fun NoGpsContent() {
                     }
                     .padding(start = 5.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.LightGray,
+                    containerColor = Color.LightGray,
                     contentColor = Color.White
                 )
             ) {
                 Text(text = "Exit")
             }
-
         }
     }
+}
 
+@OptIn(ExperimentalPermissionsApi::class)
+@Preview(showBackground = true)
+@Composable
+fun NoGpsContentPreview() {
+    NoGpsContent()
 }

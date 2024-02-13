@@ -7,12 +7,12 @@ import openweather.domain.models.List
 
 class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, FiveDayWeatherForecast> {
 
-    override fun mapToModel(response: FiveDayWeatherForecastResponse): FiveDayWeatherForecast {
+    override fun mapToModel(entity: FiveDayWeatherForecastResponse): FiveDayWeatherForecast {
         return FiveDayWeatherForecast(
-            response.cod,
-            response.message,
-            response.cnt,
-            response.list?.map { list ->
+            entity.cod,
+            entity.message,
+            entity.cnt,
+            entity.list?.map { list ->
                 List(
                     list.dt,
                     Main(
@@ -60,17 +60,17 @@ class FiveDayWeatherMapper : ResponseMapper<FiveDayWeatherForecastResponse, Five
                 )
             },
             City(
-                response.city?.id,
-                response.city?.name,
+                entity.city?.id,
+                entity.city?.name,
                 Coord(
-                    response.city?.coord?.lon,
-                    response.city?.coord?.lat
+                    entity.city?.coord?.lon,
+                    entity.city?.coord?.lat
                 ),
-                response.city?.country,
-                response.city?.population,
-                response.city?.timezone,
-                response.city?.sunrise,
-                response.city?.sunset
+                entity.city?.country,
+                entity.city?.population,
+                entity.city?.timezone,
+                entity.city?.sunrise,
+                entity.city?.sunset
             )
         )
     }

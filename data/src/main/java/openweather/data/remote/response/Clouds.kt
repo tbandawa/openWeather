@@ -1,7 +1,9 @@
 package openweather.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Clouds (
-    @SerializedName("all") var all : Int? = null
+    @SerialName("all") var all : Int? = null
 )

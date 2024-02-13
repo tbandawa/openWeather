@@ -5,20 +5,16 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.location.*
-import android.os.IBinder
 import android.os.Bundle
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import timber.log.Timber
-import java.lang.Exception
-import android.location.Geocoder
+import android.os.IBinder
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import java.io.IOException
 import java.util.*
 
 @SuppressLint("MissingPermission")
 class LocationService(
-    val context: Context
+    private val context: Context
     ) : Service(), LocationListener {
 
     private var location: Location? = null
@@ -27,7 +23,8 @@ class LocationService(
 
     private var locationManager: LocationManager? = null
 
-    val locationInfo: MutableState<LocationInfo?> = mutableStateOf(null)
+    private val _locationInfo = MutableLiveData<LocationInfo?>()
+    val locationInfo: MutableLiveData<LocationInfo?> = _locationInfo
 
     override fun onBind(arg0: Intent?): IBinder? = null
 
@@ -60,7 +57,8 @@ class LocationService(
                 }
             }
         } catch (e: Exception) {
-            Timber.d("ERROR -> ${e.message}")
+            e.printStackTrace()
+            _locationInfo.value = null
         }
     }
 
@@ -78,7 +76,7 @@ class LocationService(
                 locationName = "${address.countryName}, ${address.locality}"
             }
         } catch (e: IOException) {
-            Timber.d("Unable connect to Geocoder -> ${e.message}")
+            e.printStackTrace()
         } finally {
             if (locationName.isNullOrEmpty())
                 locationName = "open Weather"
@@ -87,9 +85,7 @@ class LocationService(
         if (isLocation.not()) {
             isLocation = true
 
-            Timber.d("location -> ($latitude, $longitude), address -> $locationName")
-
-            locationInfo.value = LocationInfo(
+            _locationInfo.value = LocationInfo(
                 latitude,
                 longitude,
                 locationName
@@ -99,7 +95,9 @@ class LocationService(
 
     }
 
-    fun stopUsingGPS() { locationManager?.removeUpdates(this@LocationService) }
+    fun stopUsingGPS() {
+        locationManager?.removeUpdates(this@LocationService)
+    }
 
     override fun onLocationChanged(location: Location) {
         updateLocation(location.latitude, location.longitude)
