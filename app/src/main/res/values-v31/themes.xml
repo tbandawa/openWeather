@@ -5,6 +5,7 @@
         <item name="android:windowSplashScreenBackground">@color/white</item>
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
         <item name="postSplashScreenTheme">@style/Theme.OpenWeather</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/openweather_brand</item>
 
         <!-- Status bar and Nav bar configs -->
         <item name="android:statusBarColor">@android:color/transparent</item>
