@@ -22,11 +22,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +35,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_4X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
 import me.tbandawa.android.openweather.R
@@ -109,11 +110,12 @@ fun WeatherScreen(
     navigateToForecast: () -> Unit
 ) {
 
-    val weatherIcon = rememberImagePainter(
-        data = "${OPEN_WEATHER_ICON_URL}${oneCall.current?.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_4X}",
-        builder = {
-            crossfade(true)
-        }
+    val weatherIcon = rememberAsyncImagePainter(
+        ImageRequest.Builder(LocalContext.current)
+            .data(data = "${OPEN_WEATHER_ICON_URL}${oneCall.current?.weather?.get(0)?.icon}${OPEN_WEATHER_ICON_4X}")
+            .apply(block = fun ImageRequest.Builder.() {
+                crossfade(true)
+            }).build()
     )
 
     Scaffold(
