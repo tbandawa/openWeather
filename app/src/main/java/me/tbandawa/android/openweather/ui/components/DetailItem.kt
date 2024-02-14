@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import me.tbandawa.android.openweather.ui.theme.dimensions
 
@@ -62,7 +61,7 @@ fun DetailItem(
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Medium,
-                fontSize = 14.sp
+                fontSize = dimensions.valueTextSize
             ),
             modifier = Modifier
                 .constrainAs(detailValue) {

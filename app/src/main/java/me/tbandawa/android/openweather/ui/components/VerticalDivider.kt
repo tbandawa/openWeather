@@ -8,11 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import me.tbandawa.android.openweather.ui.theme.dimensions
 
 @Composable
 fun VerticalDivider() {
     Spacer(modifier = Modifier
         .width(1.dp)
-        .height(57.dp)
+        .height(dimensions.detailItemHeight)
         .background(color = Color.Black))
 }

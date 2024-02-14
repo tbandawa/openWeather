@@ -7,8 +7,9 @@ import android.content.Intent
 import android.location.*
 import android.os.Bundle
 import android.os.IBinder
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
 import java.util.*
 
@@ -23,12 +24,16 @@ class LocationService(
 
     private var locationManager: LocationManager? = null
 
-    private val _locationInfo = MutableLiveData<LocationInfo?>()
-    val locationInfo: MutableLiveData<LocationInfo?> = _locationInfo
+    private val _locationInfo = MutableStateFlow<LocationInfo?>(null)
+    val locationInfo: StateFlow<LocationInfo?> = _locationInfo
 
     override fun onBind(arg0: Intent?): IBinder? = null
 
     init {
+        getLocation()
+    }
+
+    fun getLocation() {
         locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
         try {
             locationManager!!.requestLocationUpdates(
@@ -73,7 +78,11 @@ class LocationService(
             )
             if (addressList != null && addressList.size > 0) {
                 val address = addressList[0]
-                locationName = "${address.countryName}, ${address.locality}"
+                locationName = if (address.locality == null) {
+                    address.countryName
+                } else {
+                    "${address.countryName}, ${address.locality}"
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -108,5 +117,4 @@ class LocationService(
     override fun onProviderDisabled(provider: String) {}
 
     override fun onProviderEnabled(provider: String) {}
-
 }

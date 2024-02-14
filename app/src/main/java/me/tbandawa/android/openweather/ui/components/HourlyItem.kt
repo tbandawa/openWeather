@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_2X
 import me.tbandawa.android.openweather.BuildConfig.OPEN_WEATHER_ICON_URL
@@ -40,14 +39,14 @@ fun HourlyItem(
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                fontSize = 13.sp
+                fontSize = dimensions.hourlyTimeTextSize
             )
         )
         AsyncImage(
             model = hourlyIcon,
             contentDescription = null,
             modifier = Modifier
-                .size(dimensions.hourlyIconSize, dimensions.hourlyIconSize)
+                .size(dimensions.hourlyIconSize)
                 .padding(0.dp, 0.dp, 0.dp, 0.dp)
         )
         Text(
@@ -55,7 +54,7 @@ fun HourlyItem(
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Light,
-                fontSize = 12.sp
+                fontSize = dimensions.hourlyTemperatureTextSize
             )
         )
     }

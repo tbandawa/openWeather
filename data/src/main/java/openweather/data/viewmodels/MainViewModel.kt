@@ -21,6 +21,8 @@ class MainViewModel(
     val showSplash = _showSplash.asStateFlow()
 
     fun fetchOneCall(lat: Double, lon: Double){
+        if (_oneCallWeather.value is NetworkResult.Success)
+            return
         viewModelScope.launch {
             repository.fetchOneCall(lat, lon).collect { result ->
                 _oneCallWeather.value = result
