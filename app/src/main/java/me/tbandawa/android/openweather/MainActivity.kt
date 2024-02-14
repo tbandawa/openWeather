@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
 
         // Create location service, observe gps coordinates and
         // navigate call api if location info is available
-
         LocationService(this@MainActivity).locationInfo.value.also {
             if (it != null) {
                 viewModel.fetchOneCall(
