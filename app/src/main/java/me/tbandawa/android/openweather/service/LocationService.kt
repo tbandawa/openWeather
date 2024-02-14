@@ -7,8 +7,9 @@ import android.content.Intent
 import android.location.*
 import android.os.Bundle
 import android.os.IBinder
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
 import java.util.*
 
@@ -23,8 +24,8 @@ class LocationService(
 
     private var locationManager: LocationManager? = null
 
-    private val _locationInfo = MutableLiveData<LocationInfo?>()
-    val locationInfo: MutableLiveData<LocationInfo?> = _locationInfo
+    private val _locationInfo = MutableStateFlow<LocationInfo?>(null)
+    val locationInfo: StateFlow<LocationInfo?> = _locationInfo
 
     override fun onBind(arg0: Intent?): IBinder? = null
 
