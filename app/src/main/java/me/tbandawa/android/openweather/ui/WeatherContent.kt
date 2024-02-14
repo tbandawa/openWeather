@@ -25,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,6 +71,10 @@ fun WeatherContent(
 
         // Retry callback
         val retry: () -> Unit = { viewModel.fetchOneCall(latitude, longitude) }
+
+        LaunchedEffect(Unit) {
+            viewModel.fetchOneCall(latitude, longitude)
+        }
 
         // Update UI according to network result state
         when(val result = viewModel.oneCallWeather.collectAsState().value) {

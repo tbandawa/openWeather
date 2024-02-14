@@ -29,6 +29,10 @@ class LocationService(
     override fun onBind(arg0: Intent?): IBinder? = null
 
     init {
+        getLocation()
+    }
+
+    fun getLocation() {
         locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
         try {
             locationManager!!.requestLocationUpdates(
@@ -73,7 +77,11 @@ class LocationService(
             )
             if (addressList != null && addressList.size > 0) {
                 val address = addressList[0]
-                locationName = "${address.countryName}, ${address.locality}"
+                locationName = if (address.locality == null) {
+                    address.countryName
+                } else {
+                    "${address.countryName}, ${address.locality}"
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -108,5 +116,4 @@ class LocationService(
     override fun onProviderDisabled(provider: String) {}
 
     override fun onProviderEnabled(provider: String) {}
-
 }

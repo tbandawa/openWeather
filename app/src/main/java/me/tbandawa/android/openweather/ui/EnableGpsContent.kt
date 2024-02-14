@@ -1,7 +1,10 @@
 package me.tbandawa.android.openweather.ui
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,8 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import me.tbandawa.android.openweather.ui.components.UnitChip
-import openweather.domain.models.PreferenceUnits
 
 @ExperimentalPermissionsApi
 @Composable
