@@ -1,5 +1,6 @@
 package me.tbandawa.android.openweather.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -98,6 +101,7 @@ fun WeatherContent(
 
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalAnimationApi
 @Composable
 fun WeatherScreen(
@@ -119,19 +123,14 @@ fun WeatherScreen(
         containerColor = Color.White
     ) {
 
-        ConstraintLayout(
+        Column(
             modifier = Modifier
+                .fillMaxHeight(1f)
                 .padding(it)
-                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
-
-            val (topLayout, bottomLayout) = createRefs()
-
             Column(
                 modifier = Modifier
-                    .constrainAs(topLayout) {
-                        top.linkTo(parent.top)
-                    }
                     .fillMaxWidth()
                     .fillMaxHeight()
             ) {
@@ -141,8 +140,7 @@ fun WeatherScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(top = dimensions.weatherIconPadding)
-                                .wrapContentSize(Alignment.Center),
+                                .padding(top = dimensions.weatherIconPadding),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
 
@@ -160,7 +158,7 @@ fun WeatherScreen(
                                 style = TextStyle(
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 32.sp
+                                    fontSize = dimensions.weatherTemperatureTextSize
                                 )
                             )
 
@@ -174,7 +172,7 @@ fun WeatherScreen(
                                 style = TextStyle(
                                     color = Color.Black,
                                     fontWeight = FontWeight.Medium,
-                                    fontSize = 18.sp,
+                                    fontSize = dimensions.weatherDescriptionTextSize,
                                     textAlign = TextAlign.Center
                                 )
                             )
@@ -239,13 +237,9 @@ fun WeatherScreen(
                 }
 
             }
-
-            // Bottom composable containing hourly items
+            Spacer(Modifier.weight(1f))
             Column(
                 modifier = Modifier
-                    .constrainAs(bottomLayout) {
-                        bottom.linkTo(parent.bottom)
-                    }
                     .fillMaxWidth()
             ) {
                 BottomRecycler(
@@ -254,11 +248,8 @@ fun WeatherScreen(
                     navigateToForecast
                 )
             }
-
         }
-
     }
-
 }
 
 @ExperimentalAnimationApi
