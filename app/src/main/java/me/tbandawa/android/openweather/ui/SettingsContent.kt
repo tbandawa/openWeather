@@ -29,6 +29,7 @@ import me.tbandawa.android.openweather.R
 import me.tbandawa.android.openweather.ui.components.HorizontalDivider
 import me.tbandawa.android.openweather.ui.components.SettingsToolBar
 import me.tbandawa.android.openweather.ui.components.UnitChip
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import me.tbandawa.android.openweather.ui.theme.orientation
 import openweather.data.local.UnitsPreferencesDataStoreImpl
 import openweather.domain.datastore.UnitsPreferencesDataStore
@@ -89,7 +90,7 @@ fun SettingsContent(
                         style = TextStyle(
                             color = Color.Black,
                             fontWeight = FontWeight.ExtraBold,
-                            fontSize = 18.sp
+                            fontSize = dimensions.settingsHeaderTextSize
                         ),
                         modifier = Modifier
                             .padding(0.dp, 16.dp, 0.dp, 8.dp)
@@ -123,7 +124,7 @@ fun SettingsContent(
                             style = TextStyle(
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
+                                fontSize = dimensions.settingsTitleTextSize
                             )
                         )
                         Surface(
@@ -131,9 +132,12 @@ fun SettingsContent(
                             contentColor = Color.LightGray,
                             shape = CircleShape,
                             modifier = Modifier
-                                .height(35.dp)
+                                .height(dimensions.settingsUnitContainerSize)
                         ) {
-                            Row {
+                            Row(
+                                modifier = Modifier
+                                    .padding(vertical = 3.dp)
+                            ) {
                                 UnitChip(preferenceUnits, updateUnitsPreference, "°C")
                                 UnitChip(preferenceUnits, updateUnitsPreference, "°F")
                             }
@@ -165,7 +169,7 @@ fun SettingsContent(
                             style = TextStyle(
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
+                                fontSize = dimensions.settingsTitleTextSize
                             )
                         )
                         Surface(
@@ -173,9 +177,12 @@ fun SettingsContent(
                             contentColor = Color.LightGray,
                             shape = CircleShape,
                             modifier = Modifier
-                                .height(35.dp)
+                                .height(dimensions.settingsUnitContainerSize)
                         ) {
-                            Row {
+                            Row(
+                                modifier = Modifier
+                                    .padding(vertical = 3.dp)
+                            ) {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "m/s")
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "km/h")
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "mph")
@@ -208,7 +215,7 @@ fun SettingsContent(
                             style = TextStyle(
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
+                                fontSize = dimensions.settingsTitleTextSize
                             )
                         )
                         Surface(
@@ -216,9 +223,12 @@ fun SettingsContent(
                             contentColor = Color.LightGray,
                             shape = CircleShape,
                             modifier = Modifier
-                                .height(35.dp)
+                                .height(dimensions.settingsUnitContainerSize)
                         ) {
-                            Row {
+                            Row(
+                                modifier = Modifier
+                                    .padding(vertical = 3.dp)
+                            ) {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "hPa")
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "inHg")
                             }
@@ -262,7 +272,7 @@ fun SettingsContent(
                             style = TextStyle(
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp
+                                fontSize = dimensions.settingsTitleTextSize
                             )
                         )
                         Surface(
@@ -270,9 +280,12 @@ fun SettingsContent(
                             contentColor = Color.LightGray,
                             shape = CircleShape,
                             modifier = Modifier
-                                .height(35.dp)
+                                .height(dimensions.settingsUnitContainerSize)
                         ) {
-                            Row {
+                            Row(
+                                modifier = Modifier
+                                    .padding(vertical = 3.dp)
+                            ) {
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "12-hour")
                                 UnitChip(preferenceUnits, updateUnitsPreference, text = "24-hour")
                             }

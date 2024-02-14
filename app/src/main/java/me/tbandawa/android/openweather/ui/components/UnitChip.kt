@@ -1,5 +1,6 @@
 package me.tbandawa.android.openweather.ui.components
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -11,6 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import me.tbandawa.android.openweather.ui.theme.dimensions
 import openweather.domain.models.PreferenceUnits
 
 @Composable
@@ -36,7 +39,9 @@ fun UnitChip(
             else -> Color.White
         },
         shape = CircleShape,
-        modifier = Modifier.padding(horizontal = 4.dp),
+        modifier = Modifier
+            .padding(horizontal = 3.dp)
+            .height(dimensions.settingsUnitSize),
         onClick = {
 
             when (text) {
@@ -69,6 +74,7 @@ fun UnitChip(
             text = text,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
+            fontSize = dimensions.settingsValueTitleSize,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
         )
     }

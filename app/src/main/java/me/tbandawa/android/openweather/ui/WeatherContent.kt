@@ -210,7 +210,7 @@ fun WeatherScreen(
                                     style = TextStyle(
                                         color = Color.Black,
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 30.sp,
+                                        fontSize = 25.sp,
                                         textAlign = TextAlign.Center
                                     )
                                 )
